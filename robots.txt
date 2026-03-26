@@ -1,0 +1,11 @@
+# robots.txt — Opulent Interior D-Zines
+# https://www.opulentinteriordzines.co.za/robots.txt
+
+User-agent: *
+Allow: /
+
+# Block any auto-generated Netlify preview URLs from being indexed
+User-agent: *
+Disallow: /.netlify/
+
+Sitemap: https://www.opulentinteriordzines.co.za/sitemap.xml

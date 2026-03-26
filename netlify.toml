@@ -1,0 +1,108 @@
+# ─────────────────────────────────────────────────────────────────
+# Netlify Configuration — Opulent Interior D-Zines
+# https://www.opulentinteriordzines.co.za
+# ─────────────────────────────────────────────────────────────────
+
+[build]
+  # Static site — no build command needed; publish the root folder
+  publish = "."
+
+# ── Production context ────────────────────────────────────────────
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# ── HTTP Headers ─────────────────────────────────────────────────
+# Security, caching, and performance headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security
+    X-Frame-Options             = "DENY"
+    X-Content-Type-Options      = "nosniff"
+    X-XSS-Protection            = "1; mode=block"
+    Referrer-Policy             = "strict-origin-when-cross-origin"
+    Permissions-Policy          = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy     = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-ancestors 'none';"
+    Strict-Transport-Security   = "max-age=31536000; includeSubDomains; preload"
+
+# ── Cache static assets ──────────────────────────────────────────
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ── Redirects ────────────────────────────────────────────────────
+# Force HTTPS (Netlify handles this automatically, but explicit is safer)
+[[redirects]]
+  from  = "http://opulentinteriordzines.co.za/*"
+  to    = "https://www.opulentinteriordzines.co.za/:splat"
+  status = 301
+  force  = true
+
+# www → non-www canonical (comment out if you prefer non-www)
+# [[redirects]]
+#   from  = "https://opulentinteriordzines.co.za/*"
+#   to    = "https://www.opulentinteriordzines.co.za/:splat"
+#   status = 301
+
+# Friendly hash-based page aliases (optional deep links)
+[[redirects]]
+  from  = "/services"
+  to    = "/#services"
+  status = 301
+
+[[redirects]]
+  from  = "/about"
+  to    = "/#about"
+  status = 301
+
+[[redirects]]
+  from  = "/contact"
+  to    = "/#contact"
+  status = 301
+
+[[redirects]]
+  from  = "/furniture"
+  to    = "/#services"
+  status = 301
+
+[[redirects]]
+  from  = "/hospitality"
+  to    = "/#sectors"
+  status = 301
+
+# Catch-all 404 → home (single-page site)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

@@ -1,0 +1,18 @@
+# Netlify _redirects — Opulent Interior D-Zines
+# This file mirrors the redirects in netlify.toml (belt-and-braces)
+
+# Force HTTPS
+http://opulentinteriordzines.co.za/*      https://www.opulentinteriordzines.co.za/:splat  301!
+
+# Friendly URL aliases
+/services     /#services    301
+/about        /#about       301
+/contact      /#contact     301
+/furniture    /#services    301
+/hospitality  /#sectors     301
+
+# Custom furniture shop (serve actual page, not a redirect)
+/shop         /shop.html    200
+
+# SPA catch-all
+/*            /index.html   200
