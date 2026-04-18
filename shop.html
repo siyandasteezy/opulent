@@ -1,1896 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Furniture Studio | Opulent Interior D-Zines</title>
-  <meta name="description" content="Design your bespoke furniture online. Choose your piece, set your dimensions, select premium materials and finishes. Crafted to your exact specification in Gauteng, South Africa." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.opulentinteriordzines.co.za/shop" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Furniture Shop | Opulent Interior D-Zines | South Africa</title>
+  <meta name="description" content="Browse and order handcrafted custom furniture from Opulent Interior D-Zines. Couches, dining chairs, daybeds, headboards and more — made to order in South Africa."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://www.opulentinteriordzines.co.za/shop"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ─── Design Tokens ───────────────────────────────── */
-    :root {
-      --navy:        #0d1626;
-      --navy-mid:    #1e2d4a;
-      --navy-light:  #2a3f63;
-      --gold:        #b8864e;
-      --gold-light:  #d4a96a;
-      --gold-pale:   #f5efe6;
-      --white:       #ffffff;
-      --off-white:   #faf8f4;
-      --sand:        #e8dcc8;
-      --sand-light:  #f0e8d8;
-      --text-dark:   #1a1824;
-      --text-mid:    #5c5470;
-      --text-light:  #8e8aa0;
-      --radius-sm:   6px;
-      --radius-md:   12px;
-      --radius-lg:   20px;
-      --shadow-sm:   0 2px 8px rgba(13,22,38,.08);
-      --shadow-md:   0 6px 24px rgba(13,22,38,.12);
-      --shadow-lg:   0 16px 48px rgba(13,22,38,.18);
-      --transition:  all .25s ease;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --white:#ffffff;--off-white:#faf8f4;--sand-light:#f4ede0;--sand:#e8dcc8;
+      --gold:#b8864e;--gold-light:#d4a96a;--gold-pale:#f9f0e3;
+      --navy:#0d1626;--navy-mid:#1e2d4a;
+      --text:#1a1824;--text-mid:#5c5470;--text-light:#8e8aa0;
+      --border:#e8e2d6;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      --radius:4px;
+      --shadow-sm:0 2px 12px rgba(0,0,0,.06);
+      --shadow-md:0 8px 32px rgba(0,0,0,.10);
+      --shadow-lg:0 24px 64px rgba(0,0,0,.13);
     }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.7;overflow-x:hidden}
 
-    /* ─── Reset & Base ────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text-dark);
-      background: var(--off-white);
-      min-height: 100vh;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { cursor: pointer; border: none; background: none; font-family: inherit; }
-    input, select, textarea { font-family: inherit; }
+    .container{max-width:1180px;margin:0 auto;padding:0 2rem}
+    .tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+    .tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);border-radius:var(--radius)}
+    .btn-primary{background:var(--navy);color:var(--white);box-shadow:0 4px 16px rgba(13,22,38,.25)}
+    .btn-primary:hover{background:var(--navy-mid);transform:translateY(-2px)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--white);box-shadow:0 4px 16px rgba(184,134,78,.35)}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,134,78,.45)}
+    .btn-ghost-light{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35)}
+    .btn-ghost-light:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
 
-    /* ─── Navigation ──────────────────────────────────── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2rem;
-      background: rgba(13,22,38,.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(184,134,78,.2);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem; font-weight: 500;
-      color: var(--white); letter-spacing: .04em;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; align-items: center; gap: 2rem; }
-    .nav-links a {
-      font-size: .85rem; font-weight: 400; letter-spacing: .06em;
-      color: rgba(255,255,255,.75); text-transform: uppercase;
-      transition: var(--transition);
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
-    .nav-cta {
-      padding: .5rem 1.25rem;
-      border: 1px solid var(--gold);
-      color: var(--gold) !important;
-      border-radius: var(--radius-sm);
-      transition: var(--transition) !important;
-    }
-    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+    /* ── nav ── */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.9rem 0;box-shadow:var(--shadow-sm)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:0 2rem}
+    .nav-logo{text-decoration:none}
+    .nav-logo-text{font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--navy);letter-spacing:.04em;line-height:1.2}
+    .nav-logo-sub{display:block;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-family:var(--sans)}
+    .nav-links{display:flex;list-style:none;gap:2.2rem;align-items:center}
+    .nav-links a{text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);transition:color .3s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+    .nav-right{display:flex;align-items:center;gap:1rem}
+    .nav-cart-btn{display:flex;align-items:center;gap:.5rem;background:var(--navy);color:var(--white);padding:.55rem 1.2rem;border-radius:var(--radius);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all .3s;position:relative}
+    .nav-cart-btn:hover{background:var(--navy-mid)}
+    .cart-count{position:absolute;top:-8px;right:-8px;background:var(--gold);color:var(--white);border-radius:50%;width:20px;height:20px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .3s}
+    .cart-count.show{opacity:1;transform:scale(1)}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.3rem}
+    .hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s}
 
-    /* ─── Page Hero ───────────────────────────────────── */
-    .shop-hero {
-      padding: 7rem 2rem 3rem;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      text-align: center;
-    }
-    .shop-hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .4rem 1rem;
-      background: rgba(184,134,78,.15);
-      border: 1px solid rgba(184,134,78,.35);
-      border-radius: 99px;
-      font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--gold-light); margin-bottom: 1.5rem;
-    }
-    .shop-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 300; color: var(--white); line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .shop-hero h1 em { font-style: italic; color: var(--gold-light); }
-    .shop-hero p {
-      max-width: 52ch; margin: 0 auto;
-      font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.7;
-    }
-    .hero-steps {
-      display: flex; justify-content: center; gap: 2rem;
-      margin-top: 2.5rem; flex-wrap: wrap;
-    }
-    .hero-step {
-      display: flex; align-items: center; gap: .6rem;
-      font-size: .8rem; color: rgba(255,255,255,.6); letter-spacing: .04em;
-    }
-    .hero-step-num {
-      width: 24px; height: 24px; border-radius: 50%;
-      background: var(--gold); color: var(--navy);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .7rem; font-weight: 600; flex-shrink: 0;
-    }
+    /* ── hero ── */
+    #shop-hero{padding:9rem 0 5rem;background:linear-gradient(150deg,var(--navy) 0%,var(--navy-mid) 60%,#263d60 100%);position:relative;overflow:hidden}
+    #shop-hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(60deg,transparent 0,transparent 80px,rgba(184,134,78,.03) 80px,rgba(184,134,78,.03) 81px),repeating-linear-gradient(-60deg,transparent 0,transparent 80px,rgba(184,134,78,.02) 80px,rgba(184,134,78,.02) 81px)}
+    #shop-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+    .shop-hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem}
+    .shop-hero-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(184,134,78,.12);border:1px solid rgba(184,134,78,.3);border-radius:100px;padding:.4rem 1.1rem;font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light)}
+    .shop-hero-h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:300;color:var(--white);line-height:1.1}
+    .shop-hero-h1 em{font-style:italic;color:var(--gold-light)}
+    .shop-hero-sub{font-size:.92rem;color:rgba(255,255,255,.6);max-width:520px;line-height:1.8}
+    .shop-stats{display:flex;gap:3rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+    .shop-stat-num{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--gold-light);line-height:1}
+    .shop-stat-label{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.3rem;text-align:center}
 
-    /* ─── Configurator Layout ─────────────────────────── */
-    .configurator-wrapper {
-      max-width: 1400px; margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 2rem;
-      align-items: start;
-    }
-    @media (max-width: 1100px) {
-      .configurator-wrapper { grid-template-columns: 1fr; }
-    }
+    /* ── info strip ── */
+    .info-strip{background:var(--gold-pale);border-bottom:1px solid var(--sand);padding:1rem 0}
+    .info-strip-inner{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+    .info-item{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:500;color:var(--text-mid)}
 
-    /* ─── Panel Card ──────────────────────────────────── */
-    .panel {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-    .panel-header {
-      padding: 1.25rem 1.75rem;
-      border-bottom: 1px solid var(--sand);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .panel-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem; font-weight: 500; color: var(--navy);
-      display: flex; align-items: center; gap: .6rem;
-    }
-    .panel-title-icon {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--gold-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem;
-    }
-    .panel-body { padding: 1.75rem; }
+    /* ── filter bar ── */
+    #filter-bar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:67px;z-index:800;padding:.9rem 0}
+    .filter-inner{display:flex;align-items:center;gap:.8rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+    .filter-inner::-webkit-scrollbar{display:none}
+    .filter-label{font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);white-space:nowrap;flex-shrink:0}
+    .filter-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border:1.5px solid var(--border);border-radius:100px;background:transparent;font-size:.68rem;font-weight:500;color:var(--text-mid);cursor:pointer;transition:all .22s;white-space:nowrap;flex-shrink:0}
+    .filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+    .filter-count{background:var(--sand);color:var(--text-mid);border-radius:100px;padding:0 .45rem;font-size:.6rem}
+    .filter-btn.active .filter-count{background:rgba(255,255,255,.2);color:var(--white)}
 
-    /* ─── Step Tabs ───────────────────────────────────── */
-    .step-tabs {
-      display: flex; gap: .5rem; margin-bottom: 1.75rem; flex-wrap: wrap;
-    }
-    .step-tab {
-      flex: 1; min-width: 100px;
-      padding: .55rem .75rem;
-      border: 2px solid var(--sand);
-      border-radius: var(--radius-sm);
-      font-size: .78rem; font-weight: 500; letter-spacing: .04em;
-      color: var(--text-mid); text-transform: uppercase;
-      background: var(--white); transition: var(--transition);
-      display: flex; align-items: center; gap: .4rem; justify-content: center;
-    }
-    .step-tab:hover { border-color: var(--gold); color: var(--gold); }
-    .step-tab.active {
-      border-color: var(--gold); background: var(--gold);
-      color: var(--navy); font-weight: 600;
-    }
-    .step-tab.done { border-color: var(--gold); color: var(--gold); }
-    .step-tab.done::before { content: "✓ "; }
+    /* ── products ── */
+    #products{padding:4rem 0 6rem}
+    .products-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem}
+    .products-count{font-size:.8rem;color:var(--text-light)}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.8rem}
 
-    /* ─── Step Panels ─────────────────────────────────── */
-    .step-panel { display: none; }
-    .step-panel.active { display: block; }
+    /* ── card ── */
+    .product-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all .32s cubic-bezier(.4,0,.2,1);cursor:pointer;display:flex;flex-direction:column}
+    .product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-5px);border-color:rgba(184,134,78,.5)}
+    .product-card.hidden{display:none}
+    .card-img-wrap{position:relative;overflow:hidden;background:var(--sand-light);aspect-ratio:4/3}
+    .card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+    .product-card:hover .card-img{transform:scale(1.05)}
+    .card-cat-badge{position:absolute;top:.75rem;left:.75rem;background:var(--navy);color:var(--white);font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .65rem;border-radius:100px}
+    .card-code-badge{position:absolute;top:.75rem;right:.75rem;background:rgba(255,255,255,.88);color:var(--text-mid);font-size:.58rem;font-family:monospace;padding:.22rem .55rem;border-radius:3px}
+    .card-body{padding:1.3rem;flex:1;display:flex;flex-direction:column}
+    .card-name{font-family:var(--serif);font-size:1.2rem;font-weight:500;color:var(--text);line-height:1.25;margin-bottom:.4rem}
+    .card-size{font-size:.7rem;color:var(--text-light);margin-bottom:.8rem}
+    .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:.8rem;border-top:1px solid var(--border)}
+    .card-price{font-family:var(--serif);font-size:1.45rem;font-weight:500;color:var(--navy)}
+    .card-price sup{font-size:.7rem;font-family:var(--sans);font-weight:600;vertical-align:super}
+    .card-price-from{font-size:.62rem;color:var(--text-light);margin-top:.1rem}
+    .card-add-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--navy);color:var(--white);border:none;border-radius:50%;cursor:pointer;transition:all .28s;flex-shrink:0;font-size:1rem;font-weight:700}
+    .card-add-btn:hover{background:var(--gold);transform:scale(1.12)}
 
-    /* ─── Furniture Type Grid ─────────────────────────── */
-    .furniture-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 1rem;
-    }
-    .furniture-card {
-      border: 2px solid var(--sand);
-      border-radius: var(--radius-md);
-      padding: 1.25rem .75rem;
-      text-align: center; cursor: pointer;
-      transition: var(--transition);
-      background: var(--white);
-      position: relative;
-    }
-    .furniture-card:hover {
-      border-color: var(--gold); transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-    .furniture-card.selected {
-      border-color: var(--gold); background: var(--gold-pale);
-    }
-    .furniture-card.selected::after {
-      content: "✓";
-      position: absolute; top: .4rem; right: .5rem;
-      font-size: .75rem; color: var(--gold); font-weight: 700;
-    }
-    .furniture-card-icon {
-      font-size: 2.25rem; margin-bottom: .6rem; display: block;
-    }
-    .furniture-card-name {
-      font-size: .78rem; font-weight: 500; color: var(--text-dark);
-      letter-spacing: .03em; line-height: 1.3;
-    }
-    .furniture-card-from {
-      font-size: .7rem; color: var(--gold); margin-top: .25rem;
-    }
+    /* ── modal ── */
+    .modal-overlay{position:fixed;inset:0;background:rgba(13,22,38,.68);backdrop-filter:blur(6px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+    .modal-overlay.open{opacity:1;pointer-events:all}
+    .modal{background:var(--white);border-radius:8px;max-width:820px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(24px) scale(.96);transition:transform .35s cubic-bezier(.4,0,.2,1);display:grid;grid-template-columns:1fr 1fr;position:relative}
+    .modal-overlay.open .modal{transform:translateY(0) scale(1)}
+    .modal-img-col{position:relative;background:var(--sand-light);min-height:400px}
+    .modal-img{width:100%;height:100%;object-fit:cover;display:block}
+    .modal-img-bar{position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(to top,rgba(13,22,38,.82),transparent)}
+    .modal-img-code{font-family:monospace;font-size:.7rem;color:var(--gold-light);letter-spacing:.1em}
+    .modal-close{position:absolute;top:.9rem;right:.9rem;background:rgba(255,255,255,.92);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
+    .modal-close:hover{background:var(--white);box-shadow:var(--shadow-sm)}
+    .modal-body{padding:2.2rem;display:flex;flex-direction:column;gap:1rem;overflow-y:auto}
+    .modal-cat{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+    .modal-name{font-family:var(--serif);font-size:1.9rem;font-weight:400;color:var(--text);line-height:1.15}
+    .modal-dims{background:var(--off-white);border:1px solid var(--border);border-radius:4px;padding:.9rem 1.1rem}
+    .modal-dims-title{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:.5rem}
+    .dim-row{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.2rem}
+    .dim-label{color:var(--text-mid)}
+    .dim-val{font-weight:600;font-family:monospace;font-size:.78rem;color:var(--text)}
+    .modal-price-block{padding:.8rem 0;border-top:1px solid var(--border)}
+    .modal-price-label{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem}
+    .modal-price{font-family:var(--serif);font-size:2.3rem;font-weight:400;color:var(--navy)}
+    .modal-price sup{font-size:.85rem;font-family:var(--sans);font-weight:600;vertical-align:super}
+    .size-toggle{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.2rem}
+    .size-opt{padding:.4rem .95rem;border:1.5px solid var(--border);border-radius:100px;font-size:.7rem;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;color:var(--text-mid)}
+    .size-opt.active{border-color:var(--navy);background:var(--navy);color:var(--white)}
+    .modal-actions{display:flex;flex-direction:column;gap:.7rem;margin-top:auto}
+    .btn-full{width:100%;justify-content:center}
+    .btn-wa{background:#25D366;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.28)}
+    .btn-wa:hover{background:#1fbd5b;transform:translateY(-2px)}
+    .modal-footnote{font-size:.7rem;color:var(--text-light);text-align:center;line-height:1.55}
 
-    /* ─── Dimension Inputs ────────────────────────────── */
-    .dimension-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin-bottom: 1.5rem;
-    }
-    @media (max-width: 600px) { .dimension-grid { grid-template-columns: 1fr; } }
-    .dim-group label {
-      display: block; font-size: .75rem; font-weight: 500;
-      letter-spacing: .06em; text-transform: uppercase;
-      color: var(--text-mid); margin-bottom: .4rem;
-    }
-    .dim-input-wrap {
-      display: flex; align-items: center;
-      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
-      overflow: hidden; transition: var(--transition);
-    }
-    .dim-input-wrap:focus-within { border-color: var(--gold); }
-    .dim-input-wrap input {
-      flex: 1; padding: .6rem .75rem;
-      border: none; outline: none;
-      font-size: .95rem; color: var(--text-dark);
-      background: transparent;
-    }
-    .dim-unit {
-      padding: .6rem .75rem;
-      font-size: .75rem; color: var(--text-light);
-      background: var(--off-white); border-left: 1px solid var(--sand);
-    }
-    .dim-presets {
-      display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem;
-    }
-    .dim-preset {
-      padding: .3rem .65rem;
-      border: 1px solid var(--sand); border-radius: 99px;
-      font-size: .72rem; color: var(--text-mid);
-      cursor: pointer; transition: var(--transition);
-    }
-    .dim-preset:hover { border-color: var(--gold); color: var(--gold); }
+    /* ── cart ── */
+    .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:1099;opacity:0;pointer-events:none;transition:opacity .4s}
+    .cart-overlay.open{opacity:1;pointer-events:all}
+    .cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:95vw;background:var(--white);box-shadow:-8px 0 48px rgba(0,0,0,.12);z-index:1100;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+    .cart-sidebar.open{transform:translateX(0)}
+    .cart-hd{padding:1.5rem 1.8rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .cart-hd-title{font-family:var(--serif);font-size:1.45rem;font-weight:400;color:var(--navy)}
+    .cart-close-btn{background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text-mid);padding:.3rem;transition:color .2s}
+    .cart-close-btn:hover{color:var(--text)}
+    .cart-body{flex:1;overflow-y:auto;padding:1.4rem 1.8rem;display:flex;flex-direction:column;gap:1.1rem}
+    .cart-empty-state{text-align:center;padding:3rem 1rem;color:var(--text-light)}
+    .cart-empty-icon{font-size:2.8rem;margin-bottom:.8rem;opacity:.35}
+    .cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;align-items:start;padding-bottom:1.1rem;border-bottom:1px solid var(--border)}
+    .cart-item-thumb{width:64px;height:54px;object-fit:cover;border-radius:4px;background:var(--sand-light)}
+    .cart-item-name{font-family:var(--serif);font-size:.95rem;font-weight:500;color:var(--text);line-height:1.2;margin-bottom:.15rem}
+    .cart-item-meta{font-size:.68rem;color:var(--text-light)}
+    .cart-item-rm{font-size:.7rem;color:var(--text-light);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;margin-top:.25rem;transition:color .2s}
+    .cart-item-rm:hover{color:var(--text)}
+    .cart-item-price{font-family:var(--serif);font-size:.95rem;color:var(--navy);white-space:nowrap;font-weight:500}
+    .cart-ft{padding:1.4rem 1.8rem;border-top:1px solid var(--border);background:var(--off-white);display:flex;flex-direction:column;gap:.9rem}
+    .cart-total-row{display:flex;justify-content:space-between;align-items:center}
+    .cart-total-lbl{font-size:.78rem;font-weight:600;letter-spacing:.06em;color:var(--text-mid)}
+    .cart-total-val{font-family:var(--serif);font-size:1.45rem;color:var(--navy)}
+    .cart-ft-note{font-size:.68rem;color:var(--text-light);line-height:1.5}
 
-    /* ─── Option Select Groups ────────────────────────── */
-    .option-section { margin-bottom: 1.75rem; }
-    .option-label {
-      font-size: .78rem; font-weight: 500; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--text-mid);
-      margin-bottom: .75rem; display: flex; align-items: center; gap: .4rem;
-    }
-    .option-label-badge {
-      padding: .1rem .5rem;
-      background: var(--gold-pale); border: 1px solid var(--sand);
-      border-radius: 99px; font-size: .65rem; color: var(--gold);
-      font-weight: 600;
-    }
-    .swatch-row {
-      display: flex; flex-wrap: wrap; gap: .6rem;
-    }
-    .swatch {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .5rem .85rem;
-      border: 2px solid var(--sand); border-radius: var(--radius-sm);
-      cursor: pointer; transition: var(--transition);
-      font-size: .8rem; color: var(--text-dark);
-    }
-    .swatch:hover { border-color: var(--gold); }
-    .swatch.selected { border-color: var(--gold); background: var(--gold-pale); font-weight: 500; }
-    .swatch-dot {
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 1px solid rgba(0,0,0,.1); flex-shrink: 0;
-    }
-    .swatch-premium { font-size: .65rem; color: var(--gold); margin-left: .2rem; }
+    /* ── custom banner ── */
+    .custom-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:5rem 0;margin-top:2rem}
+    .custom-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .custom-h{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:1rem}
+    .custom-h em{color:var(--gold-light);font-style:italic}
+    .custom-p{font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.85;margin-bottom:2rem}
+    .custom-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+    .feat-list{display:flex;flex-direction:column;gap:1rem}
+    .feat{display:flex;gap:1rem;padding:1.1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px}
+    .feat-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
+    .feat-title{font-size:.78rem;font-weight:600;color:var(--white);margin-bottom:.15rem}
+    .feat-desc{font-size:.75rem;color:rgba(255,255,255,.48);line-height:1.55}
 
-    .custom-select {
-      width: 100%;
-      padding: .65rem 1rem;
-      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
-      font-family: inherit; font-size: .9rem; color: var(--text-dark);
-      background: var(--white); cursor: pointer; outline: none;
-      transition: var(--transition);
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8864e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      padding-right: 2.5rem;
-    }
-    .custom-select:focus { border-color: var(--gold); }
+    /* ── footer ── */
+    footer{background:var(--navy);color:rgba(255,255,255,.45);padding:2.5rem 0;text-align:center;font-size:.76rem;border-top:1px solid rgba(255,255,255,.07)}
+    .foot-links{display:flex;gap:1.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+    .foot-links a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+    .foot-links a:hover{color:var(--gold-light)}
+    footer a{color:var(--gold-light);text-decoration:none}
 
-    /* ─── Feature Toggles ─────────────────────────────── */
-    .feature-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
-    }
-    .feature-toggle {
-      display: flex; align-items: flex-start; gap: .75rem;
-      padding: .85rem; border: 2px solid var(--sand);
-      border-radius: var(--radius-sm); cursor: pointer;
-      transition: var(--transition);
-    }
-    .feature-toggle:hover { border-color: var(--gold-light); }
-    .feature-toggle.selected { border-color: var(--gold); background: var(--gold-pale); }
-    .feature-check {
-      width: 18px; height: 18px; flex-shrink: 0;
-      border: 2px solid var(--sand); border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .7rem; transition: var(--transition);
-      margin-top: 1px;
-    }
-    .feature-toggle.selected .feature-check {
-      background: var(--gold); border-color: var(--gold); color: var(--white);
-    }
-    .feature-info { flex: 1; }
-    .feature-name { font-size: .82rem; font-weight: 500; color: var(--text-dark); }
-    .feature-desc { font-size: .72rem; color: var(--text-light); margin-top: .1rem; }
-    .feature-price { font-size: .72rem; color: var(--gold); font-weight: 500; }
+    /* ── toast ── */
+    .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:var(--white);padding:.8rem 1.8rem;border-radius:100px;font-size:.76rem;font-weight:500;box-shadow:var(--shadow-lg);z-index:2000;opacity:0;transition:all .38s cubic-bezier(.4,0,.2,1);white-space:nowrap;border-left:3px solid var(--gold)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-    /* ─── Navigation Buttons ──────────────────────────── */
-    .step-nav {
-      display: flex; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem;
-      border-top: 1px solid var(--sand);
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.75rem;
-      border-radius: var(--radius-sm);
-      font-size: .85rem; font-weight: 500; letter-spacing: .04em;
-      transition: var(--transition);
-    }
-    .btn-outline {
-      border: 1.5px solid var(--sand); color: var(--text-mid);
-    }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-      color: var(--navy); font-weight: 600;
-      box-shadow: 0 4px 16px rgba(184,134,78,.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(184,134,78,.4);
-    }
-    .btn-primary:disabled {
-      opacity: .5; cursor: not-allowed; transform: none;
-    }
-    .btn-full { width: 100%; justify-content: center; }
-
-    /* ─── Live Preview Panel ──────────────────────────── */
-    .preview-panel {
-      position: sticky; top: 5rem;
-    }
-    .preview-visual {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-      padding: 2.5rem;
-      min-height: 280px;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .preview-visual::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 80%, rgba(184,134,78,.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(184,134,78,.05) 0%, transparent 50%);
-    }
-
-    /* SVG Furniture Previews */
-    .furniture-svg {
-      width: 100%; max-width: 280px; height: auto;
-      position: relative; z-index: 1;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,.35));
-    }
-    .furniture-svg-placeholder {
-      text-align: center; color: rgba(255,255,255,.3);
-      position: relative; z-index: 1;
-    }
-    .furniture-svg-placeholder svg { width: 80px; height: 80px; opacity: .4; margin: 0 auto 1rem; display: block; }
-    .furniture-svg-placeholder p { font-size: .85rem; }
-
-    .preview-meta {
-      background: var(--white);
-      padding: 1.25rem 1.75rem;
-      border-bottom: 1px solid var(--sand);
-    }
-    .preview-piece-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 500; color: var(--navy);
-    }
-    .preview-specs {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: .4rem .75rem; margin-top: .75rem;
-    }
-    .preview-spec {
-      font-size: .75rem; color: var(--text-mid);
-      display: flex; align-items: center; gap: .3rem;
-    }
-    .preview-spec strong { color: var(--text-dark); }
-
-    .quote-panel { padding: 1.5rem 1.75rem; background: var(--white); }
-    .quote-line {
-      display: flex; justify-content: space-between;
-      font-size: .82rem; color: var(--text-mid); margin-bottom: .6rem;
-    }
-    .quote-line strong { color: var(--text-dark); }
-    .quote-divider { border: none; border-top: 1px solid var(--sand); margin: .85rem 0; }
-    .quote-total {
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .quote-total-label {
-      font-size: .85rem; color: var(--text-mid); font-weight: 500;
-    }
-    .quote-total-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem; font-weight: 500; color: var(--navy);
-    }
-    .quote-note {
-      font-size: .72rem; color: var(--text-light); margin-top: .35rem; text-align: right;
-    }
-    .quote-lead-time {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .65rem .85rem;
-      background: var(--off-white); border-radius: var(--radius-sm);
-      font-size: .78rem; color: var(--text-mid);
-      margin-top: 1rem;
-    }
-    .quote-lead-icon { font-size: 1rem; }
-
-    /* ─── Order Form ──────────────────────────────────── */
-    .form-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
-    .form-group { display: flex; flex-direction: column; gap: .35rem; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group label {
-      font-size: .75rem; font-weight: 500; letter-spacing: .05em;
-      text-transform: uppercase; color: var(--text-mid);
-    }
-    .form-control {
-      padding: .65rem .9rem;
-      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
-      font-family: inherit; font-size: .9rem; color: var(--text-dark);
-      background: var(--white); outline: none;
-      transition: var(--transition);
-    }
-    .form-control:focus { border-color: var(--gold); }
-    textarea.form-control { resize: vertical; min-height: 100px; }
-    .form-helper {
-      font-size: .7rem; color: var(--text-light); margin-top: .2rem;
-    }
-
-    /* ─── Order Summary ───────────────────────────────── */
-    .summary-card {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      border-radius: var(--radius-md); padding: 1.5rem;
-      margin-bottom: 1.5rem; color: var(--white);
-    }
-    .summary-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 400; color: var(--gold-light);
-      margin-bottom: 1rem; letter-spacing: .03em;
-    }
-    .summary-row {
-      display: flex; justify-content: space-between;
-      font-size: .82rem; color: rgba(255,255,255,.7);
-      padding: .3rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .summary-row:last-child { border-bottom: none; }
-    .summary-row strong { color: var(--white); }
-    .summary-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: .85rem; padding-top: .85rem;
-      border-top: 1px solid rgba(184,134,78,.3);
-    }
-    .summary-total-label { font-size: .85rem; color: rgba(255,255,255,.65); }
-    .summary-total-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 500; color: var(--gold-light);
-    }
-
-    /* ─── Success State ───────────────────────────────── */
-    .success-state {
-      display: none; text-align: center; padding: 3rem 1.5rem;
-    }
-    .success-state.visible { display: block; }
-    .success-icon {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: linear-gradient(135deg, #1a7f4b, #22a163);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; margin: 0 auto 1.5rem;
-      box-shadow: 0 8px 24px rgba(26,127,75,.3);
-    }
-    .success-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem; font-weight: 400; color: var(--navy);
-      margin-bottom: .75rem;
-    }
-    .success-msg { font-size: .9rem; color: var(--text-mid); line-height: 1.6; max-width: 42ch; margin: 0 auto 2rem; }
-    .success-ref {
-      display: inline-block; padding: .5rem 1.25rem;
-      background: var(--gold-pale); border: 1px solid var(--sand);
-      border-radius: var(--radius-sm); font-size: .8rem;
-      color: var(--gold); font-weight: 500; letter-spacing: .05em;
-      margin-bottom: 2rem;
-    }
-
-    /* ─── Gallery Inspiration ─────────────────────────── */
-    .inspiration-section {
-      max-width: 1400px; margin: 0 auto;
-      padding: 0 1.5rem 5rem;
-    }
-    .section-header { text-align: center; margin-bottom: 2.5rem; }
-    .section-eyebrow {
-      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: .5rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      font-weight: 300; color: var(--navy); line-height: 1.2;
-    }
-    .inspo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-    .inspo-card {
-      border-radius: var(--radius-md); overflow: hidden;
-      background: var(--white); box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-    .inspo-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .inspo-img {
-      width: 100%; aspect-ratio: 4/3; object-fit: cover;
-      background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
-    .inspo-info { padding: 1rem 1.25rem; }
-    .inspo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--navy); font-weight: 500; }
-    .inspo-detail { font-size: .78rem; color: var(--text-mid); margin-top: .2rem; }
-    .inspo-price { font-size: .82rem; color: var(--gold); font-weight: 500; margin-top: .35rem; }
-
-    /* ─── Process Strip ───────────────────────────────── */
-    .process-strip {
-      background: var(--navy); padding: 3rem 1.5rem;
-      margin-bottom: 3rem;
-    }
-    .process-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-    .process-step { text-align: center; }
-    .process-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem; font-weight: 300; color: rgba(184,134,78,.3);
-      line-height: 1; margin-bottom: .5rem;
-    }
-    .process-step-title {
-      font-size: .9rem; font-weight: 500; color: var(--white); margin-bottom: .4rem;
-    }
-    .process-step-desc { font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.5; }
-
-    /* ─── Footer ──────────────────────────────────────── */
-    .footer {
-      background: var(--navy); padding: 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.4); }
-    .footer-back {
-      font-size: .8rem; color: var(--gold-light);
-      display: flex; align-items: center; gap: .4rem;
-      transition: var(--transition);
-    }
-    .footer-back:hover { color: var(--white); }
-
-    /* ─── Tooltip / Info ──────────────────────────────── */
-    .info-note {
-      display: flex; align-items: flex-start; gap: .6rem;
-      padding: .85rem 1rem;
-      background: var(--off-white); border: 1px solid var(--sand);
-      border-radius: var(--radius-sm); margin-top: 1rem;
-      font-size: .78rem; color: var(--text-mid); line-height: 1.5;
-    }
-    .info-note-icon { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
-
-    /* ─── Mobile Nav ──────────────────────────────────── */
-    .hamburger { display: none; flex-direction: column; gap: 4px; padding: .4rem; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--navy); padding: 1.5rem; flex-direction: column; border-top: 1px solid rgba(184,134,78,.2); }
-      .nav-links.open { display: flex; }
-      .feature-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ─── Animations ──────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fadeUp .5s ease both; }
-    .fade-up-2 { animation: fadeUp .5s .1s ease both; }
-    .fade-up-3 { animation: fadeUp .5s .2s ease both; }
+    /* ── responsive ── */
+    @media(max-width:900px){.modal{grid-template-columns:1fr}.modal-img-col{min-height:220px}.custom-inner{grid-template-columns:1fr;gap:2.5rem}}
+    @media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--white);justify-content:center;align-items:center;gap:2.5rem;z-index:800}.hamburger{display:flex}.info-strip-inner{gap:1rem}.shop-stats{gap:1.5rem}.products-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+    @media(max-width:460px){.products-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 
-  <!-- ─── Navigation ─────────────────────────────────── -->
-  <nav class="nav">
-    <a href="/" class="nav-logo">Opulent <span>Interior</span> D-Zines</a>
-    <div class="nav-links" id="navLinks">
-      <a href="/">Home</a>
-      <a href="/#services">Services</a>
-      <a href="/shop" class="active">Custom Furniture</a>
-      <a href="/#gallery">Gallery</a>
-      <a href="/#contact" class="nav-cta">Get In Touch</a>
+<!-- ─────────── NAV ─────────── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Opulent Interior D-Zines Home">
+      <div class="nav-logo-text">Opulent Interior D-Zines<span class="nav-logo-sub">Luxury · Custom Furniture</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/shop.html" class="active">Shop</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart-btn" id="cartBtn" aria-label="Open enquiry list">
+        🛒 List
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="hamburger" aria-label="Toggle menu" id="hamburger">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ─── Hero ───────────────────────────────────────── -->
-  <section class="shop-hero">
-    <div class="shop-hero-badge">✦ Bespoke Furniture Studio</div>
-    <h1 class="fade-up">Design Your <em>Perfect</em> Piece</h1>
-    <p class="fade-up-2">
-      Configure every detail of your furniture online — materials, dimensions, finishes, and features.
-      Our craftsmen build it to your exact specification, right here in Gauteng.
-    </p>
-    <div class="hero-steps fade-up-3">
-      <div class="hero-step"><span class="hero-step-num">1</span> Choose your piece</div>
-      <div class="hero-step"><span class="hero-step-num">2</span> Set dimensions</div>
-      <div class="hero-step"><span class="hero-step-num">3</span> Pick materials</div>
-      <div class="hero-step"><span class="hero-step-num">4</span> Add features</div>
-      <div class="hero-step"><span class="hero-step-num">5</span> Request your quote</div>
+<!-- ─────────── HERO ─────────── -->
+<section id="shop-hero" aria-labelledby="shop-h1">
+  <div class="container shop-hero-inner">
+    <div class="shop-hero-badge">🪑 Handcrafted in South Africa</div>
+    <h1 class="shop-hero-h1" id="shop-h1">Our <em>Furniture</em> Collection</h1>
+    <p class="shop-hero-sub">Every piece is manufactured to order using quality-standard fabrics and materials. Browse our catalogue, choose your size, and we'll build it to spec — in 6 to 8 weeks.</p>
+    <div class="shop-stats">
+      <div><div class="shop-stat-num">70+</div><div class="shop-stat-label">Products</div></div>
+      <div><div class="shop-stat-num">6–8</div><div class="shop-stat-label">Wk Lead Time</div></div>
+      <div><div class="shop-stat-num">100%</div><div class="shop-stat-label">Custom Made</div></div>
+      <div><div class="shop-stat-num">ZA</div><div class="shop-stat-label">Nationwide</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ─── Process Strip ─────────────────────────────── -->
-  <div class="process-strip">
-    <div class="process-inner">
-      <div class="process-step">
-        <div class="process-num">01</div>
-        <div class="process-step-title">Design Online</div>
-        <div class="process-step-desc">Configure your piece in our studio tool — dimensions, materials, finishes</div>
+<!-- ─────────── INFO STRIP ─────────── -->
+<div class="info-strip">
+  <div class="container info-strip-inner">
+    <span class="info-item">📦 Delivery on request</span>
+    <span class="info-item">🎨 Custom fabrics &amp; leather available — re-quote required</span>
+    <span class="info-item">💳 3–6 month lay-buy available</span>
+    <span class="info-item">📞 +27 67 401 7626</span>
+  </div>
+</div>
+
+<!-- ─────────── FILTER BAR ─────────── -->
+<div id="filter-bar" role="group" aria-label="Filter by category">
+  <div class="container filter-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all">All <span class="filter-count" id="cnt-all">72</span></button>
+    <button class="filter-btn" data-filter="couch">3-Seater Couches <span class="filter-count" id="cnt-couch">12</span></button>
+    <button class="filter-btn" data-filter="chesterfield">Chesterfield <span class="filter-count" id="cnt-chesterfield">3</span></button>
+    <button class="filter-btn" data-filter="lshape">L-Shape <span class="filter-count" id="cnt-lshape">4</span></button>
+    <button class="filter-btn" data-filter="ushape">U-Shape <span class="filter-count" id="cnt-ushape">2</span></button>
+    <button class="filter-btn" data-filter="occasional">Occasional Chairs <span class="filter-count" id="cnt-occasional">12</span></button>
+    <button class="filter-btn" data-filter="dining">Dining Chairs <span class="filter-count" id="cnt-dining">4</span></button>
+    <button class="filter-btn" data-filter="daybed">Daybeds &amp; Chaises <span class="filter-count" id="cnt-daybed">5</span></button>
+    <button class="filter-btn" data-filter="bedset">Bed Sets <span class="filter-count" id="cnt-bedset">9</span></button>
+    <button class="filter-btn" data-filter="headboard">Headboards <span class="filter-count" id="cnt-headboard">8</span></button>
+    <button class="filter-btn" data-filter="ottoman">Ottomans <span class="filter-count" id="cnt-ottoman">6</span></button>
+  </div>
+</div>
+
+<!-- ─────────── PRODUCTS GRID ─────────── -->
+<section id="products">
+  <div class="container">
+    <div class="products-header">
+      <p class="products-count" id="productsCount">Showing all 72 products</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── CUSTOM BANNER ─────────── -->
+<section class="custom-banner" aria-labelledby="custom-h">
+  <div class="container custom-inner">
+    <div>
+      <span class="tag" style="color:var(--gold-light)">Custom Manufacturing</span>
+      <h2 class="custom-h" id="custom-h">Don't see exactly <em>what you need?</em></h2>
+      <p class="custom-p">Every piece in our catalogue is a starting point. We manufacture fully custom furniture to your exact specifications — dimensions, fabric, finish, and form. Our workshop team in Gauteng will bring your vision to life within 6–8 weeks.</p>
+      <div class="custom-ctas">
+        <a href="tel:+27674017626" class="btn btn-gold">📞 Call Us Now</a>
+        <a href="https://wa.me/27674017626?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20a%20custom%20furniture%20order." target="_blank" rel="noopener" class="btn btn-ghost-light">💬 WhatsApp Us</a>
       </div>
-      <div class="process-step">
-        <div class="process-num">02</div>
-        <div class="process-step-title">Review &amp; Confirm</div>
-        <div class="process-step-desc">We contact you within 24 hours with a detailed quote and production timeline</div>
+    </div>
+    <div class="feat-list">
+      <div class="feat"><span class="feat-icon">📐</span><div><div class="feat-title">Made to Your Dimensions</div><div class="feat-desc">Any size, any configuration. We work from your measurements or our standard specs — your choice.</div></div></div>
+      <div class="feat"><span class="feat-icon">🎨</span><div><div class="feat-title">Fabric &amp; Leather Selection</div><div class="feat-desc">Choose from our premium fabric supplier network — upholstery, velvet, linen, genuine leather and more.</div></div></div>
+      <div class="feat"><span class="feat-icon">⏱️</span><div><div class="feat-title">6–8 Week Lead Time</div><div class="feat-desc">Your furniture is manufactured fresh after order confirmation. Quality takes time — and it shows.</div></div></div>
+      <div class="feat"><span class="feat-icon">🚚</span><div><div class="feat-title">Nationwide Delivery</div><div class="feat-desc">We deliver across all 9 provinces of South Africa. Delivery quoted on request per order.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer>
+  <div class="container">
+    <div class="foot-links">
+      <a href="/">Home</a><a href="/#services">Services</a><a href="/#about">About</a>
+      <a href="/#gallery">Gallery</a><a href="/#contact">Contact</a><a href="/shop.html">Shop</a>
+    </div>
+    <p>📍 Gauteng, South Africa &nbsp;·&nbsp; <a href="tel:+27674017626">+27 67 401 7626</a> &nbsp;·&nbsp; <a href="mailto:info@opulentinteriordzines.co.za">info@opulentinteriordzines.co.za</a></p>
+    <p style="margin-top:.5rem">© 2026 Opulent Interior D-Zines. All prices include VAT. Subject to change without notice.</p>
+  </div>
+</footer>
+
+<!-- ─────────── PRODUCT MODAL ─────────── -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalName">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-img-col">
+      <img class="modal-img" id="modalImg" src="" alt="" loading="lazy"/>
+      <div class="modal-img-bar"><div class="modal-img-code" id="modalCode"></div></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <div class="modal-dims" id="modalDims" style="display:none"></div>
+      <div id="modalSizeWrap" style="display:none">
+        <div style="font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:.5rem">Select Size</div>
+        <div class="size-toggle" id="modalSizeToggle"></div>
       </div>
-      <div class="process-step">
-        <div class="process-num">03</div>
-        <div class="process-step-title">Expert Craft</div>
-        <div class="process-step-desc">Skilled Gauteng artisans handcraft your piece to exact specification</div>
+      <div class="modal-price-block">
+        <div class="modal-price-label">Price (incl. VAT)</div>
+        <div class="modal-price" id="modalPrice"></div>
+        <div style="font-size:.7rem;color:var(--text-light);margin-top:.3rem">Standard fabric. Custom fabric or leather requires re-quote.</div>
       </div>
-      <div class="process-step">
-        <div class="process-num">04</div>
-        <div class="process-step-title">Delivered &amp; Installed</div>
-        <div class="process-step-desc">White-glove delivery and installation anywhere in South Africa</div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-full" id="modalAddCart">🛒 Add to Enquiry List</button>
+        <a class="btn btn-wa btn-full" id="modalWA" href="#" target="_blank" rel="noopener">💬 Enquire on WhatsApp</a>
+        <p class="modal-footnote">All pieces made to order · 6–8 week lead time · Lay-buy available</p>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ─── Configurator ───────────────────────────────── -->
-  <main>
-    <div class="configurator-wrapper">
+<!-- ─────────── CART SIDEBAR ─────────── -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-sidebar" id="cartSidebar" aria-label="Enquiry list">
+  <div class="cart-hd">
+    <h2 class="cart-hd-title">Enquiry List</h2>
+    <button class="cart-close-btn" id="cartClose" aria-label="Close">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty-state">
+      <div class="cart-empty-icon">🪑</div>
+      <p style="font-size:.84rem;line-height:1.6;color:var(--text-light)">Your list is empty.<br/>Add pieces you love and send us a combined enquiry.</p>
+    </div>
+  </div>
+  <div class="cart-ft" id="cartFt" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-lbl">Estimated Total</span>
+      <span class="cart-total-val" id="cartTotal">R 0</span>
+    </div>
+    <p class="cart-ft-note">Based on standard fabric. A consultant will confirm your final quote including delivery.</p>
+    <button class="btn btn-wa btn-full" id="cartWA">💬 Send via WhatsApp</button>
+    <button class="btn btn-primary btn-full" id="cartEmail">✉️ Send via Email</button>
+  </div>
+</aside>
 
-      <!-- Left: Configuration Steps -->
+<!-- ─────────── TOAST ─────────── -->
+<div class="toast" id="toast" aria-live="polite"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   PRODUCT DATA — Opulent Interior D-Zines Furniture Catalogue
+   ══════════════════════════════════════════════════════════ */
+const PRODUCTS = [
+  // ── 3-Seater Couches ──
+  {id:'TSCH001',name:'Matshaba 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2200mm',Depth:'900mm',Height:'690mm'},price:19995,img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH002',name:'Tumeliso 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2500mm',Depth:'900mm',Height:'710mm'},price:26795,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH003',name:'Rakoro 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2100mm',Depth:'900mm',Height:'710mm'},price:14495,img:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH004',name:'Edward 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2100mm',Depth:'900mm',Height:'780mm'},price:11995,img:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH005',name:'Mark 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2100mm',Depth:'860mm',Height:'780mm'},price:17995,img:'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH006',name:'Israel Leather 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2100mm',Depth:'890mm',Height:'860mm'},price:16595,img:'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=700&q=80&auto=format&fit=crop'},
+  {id:'TSCH007',name:'Maili 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2000mm',Depth:'890mm',Height:'820mm'},price:17895,img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80&auto=format&fit=crop&sat=-20'},
+  {id:'TSCH008',name:'Tumi 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2250mm',Depth:'860mm',Height:'730mm'},price:28495,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=800&q=80&auto=format&fit=crop&hue=30'},
+  {id:'TSCH009',name:'Tshegofatso 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2040mm',Depth:'1000mm',Height:'860mm'},price:12995,img:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80&auto=format&fit=crop&sat=-30'},
+  {id:'TSCH010',name:'Zoe 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2100mm',Depth:'890mm',Height:'860mm'},price:15995,img:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80&auto=format&fit=crop'},
+  {id:'TSCH011',name:'Dimakatso 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2200mm',Depth:'890mm',Height:'680mm'},price:17295,img:'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&q=80&auto=format&fit=crop'},
+  {id:'TSCH012',name:'Mpho 3 Seater Couch',cat:'couch',catLabel:'3-Seater Couch',dims:{Width:'2000mm',Depth:'860mm',Height:'710mm'},price:16695,img:'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=800&q=80&auto=format&fit=crop'},
+  // ── Chesterfield ──
+  {id:'CFCH001',name:'Lebo 2 Seater Chesterfield',cat:'chesterfield',catLabel:'Chesterfield Couch',dims:{Width:'1900mm',Depth:'900mm',Height:'780mm'},price:14595,img:'https://images.unsplash.com/photo-1567016376408-0226e4d0f1ea?w=700&q=80&auto=format&fit=crop'},
+  {id:'CFCH002',name:'Pam 3 Seater Chesterfield',cat:'chesterfield',catLabel:'Chesterfield Couch',dims:{Width:'2250mm',Depth:'910mm',Height:'670mm'},price:21595,img:'https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=700&q=80&auto=format&fit=crop'},
+  {id:'CFCH003',name:'Pamler 3 Seater Chesterfield',cat:'chesterfield',catLabel:'Chesterfield Couch',dims:{Width:'2250mm',Depth:'890mm',Height:'670mm'},price:17695,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop'},
+  // ── L-Shape ──
+  {id:'LSCCH001',name:'Shelton L-Shape Couch',cat:'lshape',catLabel:'L-Shape Couch',dims:{Width:'2690mm',Depth:'1940mm',Height:'840mm'},price:14195,img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'LSCCH002',name:'Joseph L-Shape Couch',cat:'lshape',catLabel:'L-Shape Couch',dims:{Width:'2700mm',Depth:'1950mm',Height:'860mm'},price:16895,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'LSCCH003',name:'Mary L-Shape Couch',cat:'lshape',catLabel:'L-Shape Couch',dims:{Width:'4000mm',Depth:'3000mm',Height:'850mm'},price:23795,img:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'LSCCH004',name:'Martha L-Shape Couch',cat:'lshape',catLabel:'L-Shape Couch',dims:{Width:'4200mm',Depth:'1700mm',Height:'850mm'},price:22395,img:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  // ── U-Shape ──
+  {id:'USCCH001',name:'Hendrick U-Shape Couch',cat:'ushape',catLabel:'U-Shape Couch',dims:{Width:'4350mm',Depth:'1720mm',Height:'850mm'},price:25695,img:'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'USCCH002',name:'Khosi U-Shape Couch',cat:'ushape',catLabel:'U-Shape Couch',dims:{Width:'3600mm',Depth:'1625mm',Height:'890mm'},price:23695,img:'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  // ── Occasional Chairs ──
+  {id:'OCNCH001',name:'Labane Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'800mm',Depth:'650mm',Height:'750mm'},price:8095,img:'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=700&q=80&auto=format&fit=crop'},
+  {id:'OCNCH002',name:'Lichaba Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'700mm',Depth:'600mm',Height:'840mm'},price:7895,img:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80&auto=format&fit=crop'},
+  {id:'OCNCH003',name:'Lukhanyo Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'750mm',Depth:'830mm',Height:'780mm'},price:6695,img:'https://images.unsplash.com/photo-1567016376408-0226e4d0f1ea?w=700&q=80&auto=format&fit=crop&crop=right'},
+  {id:'OCNCH004',name:'Neo Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'876mm',Depth:'700mm',Height:'720mm'},price:7595,img:'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'OCNCH005',name:'Motale Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'700mm',Depth:'700mm',Height:'786mm'},price:5995,img:'https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=700&q=80&auto=format&fit=crop&crop=center'},
+  {id:'OCNCH006',name:'Molikeng Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'800mm',Depth:'600mm',Height:'655mm'},price:11795,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop&crop=center'},
+  {id:'OCNCH007',name:'Refiloe Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'650mm',Depth:'550mm',Height:'640mm'},price:5595,img:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'OCNCH008',name:'Khati Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'600mm',Depth:'560mm',Height:'660mm'},price:5895,img:'https://images.unsplash.com/photo-1567016376408-0226e4d0f1ea?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'OCNCH009',name:'Mpeo Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'1190mm',Depth:'1190mm',Height:'850mm'},price:12495,img:'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'OCNCH010',name:'Mpeoane Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'1200mm',Depth:'1000mm',Height:'710mm'},price:10795,img:'https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'OCNCH011',name:'Tsilo Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'876mm',Depth:'700mm',Height:'890mm'},price:7295,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'OCNCH012',name:'Simphiwe Oak Occasional Chair',cat:'occasional',catLabel:'Occasional Chair',dims:{Width:'800mm',Depth:'700mm',Height:'780mm'},price:9295,img:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  // ── Dining Chairs ──
+  {id:'DNGCH001',name:'Mangole Dining Chair',cat:'dining',catLabel:'Dining Chair',dims:{Width:'650mm',Depth:'600mm',Height:'850mm'},price:4995,img:'https://images.unsplash.com/photo-1549497538-303791108f95?w=700&q=80&auto=format&fit=crop'},
+  {id:'DNGCH002',name:'Khabele Dining Chair',cat:'dining',catLabel:'Dining Chair',dims:{Width:'600mm',Depth:'650mm',Height:'830mm'},price:4495,img:'https://images.unsplash.com/photo-1549497538-303791108f95?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'DNGCH003',name:'Mnoto Dining Chair',cat:'dining',catLabel:'Dining Chair',dims:{Width:'630mm',Depth:'550mm',Height:'890mm'},price:3995,img:'https://images.unsplash.com/photo-1549497538-303791108f95?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'DNGCH004',name:'Khanyiso Dining Chair',cat:'dining',catLabel:'Dining Chair',dims:{Width:'650mm',Depth:'600mm',Height:'850mm'},price:5295,img:'https://images.unsplash.com/photo-1549497538-303791108f95?w=700&q=80&auto=format&fit=crop&crop=center'},
+  // ── Daybeds & Chaises ──
+  {id:'DBCHS001',name:'Zipho Daybed',cat:'daybed',catLabel:'Daybed',dims:{Width:'1600mm',Depth:'600mm',Height:'430mm'},price:12495,img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop'},
+  {id:'DBCHS002',name:'Thoriso Daybed',cat:'daybed',catLabel:'Daybed',dims:{Width:'1600mm',Depth:'700mm',Height:'450mm'},price:9095,img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop'},
+  {id:'DBCHS003',name:'Zezethu Chaise',cat:'daybed',catLabel:'Chaise',dims:{Width:'1900mm',Depth:'850mm',Height:'650mm'},price:7795,img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'DBCHS004',name:'Sekhantsho Chaise',cat:'daybed',catLabel:'Chaise',dims:{Width:'1700mm',Depth:'1100mm',Height:'450mm'},price:10395,img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'DBCHS005',name:'Leruo Chaise',cat:'daybed',catLabel:'Chaise',dims:{Width:'1700mm',Depth:'500mm',Height:'450mm'},price:9395,img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=center'},
+  // ── Headboard & Base Sets (sized) ──
+  {id:'HBDBS001',name:'Violet Sleigh Bed',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:13495,King:14695},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop'},
+  {id:'HBDBS002',name:'Makhabele Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:11495,King:12395},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=center'},
+  {id:'HBDBS003',name:'Malabane Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:12295,King:12795},img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=center'},
+  {id:'HBDBS004',name:'Lebohang Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:10095,King:11495},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop&crop=entropy'},
+  {id:'HBDBS004B',name:'Tlalane Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:14495,King:15495},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'HBDBS005',name:'Mamaili Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:11695,King:12795},img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'HBDBS006',name:'Mamatshaba Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:13495,King:14795},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop&crop=faces'},
+  {id:'HBDBS007',name:'Shoani Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:12495,King:13695},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=left'},
+  {id:'HBDBS008',name:'Tseli Headboard & Base Set',cat:'bedset',catLabel:'Headboard & Base Set',sizes:{Queen:12195,King:13095},img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=left'},
+  // ── Headboards only (sized) ──
+  {id:'HDBRD001',name:'Distinct Deep Button Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:5195,King:6195},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'HDBRD002',name:'Plain Studded Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:4795,King:5795},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=right'},
+  {id:'HDBRD003',name:'Deep Block Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:4595,King:5595},img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=right'},
+  {id:'HDBRD004',name:'Distinct Panel Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:4895,King:5895},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop&crop=right'},
+  {id:'HDBRD005',name:'Hexagon Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:7895,King:8895},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=bottom'},
+  {id:'HDBRD006',name:'Bordered Deep Button Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:6995,King:7895},img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format&fit=crop&crop=bottom'},
+  {id:'HDBRD007',name:'Sunrise Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:5795,King:6995},img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80&auto=format&fit=crop&crop=bottom'},
+  {id:'HDBRD008',name:'Pleated Button Headboard',cat:'headboard',catLabel:'Headboard',sizes:{Queen:4995,King:5995},img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80&auto=format&fit=crop&crop=top'},
+  // ── Ottomans ──
+  {id:'OTTMN001',name:'Deep Button Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Width:'1300mm',Depth:'500mm',Height:'450mm'},price:4595,img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'OTTMN002',name:'Button Genuine Leather Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Width:'1500mm',Depth:'550mm',Height:'380mm'},price:12295,img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'OTTMN003',name:'Coffee Table Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Width:'1200mm',Depth:'550mm',Height:'470mm'},price:6295,img:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'OTTMN004',name:'Pleated Leather Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Width:'1200mm',Depth:'550mm',Height:'380mm'},price:12595,img:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'OTTMN005',name:'Palesa Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Diameter:'910mm',Height:'370mm'},price:4295,img:'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=700&q=80&auto=format&fit=crop&crop=top'},
+  {id:'OTTMN006',name:'Round Button Ottoman',cat:'ottoman',catLabel:'Ottoman',dims:{Diameter:'910mm',Height:'400mm'},price:4595,img:'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=700&q=80&auto=format&fit=crop&crop=top'},
+];
+
+/* ── helpers ── */
+const R = n => 'R\u00a0' + n.toLocaleString('en-ZA');
+const getPrice = (p, sz) => p.sizes ? p.sizes[sz || 'Queen'] : p.price;
+const defaultSize = p => p.sizes ? 'Queen' : null;
+
+/* ── render cards ── */
+function buildCards(){
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  PRODUCTS.forEach(p => {
+    const sz = defaultSize(p);
+    const price = getPrice(p, sz);
+    const card = document.createElement('div');
+    card.className = 'product-card reveal';
+    card.dataset.cat = p.cat;
+    card.dataset.id = p.id;
+    const dimStr = p.dims ? Object.values(p.dims).join(' × ') : 'Queen & King available';
+    card.innerHTML = `
+      <div class="card-img-wrap">
+        <img class="card-img" src="${p.img}" alt="${p.name}" loading="lazy"/>
+        <span class="card-cat-badge">${p.catLabel}</span>
+        <span class="card-code-badge">${p.id}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-size">📐 ${dimStr}</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><sup>R</sup>${price.toLocaleString('en-ZA')}</div>
+            ${p.sizes ? '<div class="card-price-from">from — Queen size</div>' : ''}
+          </div>
+          <button class="card-add-btn" aria-label="Add to list" data-id="${p.id}">+</button>
+        </div>
+      </div>`;
+    card.addEventListener('click', e => { if(!e.target.closest('.card-add-btn')) openModal(p); });
+    card.querySelector('.card-add-btn').addEventListener('click', e => { e.stopPropagation(); addToList(p, sz); showToast('✓ Added to enquiry list'); });
+    grid.appendChild(card);
+  });
+  initReveal();
+  syncCounts();
+}
+
+/* ── filter ── */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    let vis = 0;
+    document.querySelectorAll('.product-card').forEach(c => {
+      const show = f === 'all' || c.dataset.cat === f;
+      c.classList.toggle('hidden', !show);
+      if(show) vis++;
+    });
+    document.getElementById('productsCount').textContent = `Showing ${vis} product${vis!==1?'s':''}`;
+  });
+});
+
+function syncCounts(){
+  const totals = {};
+  PRODUCTS.forEach(p => { totals[p.cat] = (totals[p.cat]||0)+1; });
+  document.getElementById('cnt-all').textContent = PRODUCTS.length;
+  ['couch','chesterfield','lshape','ushape','occasional','dining','daybed','bedset','headboard','ottoman'].forEach(c => {
+    const el = document.getElementById('cnt-'+c);
+    if(el) el.textContent = totals[c]||0;
+  });
+}
+
+/* ── modal ── */
+let mProduct = null, mSize = null;
+
+function openModal(p){
+  mProduct = p;
+  mSize = defaultSize(p);
+
+  document.getElementById('modalImg').src = p.img;
+  document.getElementById('modalImg').alt = p.name;
+  document.getElementById('modalCode').textContent = p.id;
+  document.getElementById('modalCat').textContent = p.catLabel;
+  document.getElementById('modalName').textContent = p.name;
+
+  // dims
+  const dimsEl = document.getElementById('modalDims');
+  if(p.dims){
+    dimsEl.innerHTML = `<div class="modal-dims-title">Dimensions</div>`+
+      Object.entries(p.dims).map(([k,v])=>`<div class="dim-row"><span class="dim-label">${k}</span><span class="dim-val">${v}</span></div>`).join('');
+    dimsEl.style.display = '';
+  } else { dimsEl.style.display = 'none'; }
+
+  // size
+  const sizeWrap = document.getElementById('modalSizeWrap');
+  const sizeToggle = document.getElementById('modalSizeToggle');
+  if(p.sizes){
+    sizeToggle.innerHTML = Object.keys(p.sizes).map(s =>
+      `<button class="size-opt${s===mSize?' active':''}" data-sz="${s}">${s}</button>`).join('');
+    sizeToggle.querySelectorAll('.size-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        mSize = btn.dataset.sz;
+        sizeToggle.querySelectorAll('.size-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        refreshModalPrice();
+      });
+    });
+    sizeWrap.style.display = '';
+  } else { sizeWrap.style.display = 'none'; }
+
+  refreshModalPrice();
+
+  document.getElementById('modalAddCart').onclick = () => { addToList(mProduct, mSize); closeModal(); showToast('✓ Added to enquiry list'); };
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function refreshModalPrice(){
+  const price = getPrice(mProduct, mSize);
+  document.getElementById('modalPrice').innerHTML = `<sup>R</sup>${price.toLocaleString('en-ZA')}`;
+  const msg = encodeURIComponent(`Hi, I'm interested in the *${mProduct.name}* (${mProduct.id})${mSize?' — '+mSize+' size':''}, priced at ${R(price)}. Please assist with my order.`);
+  document.getElementById('modalWA').href = `https://wa.me/27674017626?text=${msg}`;
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target.id==='modalOverlay') closeModal(); });
+
+/* ── list (cart) ── */
+let list = [];
+
+function addToList(p, sz){
+  const key = p.id + (sz||'');
+  const ex = list.find(i => i.key===key);
+  if(ex){ ex.qty++; } else {
+    list.push({key, id:p.id, name:p.name, sz, price:getPrice(p,sz), img:p.img, catLabel:p.catLabel, qty:1});
+  }
+  renderList();
+}
+
+function rmFromList(key){ list = list.filter(i => i.key!==key); renderList(); }
+
+function renderList(){
+  const body = document.getElementById('cartBody');
+  const ft = document.getElementById('cartFt');
+  const cnt = document.getElementById('cartCount');
+  const total = list.reduce((s,i)=>s+i.price*i.qty,0);
+  const totalItems = list.reduce((s,i)=>s+i.qty,0);
+  cnt.textContent = totalItems;
+  cnt.classList.toggle('show', totalItems > 0);
+  if(!list.length){
+    body.innerHTML=`<div class="cart-empty-state"><div class="cart-empty-icon">🪑</div><p style="font-size:.84rem;line-height:1.6;color:var(--text-light)">Your list is empty.<br/>Add pieces you love and send us a combined enquiry.</p></div>`;
+    ft.style.display='none'; return;
+  }
+  body.innerHTML = list.map(i=>`
+    <div class="cart-item">
+      <img class="cart-item-thumb" src="${i.img}" alt="${i.name}" loading="lazy"/>
       <div>
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span class="panel-title-icon">✦</span>
-              Furniture Configurator
-            </div>
-            <div id="progressLabel" style="font-size:.78rem;color:var(--text-light);">Step 1 of 4</div>
-          </div>
-          <div class="panel-body">
-
-            <!-- Step Tabs -->
-            <div class="step-tabs" role="tablist">
-              <button class="step-tab active" data-step="1" role="tab">① Piece</button>
-              <button class="step-tab" data-step="2" role="tab">② Size</button>
-              <button class="step-tab" data-step="3" role="tab">③ Materials</button>
-              <button class="step-tab" data-step="4" role="tab">④ Features</button>
-            </div>
-
-            <!-- ── Step 1: Choose Piece ── -->
-            <div class="step-panel active" id="step-1">
-              <div class="furniture-grid" id="furnitureGrid">
-                <!-- populated by JS -->
-              </div>
-              <div class="step-nav">
-                <button class="btn btn-primary" id="nextBtn1" onclick="goToStep(2)">
-                  Continue to Dimensions →
-                </button>
-              </div>
-            </div>
-
-            <!-- ── Step 2: Dimensions ── -->
-            <div class="step-panel" id="step-2">
-              <div id="dimensionContent">
-                <!-- populated by JS based on furniture selection -->
-              </div>
-              <div class="step-nav">
-                <button class="btn btn-outline" onclick="goToStep(1)">← Back</button>
-                <button class="btn btn-primary" onclick="goToStep(3)">Continue to Materials →</button>
-              </div>
-            </div>
-
-            <!-- ── Step 3: Materials & Finishes ── -->
-            <div class="step-panel" id="step-3">
-
-              <div class="option-section">
-                <div class="option-label">
-                  Primary Timber
-                  <span class="option-label-badge">Required</span>
-                </div>
-                <div class="swatch-row" id="timberSwatches">
-                  <label class="swatch selected" data-group="timber" data-val="oak" data-mult="1.0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#c8a96e;"></span> Solid Oak
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="walnut" data-mult="1.3" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#5c3a1e;"></span> Walnut <span class="swatch-premium">+30%</span>
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="mahogany" data-mult="1.5" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#7b2d26;"></span> Mahogany <span class="swatch-premium">+50%</span>
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="ash" data-mult="0.9" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#d4c4a0;"></span> Ash <span class="swatch-premium">−10%</span>
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="pine" data-mult="0.75" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#e8d5a0;"></span> Pine <span class="swatch-premium">−25%</span>
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="teak" data-mult="1.6" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#8b5e3c;"></span> Teak <span class="swatch-premium">+60%</span>
-                  </label>
-                  <label class="swatch" data-group="timber" data-val="ebony" data-mult="2.0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#1a1008;"></span> Ebony <span class="swatch-premium">+100%</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="option-section">
-                <div class="option-label">Finish</div>
-                <div class="swatch-row" id="finishSwatches">
-                  <label class="swatch selected" data-group="finish" data-val="natural" data-mult="1.0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:linear-gradient(135deg,#e8d5b0,#c8a96e);"></span> Natural
-                  </label>
-                  <label class="swatch" data-group="finish" data-val="dark-stain" data-mult="1.05" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#3a2010;"></span> Dark Stain
-                  </label>
-                  <label class="swatch" data-group="finish" data-val="white-wash" data-mult="1.05" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#f0ece5;border:1px solid #ddd;"></span> White Wash
-                  </label>
-                  <label class="swatch" data-group="finish" data-val="matt-black" data-mult="1.08" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#1a1a1a;"></span> Matt Black
-                  </label>
-                  <label class="swatch" data-group="finish" data-val="charcoal" data-mult="1.08" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#3d3d3d;"></span> Charcoal
-                  </label>
-                  <label class="swatch" data-group="finish" data-val="raw" data-mult="0.95" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#d4b896;"></span> Raw / Unfinished
-                  </label>
-                </div>
-              </div>
-
-              <div class="option-section" id="upholsterySection" style="display:none;">
-                <div class="option-label">
-                  Upholstery Fabric
-                  <span class="option-label-badge">For this piece</span>
-                </div>
-                <select class="custom-select" id="upholsterySelect" onchange="updateQuote()">
-                  <option value="linen-0" data-add="0">Linen Blend — Included</option>
-                  <option value="cotton-0" data-add="0">Cotton Weave — Included</option>
-                  <option value="velvet-2500" data-add="2500">Premium Velvet +R2,500</option>
-                  <option value="leather-5000" data-add="5000">Full-Grain Leather +R5,000</option>
-                  <option value="bouclé-3500" data-add="3500">Bouclé +R3,500</option>
-                  <option value="chenille-2000" data-add="2000">Chenille +R2,000</option>
-                  <option value="performance-1500" data-add="1500">Performance Fabric +R1,500</option>
-                </select>
-                <div class="option-section" style="margin-top:1rem;margin-bottom:0;">
-                  <div class="option-label">Upholstery Colour</div>
-                  <div class="swatch-row" id="fabricColourSwatches">
-                    <label class="swatch selected" data-group="fabric-colour" data-val="ivory" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#f5f0e8;border:1px solid #ddd;"></span> Ivory
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="sand" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#c8b090;"></span> Sand
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="slate" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#708090;"></span> Slate
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="sage" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#8fad8a;"></span> Sage
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="navy" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#0d1626;"></span> Navy
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="terracotta" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#c0624a;"></span> Terracotta
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="charcoal-fab" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#3d3d3d;"></span> Charcoal
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="blush" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#e8b4a0;"></span> Blush
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="option-section">
-                <div class="option-label">Hardware &amp; Fittings</div>
-                <div class="swatch-row" id="hardwareSwatches">
-                  <label class="swatch selected" data-group="hardware" data-val="satin-brass" data-add="0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#b8924e;"></span> Satin Brass
-                  </label>
-                  <label class="swatch" data-group="hardware" data-val="brushed-chrome" data-add="0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#b0b8c0;"></span> Brushed Chrome
-                  </label>
-                  <label class="swatch" data-group="hardware" data-val="matt-black-hw" data-add="0" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#1a1a1a;"></span> Matt Black
-                  </label>
-                  <label class="swatch" data-group="hardware" data-val="antique-brass" data-add="800" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#7c5f30;"></span> Antique Brass <span class="swatch-premium">+R800</span>
-                  </label>
-                  <label class="swatch" data-group="hardware" data-val="rose-gold" data-add="1200" onclick="selectSwatch(this)">
-                    <span class="swatch-dot" style="background:#c0806a;"></span> Rose Gold <span class="swatch-premium">+R1,200</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="step-nav">
-                <button class="btn btn-outline" onclick="goToStep(2)">← Back</button>
-                <button class="btn btn-primary" onclick="goToStep(4)">Continue to Features →</button>
-              </div>
-            </div>
-
-            <!-- ── Step 4: Features ── -->
-            <div class="step-panel" id="step-4">
-              <div class="feature-grid" id="featureGrid">
-                <!-- populated by JS -->
-              </div>
-              <div class="info-note">
-                <span class="info-note-icon">ℹ️</span>
-                Not sure which features suit your space? Our design consultants will advise during your quote review. Select anything you're interested in — nothing is finalised until you confirm with us.
-              </div>
-              <div class="step-nav">
-                <button class="btn btn-outline" onclick="goToStep(3)">← Back</button>
-                <button class="btn btn-primary" onclick="goToStep(5)">Proceed to Order →</button>
-              </div>
-            </div>
-
-            <!-- ── Step 5: Order Details ── -->
-            <div class="step-panel" id="step-5">
-              <div class="summary-card" id="orderSummaryCard"></div>
-
-              <form id="orderForm" onsubmit="submitOrder(event)">
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label for="firstName">First Name *</label>
-                    <input type="text" class="form-control" id="firstName" required placeholder="Sipho" />
-                  </div>
-                  <div class="form-group">
-                    <label for="lastName">Last Name *</label>
-                    <input type="text" class="form-control" id="lastName" required placeholder="Dlamini" />
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" class="form-control" id="email" required placeholder="you@example.com" />
-                  </div>
-                  <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" class="form-control" id="phone" required placeholder="+27 xx xxx xxxx" />
-                  </div>
-                  <div class="form-group">
-                    <label for="province">Province</label>
-                    <select class="form-control custom-select" id="province">
-                      <option value="">Select province...</option>
-                      <option value="gauteng">Gauteng</option>
-                      <option value="western-cape">Western Cape</option>
-                      <option value="kwazulu-natal">KwaZulu-Natal</option>
-                      <option value="eastern-cape">Eastern Cape</option>
-                      <option value="limpopo">Limpopo</option>
-                      <option value="mpumalanga">Mpumalanga</option>
-                      <option value="north-west">North West</option>
-                      <option value="free-state">Free State</option>
-                      <option value="northern-cape">Northern Cape</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="timeline">Desired Timeline</label>
-                    <select class="form-control custom-select" id="timeline">
-                      <option value="flexible">Flexible</option>
-                      <option value="6-8weeks">6–8 Weeks</option>
-                      <option value="10-12weeks">10–12 Weeks</option>
-                      <option value="3-6months">3–6 Months</option>
-                      <option value="urgent">Urgent (discuss)</option>
-                    </select>
-                  </div>
-                  <div class="form-group full">
-                    <label for="additionalNotes">Additional Notes or Requirements</label>
-                    <textarea class="form-control" id="additionalNotes" placeholder="Any special requirements, existing décor to match, room dimensions, access constraints, etc."></textarea>
-                    <span class="form-helper">The more detail you share, the more accurate your quote will be.</span>
-                  </div>
-                  <div class="form-group full">
-                    <label for="referenceImages">Inspiration / Reference (optional)</label>
-                    <input type="url" class="form-control" id="referenceImages" placeholder="Link to Pinterest board, Houzz, Google Drive folder, etc." />
-                    <span class="form-helper">Share a link to reference images that inspire your vision.</span>
-                  </div>
-                </div>
-
-                <div style="margin-top:1.5rem;">
-                  <div class="info-note" style="margin-bottom:1rem;">
-                    <span class="info-note-icon">🔒</span>
-                    Your information is used solely to prepare and send your furniture quote. We do not share your data with third parties.
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
-                    ✦ &nbsp; Submit My Furniture Brief
-                  </button>
-                </div>
-              </form>
-
-              <div class="success-state" id="successState">
-                <div class="success-icon">✓</div>
-                <div class="success-title">Brief Received — Thank You!</div>
-                <p class="success-msg">
-                  Your custom furniture specification has been received. One of our craftsmen and design consultants will review your brief and contact you within <strong>24 business hours</strong> with a detailed quotation.
-                </p>
-                <div class="success-ref" id="successRef">REF: OID-000000</div>
-                <div style="display:flex;flex-direction:column;gap:.75rem;align-items:center;">
-                  <a href="/" class="btn btn-primary">Return to Homepage</a>
-                  <button class="btn btn-outline" onclick="resetConfigurator()">Configure Another Piece</button>
-                </div>
-              </div>
-
-              <div class="step-nav" id="step5Nav">
-                <button class="btn btn-outline" onclick="goToStep(4)">← Edit Features</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <div class="cart-item-name">${i.name}</div>
+        <div class="cart-item-meta">${i.id}${i.sz?' · '+i.sz:''} · Qty ${i.qty}</div>
+        <button class="cart-item-rm" data-key="${i.key}">Remove</button>
       </div>
-
-      <!-- Right: Live Preview Panel -->
-      <div class="preview-panel">
-        <div class="panel">
-          <div class="preview-visual" id="previewVisual">
-            <div class="furniture-svg-placeholder" id="previewPlaceholder">
-              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="40" width="60" height="8" rx="3" fill="currentColor" opacity=".5"/>
-                <rect x="14" y="48" width="6" height="20" rx="2" fill="currentColor" opacity=".4"/>
-                <rect x="60" y="48" width="6" height="20" rx="2" fill="currentColor" opacity=".4"/>
-                <rect x="8" y="28" width="64" height="14" rx="4" fill="currentColor" opacity=".6"/>
-              </svg>
-              <p>Select a furniture piece<br>to see your preview</p>
-            </div>
-            <div id="furnitureSvgContainer" style="display:none;width:100%;max-width:320px;"></div>
-          </div>
-
-          <div class="preview-meta" id="previewMeta" style="display:none;">
-            <div class="preview-piece-name" id="previewName">—</div>
-            <div class="preview-specs" id="previewSpecs"></div>
-          </div>
-
-          <div class="quote-panel">
-            <div class="quote-line"><span>Base price</span><strong id="qBase">—</strong></div>
-            <div class="quote-line"><span>Material</span><strong id="qMaterial">Oak (×1.0)</strong></div>
-            <div class="quote-line"><span>Finish</span><strong id="qFinish">Natural (×1.0)</strong></div>
-            <div class="quote-line"><span>Size adjustment</span><strong id="qSize">—</strong></div>
-            <div class="quote-line"><span>Features &amp; extras</span><strong id="qExtras">R0</strong></div>
-            <hr class="quote-divider" />
-            <div class="quote-total">
-              <span class="quote-total-label">Estimated Total</span>
-              <span class="quote-total-price" id="qTotal">—</span>
-            </div>
-            <div class="quote-note">*Estimate only. Final quote confirmed after review.</div>
-            <div class="quote-lead-time" id="leadTimeDisplay">
-              <span class="quote-lead-icon">🕐</span>
-              <span id="leadTimeText">Select a piece to see production time</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /configurator-wrapper -->
-
-    <!-- ─── Inspiration Gallery ─────────────────────── -->
-    <section class="inspiration-section">
-      <div class="section-header">
-        <div class="section-eyebrow">Portfolio</div>
-        <h2 class="section-title">Recent Custom Pieces</h2>
-      </div>
-      <div class="inspo-grid">
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#c8a96e22,#5c3a1e22);">🪑</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Walnut Lounge Chair</div>
-            <div class="inspo-detail">Solid walnut frame · Ivory bouclé · Sandton residence</div>
-            <div class="inspo-price">From R12,500</div>
-          </div>
-        </div>
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#1e2d4a22,#b8864e22);">🛏️</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Emperor Bed Frame</div>
-            <div class="inspo-detail">Oak with upholstered headboard · Leather finish · Waterfall Estate</div>
-            <div class="inspo-price">From R22,000</div>
-          </div>
-        </div>
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#7b2d2622,#c8a96e22);">🪵</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Live-Edge Dining Table</div>
-            <div class="inspo-detail">Mahogany slab · Natural finish · 2800mm · Bryanston home</div>
-            <div class="inspo-price">From R35,000</div>
-          </div>
-        </div>
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#1a182422,#d4a96a22);">📚</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Floor-to-Ceiling Bookcase</div>
-            <div class="inspo-detail">Dark stained oak · Antique brass hardware · Houghton library</div>
-            <div class="inspo-price">From R28,000</div>
-          </div>
-        </div>
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#c8a96e22,#1e2d4a22);">🛋️</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Modular Corner Sofa</div>
-            <div class="inspo-detail">Ash frame · Full-grain leather · Terracotta · Constantia villa</div>
-            <div class="inspo-price">From R48,000</div>
-          </div>
-        </div>
-        <div class="inspo-card">
-          <div class="inspo-img" style="background:linear-gradient(135deg,#e8dcc822,#0d162622);">🚪</div>
-          <div class="inspo-info">
-            <div class="inspo-name">Walk-in Wardrobe System</div>
-            <div class="inspo-detail">Teak veneer · Rose gold hardware · Rivonia penthouse</div>
-            <div class="inspo-price">From R55,000</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ─── Footer ─────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="footer-copy">© 2026 Opulent Interior D-Zines · Gauteng, South Africa</div>
-    <a href="/" class="footer-back">← Back to main site</a>
-  </footer>
-
-
-  <script>
-  // ═══════════════════════════════════════════════════
-  //  DATA
-  // ═══════════════════════════════════════════════════
-  const FURNITURE = [
-    {
-      id: 'dining-table', icon: '🪵', name: 'Dining Table',
-      basePrice: 12000, from: 'R12,000',
-      leadTime: '8–10 weeks',
-      dims: { w: 1800, d: 900, h: 760 },
-      presets: { w: [1400,1600,1800,2200,2600], d: [800,900,1000,1100], h: [720,740,760,780] },
-      hasUpholstery: false,
-      features: ['drawers','cable-mgmt','extension','glass-insert','lazy-susan'],
-      svgFn: drawDiningTable
-    },
-    {
-      id: 'coffee-table', icon: '☕', name: 'Coffee Table',
-      basePrice: 5500, from: 'R5,500',
-      leadTime: '5–7 weeks',
-      dims: { w: 1200, d: 600, h: 420 },
-      presets: { w: [900,1100,1200,1400], d: [500,600,700], h: [380,420,460] },
-      hasUpholstery: false,
-      features: ['lower-shelf','drawers','lift-top','castors','glass-insert'],
-      svgFn: drawCoffeeTable
-    },
-    {
-      id: 'sofa', icon: '🛋️', name: 'Sofa',
-      basePrice: 22000, from: 'R22,000',
-      leadTime: '10–12 weeks',
-      dims: { w: 2200, d: 900, h: 850 },
-      presets: { w: [1800,2000,2200,2600,3000], d: [800,900,1000,1100], h: [750,800,850,900] },
-      hasUpholstery: true,
-      features: ['sofa-bed','chaise','storage-base','electric-recliner','usb-ports','feather-fill'],
-      svgFn: drawSofa
-    },
-    {
-      id: 'armchair', icon: '🪑', name: 'Armchair',
-      basePrice: 8500, from: 'R8,500',
-      leadTime: '6–8 weeks',
-      dims: { w: 800, d: 850, h: 900 },
-      presets: { w: [700,750,800,850,900], d: [800,850,900], h: [800,850,900,950] },
-      hasUpholstery: true,
-      features: ['swivel-base','recliner','foot-stool','wing-back','feather-fill'],
-      svgFn: drawArmchair
-    },
-    {
-      id: 'bed-frame', icon: '🛏️', name: 'Bed Frame',
-      basePrice: 18000, from: 'R18,000',
-      leadTime: '8–10 weeks',
-      dims: { w: 1800, d: 2000, h: 1200 },
-      presets: { w: [900,1200,1500,1800,2000], d: [1900,2000,2200], h: [900,1000,1100,1200,1400] },
-      hasUpholstery: true,
-      features: ['storage-base','floating-nightstands','reading-lights','charging-dock','upholstered-headboard','footboard'],
-      svgFn: drawBed
-    },
-    {
-      id: 'wardrobe', icon: '🚪', name: 'Wardrobe',
-      basePrice: 28000, from: 'R28,000',
-      leadTime: '10–14 weeks',
-      dims: { w: 2400, d: 600, h: 2200 },
-      presets: { w: [1800,2000,2200,2400,3000,4000], d: [550,600,650], h: [2100,2200,2400] },
-      hasUpholstery: false,
-      features: ['full-mirror','pull-out-trays','shoe-rack','island-unit','lighting','soft-close','lockable'],
-      svgFn: drawWardrobe
-    },
-    {
-      id: 'bookcase', icon: '📚', name: 'Bookcase',
-      basePrice: 14000, from: 'R14,000',
-      leadTime: '7–9 weeks',
-      dims: { w: 1800, d: 400, h: 2200 },
-      presets: { w: [900,1200,1500,1800,2400], d: [300,350,400,450], h: [1800,2000,2200,2400] },
-      hasUpholstery: false,
-      features: ['glass-doors','lighting','ladder-rail','adjustable-shelves','cable-mgmt','lockable'],
-      svgFn: drawBookcase
-    },
-    {
-      id: 'tv-unit', icon: '📺', name: 'TV Unit',
-      basePrice: 9500, from: 'R9,500',
-      leadTime: '6–8 weeks',
-      dims: { w: 1800, d: 500, h: 500 },
-      presets: { w: [1400,1600,1800,2000,2200], d: [400,450,500,550], h: [400,450,500,550,600] },
-      hasUpholstery: false,
-      features: ['cable-mgmt','led-backlight','floating','glass-doors','drawers','corner-unit'],
-      svgFn: drawTvUnit
-    },
-    {
-      id: 'desk', icon: '🖥️', name: 'Desk',
-      basePrice: 8000, from: 'R8,000',
-      leadTime: '5–7 weeks',
-      dims: { w: 1600, d: 750, h: 760 },
-      presets: { w: [1200,1400,1600,1800,2000], d: [650,700,750,800], h: [720,740,760,780] },
-      hasUpholstery: false,
-      features: ['cable-mgmt','drawers','hutch','monitor-riser','usb-ports','sit-stand'],
-      svgFn: drawDesk
-    },
-    {
-      id: 'side-table', icon: '🪔', name: 'Side Table',
-      basePrice: 3200, from: 'R3,200',
-      leadTime: '4–5 weeks',
-      dims: { w: 500, d: 500, h: 600 },
-      presets: { w: [400,450,500,550,600], d: [400,450,500,550], h: [500,550,600,650] },
-      hasUpholstery: false,
-      features: ['drawer','lower-shelf','castors','wireless-charging'],
-      svgFn: drawSideTable
-    },
-  ];
-
-  const FEATURE_DATA = {
-    'drawers':            { name: 'Drawers', desc: 'Soft-close drawer units', price: 2800 },
-    'cable-mgmt':         { name: 'Cable Management', desc: 'Built-in cable routing', price: 600 },
-    'extension':          { name: 'Extension Leaves', desc: 'Seat 4 more guests', price: 4500 },
-    'glass-insert':       { name: 'Glass Insert', desc: 'Tempered safety glass top', price: 3200 },
-    'lazy-susan':         { name: 'Lazy Susan', desc: 'Central rotating tray', price: 1800 },
-    'lower-shelf':        { name: 'Lower Shelf', desc: 'Storage shelf below', price: 1200 },
-    'lift-top':           { name: 'Lift Top', desc: 'Hinged working surface', price: 2500 },
-    'castors':            { name: 'Castors', desc: 'Easy-roll wheels', price: 800 },
-    'sofa-bed':           { name: 'Sofa Bed', desc: 'Folds out to double bed', price: 8000 },
-    'chaise':             { name: 'Chaise Extension', desc: 'L-shape chaise section', price: 6500 },
-    'storage-base':       { name: 'Storage Base', desc: 'Lift-up base storage', price: 4500 },
-    'electric-recliner':  { name: 'Electric Recliner', desc: 'Motorised recline', price: 9500 },
-    'usb-ports':          { name: 'USB Charging', desc: 'Built-in USB-A & C ports', price: 1200 },
-    'feather-fill':       { name: 'Feather Fill', desc: 'Premium feather cushions', price: 3500 },
-    'swivel-base':        { name: 'Swivel Base', desc: '360° swivel mechanism', price: 2200 },
-    'recliner':           { name: 'Recliner Mechanism', desc: 'Manual recliner', price: 3500 },
-    'foot-stool':         { name: 'Matching Ottoman', desc: 'Coordinating foot stool', price: 4200 },
-    'wing-back':          { name: 'Wing-Back Design', desc: 'Classic high wing sides', price: 1800 },
-    'floating-nightstands': { name: 'Floating Nightstands', desc: 'Wall-mounted (pair)', price: 5500 },
-    'reading-lights':     { name: 'Reading Lights', desc: 'Integrated LED lights', price: 2800 },
-    'charging-dock':      { name: 'Charging Dock', desc: 'USB & wireless charging', price: 1800 },
-    'upholstered-headboard': { name: 'Upholstered Headboard', desc: 'Fabric or leather panel', price: 4500 },
-    'footboard':          { name: 'Footboard', desc: 'Matching foot rail', price: 2200 },
-    'full-mirror':        { name: 'Full-Length Mirror', desc: 'Integrated floor mirror', price: 4800 },
-    'pull-out-trays':     { name: 'Pull-Out Trays', desc: 'Accessories trays', price: 2200 },
-    'shoe-rack':          { name: 'Shoe Rack Section', desc: 'Angled shoe shelves', price: 2800 },
-    'island-unit':        { name: 'Centre Island', desc: 'Free-standing island unit', price: 12000 },
-    'lighting':           { name: 'LED Interior Lighting', desc: 'Motion-activated LEDs', price: 2500 },
-    'soft-close':         { name: 'Soft-Close Fittings', desc: 'All doors & drawers', price: 1800 },
-    'lockable':           { name: 'Lockable Doors', desc: 'Security key locks', price: 1200 },
-    'glass-doors':        { name: 'Glass Door Panels', desc: 'Tempered glass fronts', price: 4200 },
-    'ladder-rail':        { name: 'Rolling Ladder Rail', desc: 'Library-style ladder', price: 6500 },
-    'adjustable-shelves': { name: 'Adjustable Shelves', desc: 'Movable shelf pins', price: 800 },
-    'led-backlight':      { name: 'LED Backlighting', desc: 'Ambient LED strip', price: 1800 },
-    'floating':           { name: 'Wall-Mounted / Floating', desc: 'Hidden bracket system', price: 2800 },
-    'corner-unit':        { name: 'Corner Extension', desc: 'L-shape corner unit', price: 5500 },
-    'hutch':              { name: 'Overhead Hutch', desc: 'Upper bookcase unit', price: 4500 },
-    'monitor-riser':      { name: 'Monitor Riser', desc: 'Raised monitor shelf', price: 1200 },
-    'sit-stand':          { name: 'Sit-Stand Mechanism', desc: 'Electric height adjust', price: 9500 },
-    'drawer':             { name: 'Drawer', desc: 'Single storage drawer', price: 1200 },
-    'wireless-charging':  { name: 'Wireless Charging', desc: 'Integrated Qi charger', price: 1800 },
-  };
-
-  // ═══════════════════════════════════════════════════
-  //  STATE
-  // ═══════════════════════════════════════════════════
-  const state = {
-    step: 1,
-    furniture: null,
-    dims: {},
-    timber: { val: 'oak', mult: 1.0, label: 'Solid Oak' },
-    finish: { val: 'natural', mult: 1.0, label: 'Natural' },
-    upholstery: { add: 0, label: 'Linen Blend' },
-    fabricColour: 'Ivory',
-    hardware: { val: 'satin-brass', add: 0, label: 'Satin Brass' },
-    features: new Set(),
-  };
-
-  // ═══════════════════════════════════════════════════
-  //  INIT
-  // ═══════════════════════════════════════════════════
-  document.addEventListener('DOMContentLoaded', () => {
-    renderFurnitureGrid();
-    // hamburger
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.getElementById('navLinks').classList.toggle('open');
-    });
-  });
-
-  function renderFurnitureGrid() {
-    const grid = document.getElementById('furnitureGrid');
-    grid.innerHTML = FURNITURE.map(f => `
-      <div class="furniture-card" data-id="${f.id}" onclick="selectFurniture('${f.id}')">
-        <span class="furniture-card-icon">${f.icon}</span>
-        <div class="furniture-card-name">${f.name}</div>
-        <div class="furniture-card-from">${f.from}</div>
-      </div>
-    `).join('');
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  STEP NAVIGATION
-  // ═══════════════════════════════════════════════════
-  function goToStep(n) {
-    if (n === 2 && !state.furniture) { alert('Please select a furniture piece first.'); return; }
-    state.step = n;
-
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('step-' + n).classList.add('active');
-
-    document.querySelectorAll('.step-tab').forEach(t => {
-      const s = parseInt(t.dataset.step);
-      t.classList.toggle('active', s === n);
-      t.classList.toggle('done', s < n);
-    });
-
-    document.getElementById('progressLabel').textContent = `Step ${n} of 4${n === 5 ? ' — Review' : ''}`;
-
-    if (n === 2) renderDimensions();
-    if (n === 4) renderFeatures();
-    if (n === 5) renderOrderSummary();
-
-    updateQuote();
-    updatePreview();
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  FURNITURE SELECTION
-  // ═══════════════════════════════════════════════════
-  function selectFurniture(id) {
-    state.furniture = FURNITURE.find(f => f.id === id);
-    state.dims = { ...state.furniture.dims };
-    state.features.clear();
-
-    document.querySelectorAll('.furniture-card').forEach(c => {
-      c.classList.toggle('selected', c.dataset.id === id);
-    });
-
-    // Show/hide upholstery
-    document.getElementById('upholsterySection').style.display =
-      state.furniture.hasUpholstery ? 'block' : 'none';
-
-    updateQuote();
-    updatePreview();
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  DIMENSIONS
-  // ═══════════════════════════════════════════════════
-  function renderDimensions() {
-    const f = state.furniture;
-    if (!f) return;
-    const dimNames = { w: 'Width', d: 'Depth', h: 'Height' };
-    const dimDescs = { w: '(left to right)', d: '(front to back)', h: '(floor to top)' };
-
-    let html = `<p style="font-size:.85rem;color:var(--text-mid);margin-bottom:1.25rem;line-height:1.6;">
-      Set exact dimensions for your ${f.name.toLowerCase()}. All measurements in millimetres.
-      Standard sizes shown below — or enter any custom value.
-    </p>
-    <div class="dimension-grid">`;
-
-    for (const dim of ['w','d','h']) {
-      html += `
-        <div class="dim-group">
-          <label>${dimNames[dim]} ${dimDescs[dim]}</label>
-          <div class="dim-input-wrap">
-            <input type="number" id="dim-${dim}" value="${state.dims[dim]}"
-              min="100" max="10000" step="10"
-              onchange="updateDim('${dim}', this.value)" />
-            <span class="dim-unit">mm</span>
-          </div>
-          <div class="dim-presets">
-            ${f.presets[dim].map(v => `<button class="dim-preset" onclick="setDim('${dim}',${v})">${v}</button>`).join('')}
-          </div>
-        </div>`;
-    }
-
-    html += `</div>
-    <div class="info-note">
-      <span class="info-note-icon">📐</span>
-      Need a non-standard size? Enter any value — our craftsmen work to millimetre precision.
-      Sizes beyond standard presets may affect lead time and pricing.
-    </div>`;
-
-    document.getElementById('dimensionContent').innerHTML = html;
-  }
-
-  function updateDim(dim, val) {
-    state.dims[dim] = parseInt(val) || state.furniture.dims[dim];
-    updateQuote();
-    updatePreview();
-  }
-
-  function setDim(dim, val) {
-    state.dims[dim] = val;
-    const el = document.getElementById('dim-' + dim);
-    if (el) el.value = val;
-    updateQuote();
-    updatePreview();
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  SWATCHES
-  // ═══════════════════════════════════════════════════
-  function selectSwatch(el) {
-    const group = el.dataset.group;
-    document.querySelectorAll(`[data-group="${group}"]`).forEach(s => s.classList.remove('selected'));
-    el.classList.add('selected');
-
-    if (group === 'timber') {
-      state.timber = { val: el.dataset.val, mult: parseFloat(el.dataset.mult), label: el.textContent.trim() };
-    } else if (group === 'finish') {
-      state.finish = { val: el.dataset.val, mult: parseFloat(el.dataset.mult), label: el.textContent.trim() };
-    } else if (group === 'hardware') {
-      state.hardware = { val: el.dataset.val, add: parseFloat(el.dataset.add||0), label: el.textContent.trim() };
-    } else if (group === 'fabric-colour') {
-      state.fabricColour = el.dataset.val;
-    }
-
-    updateQuote();
-    updatePreview();
-  }
-
-  // Upholstery select
-  document.addEventListener('DOMContentLoaded', () => {
-    const sel = document.getElementById('upholsterySelect');
-    if (sel) sel.addEventListener('change', function() {
-      const opt = this.options[this.selectedIndex];
-      state.upholstery = { add: parseInt(opt.dataset.add||0), label: opt.text.split(' +')[0].split(' —')[0] };
-      updateQuote();
-    });
-  });
-
-  // ═══════════════════════════════════════════════════
-  //  FEATURES
-  // ═══════════════════════════════════════════════════
-  function renderFeatures() {
-    const f = state.furniture;
-    if (!f) return;
-    const grid = document.getElementById('featureGrid');
-    grid.innerHTML = f.features.map(fid => {
-      const fd = FEATURE_DATA[fid];
-      if (!fd) return '';
-      const sel = state.features.has(fid);
-      return `
-        <div class="feature-toggle ${sel ? 'selected' : ''}" onclick="toggleFeature('${fid}', this)">
-          <div class="feature-check">${sel ? '✓' : ''}</div>
-          <div class="feature-info">
-            <div class="feature-name">${fd.name}</div>
-            <div class="feature-desc">${fd.desc}</div>
-            <div class="feature-price">+R${fd.price.toLocaleString()}</div>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  function toggleFeature(id, el) {
-    if (state.features.has(id)) {
-      state.features.delete(id);
-      el.classList.remove('selected');
-      el.querySelector('.feature-check').textContent = '';
-    } else {
-      state.features.add(id);
-      el.classList.add('selected');
-      el.querySelector('.feature-check').textContent = '✓';
-    }
-    updateQuote();
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  QUOTE CALCULATION
-  // ═══════════════════════════════════════════════════
-  function updateQuote() {
-    const f = state.furniture;
-    if (!f) return;
-
-    const basePrice = f.basePrice;
-
-    // Size multiplier: relative to default dimensions
-    const defVol = f.dims.w * f.dims.d * f.dims.h;
-    const curVol = (state.dims.w||f.dims.w) * (state.dims.d||f.dims.d) * (state.dims.h||f.dims.h);
-    const sizeRatio = Math.pow(curVol / defVol, 0.4); // dampened exponent
-
-    // Material & finish
-    const matMult = state.timber.mult;
-    const finMult = state.finish.mult || 1.0;
-
-    // Features extras
-    let extrasTotal = state.hardware.add || 0;
-    extrasTotal += state.upholstery.add || 0;
-    state.features.forEach(fid => {
-      extrasTotal += FEATURE_DATA[fid]?.price || 0;
-    });
-
-    const subtotal = Math.round(basePrice * matMult * finMult * sizeRatio);
-    const total = subtotal + extrasTotal;
-
-    const fmt = n => 'R' + Math.round(n).toLocaleString('en-ZA');
-
-    document.getElementById('qBase').textContent = fmt(basePrice);
-    document.getElementById('qMaterial').textContent = `${state.timber.label.split(' ')[state.timber.label.split(' ').length - 1]} (×${matMult})`;
-    document.getElementById('qFinish').textContent = `${state.finish.label.replace(/\s+/g,'').split('/')[0]} (×${finMult})`;
-    document.getElementById('qSize').textContent = sizeRatio !== 1 ? `×${sizeRatio.toFixed(2)}` : 'Standard';
-    document.getElementById('qExtras').textContent = fmt(extrasTotal);
-    document.getElementById('qTotal').textContent = fmt(total);
-    document.getElementById('leadTimeText').textContent = `Estimated production: ${f.leadTime} · Delivery extra`;
-
-    // preview meta
-    if (document.getElementById('previewMeta')) {
-      document.getElementById('previewMeta').style.display = 'block';
-      document.getElementById('previewName').textContent = f.name;
-      document.getElementById('previewSpecs').innerHTML = `
-        <div class="preview-spec">📐 <strong>${state.dims.w||f.dims.w}×${state.dims.d||f.dims.d}×${state.dims.h||f.dims.h}mm</strong></div>
-        <div class="preview-spec">🪵 <strong>${state.timber.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-        <div class="preview-spec">🎨 <strong>${state.finish.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-        <div class="preview-spec">🔩 <strong>${state.hardware.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-      `;
-    }
-
-    state._total = total;
-    state._subtotal = subtotal;
-    state._extrasTotal = extrasTotal;
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  SVG PREVIEW
-  // ═══════════════════════════════════════════════════
-  function getTimberFill() {
-    const fills = {
-      oak: '#c8a86e', walnut: '#5c3a1e', mahogany: '#7b2d26',
-      ash: '#d4c4a0', pine: '#e8d5a0', teak: '#8b5e3c', ebony: '#1a1008'
-    };
-    return fills[state.timber.val] || '#c8a86e';
-  }
-  function getFinishOpacity() {
-    const ops = {
-      'natural': 1, 'dark-stain': 0.7, 'white-wash': 0.3,
-      'matt-black': 0.1, 'charcoal': 0.2, 'raw': 0.9
-    };
-    return ops[state.finish.val] ?? 1;
-  }
-  function getGoldTone() {
-    const tones = {
-      'satin-brass': '#b8924e', 'brushed-chrome': '#b0b8c0',
-      'matt-black-hw': '#2a2a2a', 'antique-brass': '#7c5f30', 'rose-gold': '#c0806a'
-    };
-    return tones[state.hardware.val] || '#b8924e';
-  }
-  function mixColour(hex, opacity, bg = '#1e2d4a') {
-    // Mix timber colour with dark stain / finish
-    return hex;
-  }
-
-  function updatePreview() {
-    const f = state.furniture;
-    const placeholder = document.getElementById('previewPlaceholder');
-    const container = document.getElementById('furnitureSvgContainer');
-    if (!f) { placeholder.style.display='block'; container.style.display='none'; return; }
-    placeholder.style.display = 'none';
-    container.style.display = 'block';
-    container.innerHTML = f.svgFn();
-  }
-
-  // ─── SVG Drawing Functions ─────────────────────────
-
-  function svgWrap(content, vw=280, vh=200) {
-    const wood = getTimberFill();
-    const gold = getGoldTone();
-    const fin = state.finish.val;
-    const overlay = fin === 'dark-stain' ? 'rgba(0,0,0,0.38)' :
-                    fin === 'white-wash' ? 'rgba(255,255,255,0.55)' :
-                    fin === 'matt-black' ? 'rgba(10,10,10,0.72)' :
-                    fin === 'charcoal'   ? 'rgba(30,30,30,0.58)' :
-                    fin === 'raw'        ? 'rgba(230,210,180,0.15)' : 'transparent';
-    return `<svg viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg" class="furniture-svg"
-      style="--wood:${wood};--gold:${gold};--overlay:${overlay};">
-      <defs>
-        <pattern id="grain" patternUnits="userSpaceOnUse" width="4" height="60" patternTransform="rotate(15)">
-          <line x1="0" y1="0" x2="0" y2="60" stroke="${wood}" stroke-width="1.5" opacity=".18"/>
-        </pattern>
-        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".25"/>
-        </filter>
-      </defs>
-      ${content}
-    </svg>`;
-  }
-
-  function drawDiningTable() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Table top -->
-      <rect x="20" y="55" width="240" height="22" rx="4" fill="${w}" filter="url(#shadow)"/>
-      <rect x="20" y="55" width="240" height="22" rx="4" fill="url(#grain)" opacity=".6"/>
-      <rect x="20" y="55" width="240" height="22" rx="4" fill="var(--overlay)" opacity=".8"/>
-      <!-- Table top highlight -->
-      <rect x="22" y="56" width="238" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
-      <!-- Apron front -->
-      <rect x="30" y="77" width="220" height="10" rx="2" fill="${w}" opacity=".85"/>
-      <rect x="30" y="77" width="220" height="10" rx="2" fill="url(#grain)" opacity=".4"/>
-      <rect x="30" y="77" width="220" height="10" rx="2" fill="var(--overlay)" opacity=".7"/>
-      <!-- Legs -->
-      <rect x="35" y="87" width="12" height="70" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="35" y="87" width="12" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="233" y="87" width="12" height="70" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="233" y="87" width="12" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <!-- Leg feet caps -->
-      <rect x="33" y="153" width="16" height="4" rx="2" fill="${g}" opacity=".9"/>
-      <rect x="231" y="153" width="16" height="4" rx="2" fill="${g}" opacity=".9"/>
-      <!-- Shadow on floor -->
-      <ellipse cx="140" cy="162" rx="110" ry="8" fill="rgba(0,0,0,.15)"/>
-    `, 280, 175);
-  }
-
-  function drawCoffeeTable() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <rect x="25" y="90" width="230" height="16" rx="4" fill="${w}" filter="url(#shadow)"/>
-      <rect x="25" y="90" width="230" height="16" rx="4" fill="url(#grain)" opacity=".6"/>
-      <rect x="25" y="90" width="230" height="16" rx="4" fill="var(--overlay)" opacity=".8"/>
-      <rect x="27" y="91" width="226" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
-      <!-- shelf -->
-      <rect x="40" y="130" width="200" height="10" rx="3" fill="${w}" opacity=".7"/>
-      <rect x="40" y="130" width="200" height="10" rx="3" fill="var(--overlay)" opacity=".6"/>
-      <!-- Legs -->
-      <rect x="40" y="106" width="10" height="48" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="40" y="106" width="10" height="48" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="230" y="106" width="10" height="48" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="230" y="106" width="10" height="48" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="38" y="150" width="14" height="4" rx="2" fill="${g}"/>
-      <rect x="228" y="150" width="14" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="158" rx="110" ry="6" fill="rgba(0,0,0,.15)"/>
-    `, 280, 168);
-  }
-
-  function drawSofa() {
-    const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
-    const fc = fabric[state.fabricColour] || '#e8d5c0';
-    return svgWrap(`
-      <!-- Back rest -->
-      <rect x="15" y="55" width="250" height="65" rx="8" fill="${fc}" filter="url(#shadow)"/>
-      <rect x="17" y="57" width="246" height="20" rx="6" fill="rgba(255,255,255,.08)"/>
-      <!-- Seat cushions -->
-      <rect x="15" y="108" width="120" height="38" rx="6" fill="${fc}" opacity=".95"/>
-      <rect x="143" y="108" width="122" height="38" rx="6" fill="${fc}" opacity=".95"/>
-      <rect x="15" y="108" width="120" height="8" rx="4" fill="rgba(255,255,255,.09)"/>
-      <rect x="143" y="108" width="122" height="8" rx="4" fill="rgba(255,255,255,.09)"/>
-      <!-- Cushion divide -->
-      <line x1="139" y1="108" x2="139" y2="146" stroke="rgba(0,0,0,.08)" stroke-width="2"/>
-      <!-- Arms -->
-      <rect x="5" y="78" width="18" height="68" rx="6" fill="${fc}" opacity=".9"/>
-      <rect x="257" y="78" width="18" height="68" rx="6" fill="${fc}" opacity=".9"/>
-      <!-- Legs -->
-      <rect x="22" y="143" width="10" height="20" rx="3" fill="${w}"/>
-      <rect x="248" y="143" width="10" height="20" rx="3" fill="${w}"/>
-      <rect x="22" y="159" width="10" height="4" rx="2" fill="${g}"/>
-      <rect x="248" y="159" width="10" height="4" rx="2" fill="${g}"/>
-      <!-- Piping detail -->
-      <rect x="15" y="120" width="250" height="2" rx="1" fill="rgba(0,0,0,.06)"/>
-      <ellipse cx="140" cy="167" rx="120" ry="6" fill="rgba(0,0,0,.15)"/>
-    `, 280, 175);
-  }
-
-  function drawArmchair() {
-    const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
-    const fc = fabric[state.fabricColour] || '#e8d5c0';
-    return svgWrap(`
-      <rect x="55" y="55" width="170" height="70" rx="10" fill="${fc}" filter="url(#shadow)"/>
-      <rect x="57" y="57" width="166" height="22" rx="8" fill="rgba(255,255,255,.09)"/>
-      <rect x="55" y="112" width="170" height="42" rx="8" fill="${fc}" opacity=".95"/>
-      <rect x="55" y="112" width="170" height="10" rx="5" fill="rgba(255,255,255,.09)"/>
-      <!-- Arms -->
-      <rect x="42" y="80" width="22" height="62" rx="7" fill="${fc}" opacity=".9"/>
-      <rect x="216" y="80" width="22" height="62" rx="7" fill="${fc}" opacity=".9"/>
-      <!-- Legs -->
-      <rect x="65" y="151" width="12" height="22" rx="3" fill="${w}"/>
-      <rect x="203" y="151" width="12" height="22" rx="3" fill="${w}"/>
-      <rect x="63" y="169" width="16" height="4" rx="2" fill="${g}"/>
-      <rect x="201" y="169" width="16" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="177" rx="90" ry="6" fill="rgba(0,0,0,.15)"/>
-    `, 280, 185);
-  }
-
-  function drawBed() {
-    const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
-    const fc = fabric[state.fabricColour] || '#e8d5c0';
-    return svgWrap(`
-      <!-- Headboard -->
-      <rect x="20" y="30" width="240" height="80" rx="10" fill="${fc}" filter="url(#shadow)"/>
-      <rect x="22" y="32" width="236" height="25" rx="8" fill="rgba(255,255,255,.1)"/>
-      <!-- Headboard timber cap -->
-      <rect x="20" y="30" width="240" height="8" rx="4" fill="${w}"/>
-      <!-- Base -->
-      <rect x="15" y="108" width="250" height="46" rx="6" fill="${w}" opacity=".9"/>
-      <rect x="15" y="108" width="250" height="46" rx="6" fill="url(#grain)" opacity=".5"/>
-      <rect x="15" y="108" width="250" height="46" rx="6" fill="var(--overlay)" opacity=".7"/>
-      <!-- Mattress -->
-      <rect x="20" y="95" width="240" height="20" rx="4" fill="#f5f2ee"/>
-      <!-- Pillow -->
-      <rect x="30" y="98" width="90" height="14" rx="4" fill="rgba(255,255,255,.7)"/>
-      <rect x="158" y="98" width="90" height="14" rx="4" fill="rgba(255,255,255,.7)"/>
-      <!-- Legs -->
-      <rect x="22" y="150" width="12" height="18" rx="3" fill="${w}"/>
-      <rect x="246" y="150" width="12" height="18" rx="3" fill="${w}"/>
-      <rect x="20" y="164" width="16" height="4" rx="2" fill="${g}"/>
-      <rect x="244" y="164" width="16" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="172" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
-    `, 280, 180);
-  }
-
-  function drawWardrobe() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Carcass -->
-      <rect x="20" y="20" width="240" height="155" rx="5" fill="${w}" filter="url(#shadow)"/>
-      <rect x="20" y="20" width="240" height="155" rx="5" fill="url(#grain)" opacity=".5"/>
-      <rect x="20" y="20" width="240" height="155" rx="5" fill="var(--overlay)" opacity=".75"/>
-      <!-- Top cap -->
-      <rect x="18" y="17" width="244" height="8" rx="3" fill="${w}" opacity=".85"/>
-      <!-- Door divider -->
-      <line x1="140" y1="20" x2="140" y2="175" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
-      <!-- Door panels -->
-      <rect x="26" y="28" width="106" height="138" rx="3" fill="${w}" opacity=".55"/>
-      <rect x="26" y="28" width="106" height="138" rx="3" fill="var(--overlay)" opacity=".4"/>
-      <rect x="148" y="28" width="106" height="138" rx="3" fill="${w}" opacity=".55"/>
-      <rect x="148" y="28" width="106" height="138" rx="3" fill="var(--overlay)" opacity=".4"/>
-      <!-- Panel insets -->
-      <rect x="30" y="32" width="98" height="60" rx="2" fill="rgba(0,0,0,.06)"/>
-      <rect x="30" y="97" width="98" height="65" rx="2" fill="rgba(0,0,0,.06)"/>
-      <rect x="152" y="32" width="98" height="60" rx="2" fill="rgba(0,0,0,.06)"/>
-      <rect x="152" y="97" width="98" height="65" rx="2" fill="rgba(0,0,0,.06)"/>
-      <!-- Handles -->
-      <rect x="129" y="93" width="6" height="20" rx="3" fill="${g}"/>
-      <rect x="145" y="93" width="6" height="20" rx="3" fill="${g}"/>
-      <!-- Base plinth -->
-      <rect x="14" y="172" width="252" height="8" rx="3" fill="${w}" opacity=".7"/>
-      <ellipse cx="140" cy="182" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
-    `, 280, 188);
-  }
-
-  function drawBookcase() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Sides -->
-      <rect x="20" y="15" width="12" height="160" rx="3" fill="${w}" filter="url(#shadow)"/>
-      <rect x="248" y="15" width="12" height="160" rx="3" fill="${w}"/>
-      <rect x="20" y="15" width="12" height="160" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="248" y="15" width="12" height="160" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <!-- Top & bottom -->
-      <rect x="18" y="13" width="244" height="10" rx="3" fill="${w}"/>
-      <rect x="18" y="13" width="244" height="10" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="18" y="163" width="244" height="10" rx="3" fill="${w}"/>
-      <rect x="18" y="163" width="244" height="10" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <!-- Shelves -->
-      <rect x="32" y="50" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
-      <rect x="32" y="50" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
-      <rect x="32" y="95" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
-      <rect x="32" y="95" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
-      <rect x="32" y="137" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
-      <rect x="32" y="137" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
-      <!-- Books (decorative) -->
-      <rect x="35" y="20" width="10" height="28" rx="1" fill="#8b2020" opacity=".7"/>
-      <rect x="47" y="20" width="8" height="28" rx="1" fill="#1e4a8b" opacity=".7"/>
-      <rect x="57" y="20" width="12" height="28" rx="1" fill="#2a6e3a" opacity=".7"/>
-      <rect x="71" y="20" width="9" height="28" rx="1" fill="#8b6e20" opacity=".7"/>
-      <rect x="82" y="20" width="11" height="28" rx="1" fill="#5a2a8b" opacity=".7"/>
-      <rect x="35" y="58" width="12" height="32" rx="1" fill="#c0624a" opacity=".7"/>
-      <rect x="49" y="58" width="8" height="32" rx="1" fill="#1a5c8a" opacity=".7"/>
-      <rect x="59" y="58" width="14" height="32" rx="1" fill="#3a7a4a" opacity=".7"/>
-      <rect x="75" y="58" width="9" height="32" rx="1" fill="#7a4e28" opacity=".7"/>
-      <ellipse cx="140" cy="175" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
-    `, 280, 182);
-  }
-
-  function drawTvUnit() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Main body -->
-      <rect x="15" y="65" width="250" height="80" rx="6" fill="${w}" filter="url(#shadow)"/>
-      <rect x="15" y="65" width="250" height="80" rx="6" fill="url(#grain)" opacity=".5"/>
-      <rect x="15" y="65" width="250" height="80" rx="6" fill="var(--overlay)" opacity=".75"/>
-      <!-- Top surface highlight -->
-      <rect x="17" y="66" width="246" height="6" rx="3" fill="rgba(255,255,255,.1)"/>
-      <!-- Doors / sections -->
-      <rect x="22" y="73" width="70" height="64" rx="3" fill="${w}" opacity=".5"/>
-      <rect x="22" y="73" width="70" height="64" rx="3" fill="var(--overlay)" opacity=".4"/>
-      <rect x="105" y="73" width="70" height="64" rx="3" fill="rgba(0,0,0,.04)"/>
-      <rect x="188" y="73" width="70" height="64" rx="3" fill="${w}" opacity=".5"/>
-      <rect x="188" y="73" width="70" height="64" rx="3" fill="var(--overlay)" opacity=".4"/>
-      <!-- Handles -->
-      <rect x="53" y="102" width="8" height="4" rx="2" fill="${g}"/>
-      <rect x="219" y="102" width="8" height="4" rx="2" fill="${g}"/>
-      <!-- Dividers -->
-      <line x1="96" y1="73" x2="96" y2="137" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
-      <line x1="184" y1="73" x2="184" y2="137" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
-      <!-- Legs -->
-      <rect x="35" y="143" width="10" height="18" rx="3" fill="${w}" opacity=".8"/>
-      <rect x="235" y="143" width="10" height="18" rx="3" fill="${w}" opacity=".8"/>
-      <rect x="33" y="157" width="14" height="4" rx="2" fill="${g}"/>
-      <rect x="233" y="157" width="14" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="163" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
-    `, 280, 170);
-  }
-
-  function drawDesk() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Desktop -->
-      <rect x="15" y="70" width="250" height="18" rx="4" fill="${w}" filter="url(#shadow)"/>
-      <rect x="15" y="70" width="250" height="18" rx="4" fill="url(#grain)" opacity=".6"/>
-      <rect x="15" y="70" width="250" height="18" rx="4" fill="var(--overlay)" opacity=".8"/>
-      <rect x="17" y="71" width="246" height="5" rx="2" fill="rgba(255,255,255,.12)"/>
-      <!-- Drawer pedestal right -->
-      <rect x="195" y="88" width="65" height="68" rx="4" fill="${w}" opacity=".8"/>
-      <rect x="195" y="88" width="65" height="68" rx="4" fill="var(--overlay)" opacity=".65"/>
-      <rect x="200" y="95" width="55" height="18" rx="2" fill="rgba(0,0,0,.05)"/>
-      <rect x="200" y="118" width="55" height="18" rx="2" fill="rgba(0,0,0,.05)"/>
-      <rect x="200" y="141" width="55" height="10" rx="2" fill="rgba(0,0,0,.05)"/>
-      <!-- Drawer handles -->
-      <rect x="223" y="102" width="8" height="3" rx="1.5" fill="${g}"/>
-      <rect x="223" y="124" width="8" height="3" rx="1.5" fill="${g}"/>
-      <!-- Legs left -->
-      <rect x="20" y="88" width="12" height="68" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="20" y="88" width="12" height="68" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="18" y="152" width="16" height="4" rx="2" fill="${g}"/>
-      <rect x="258" y="152" width="16" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="160" rx="115" ry="6" fill="rgba(0,0,0,.12)"/>
-    `, 280, 168);
-  }
-
-  function drawSideTable() {
-    const w = getTimberFill(), g = getGoldTone();
-    return svgWrap(`
-      <!-- Top -->
-      <rect x="65" y="65" width="150" height="14" rx="4" fill="${w}" filter="url(#shadow)"/>
-      <rect x="65" y="65" width="150" height="14" rx="4" fill="url(#grain)" opacity=".6"/>
-      <rect x="65" y="65" width="150" height="14" rx="4" fill="var(--overlay)" opacity=".8"/>
-      <rect x="67" y="66" width="146" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
-      <!-- Apron -->
-      <rect x="75" y="79" width="130" height="8" rx="2" fill="${w}" opacity=".8"/>
-      <rect x="75" y="79" width="130" height="8" rx="2" fill="var(--overlay)" opacity=".7"/>
-      <!-- Legs -->
-      <rect x="76" y="87" width="10" height="70" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="76" y="87" width="10" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <rect x="194" y="87" width="10" height="70" rx="3" fill="${w}" opacity=".9"/>
-      <rect x="194" y="87" width="10" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
-      <!-- Shelf -->
-      <rect x="80" y="135" width="120" height="8" rx="2" fill="${w}" opacity=".7"/>
-      <rect x="80" y="135" width="120" height="8" rx="2" fill="var(--overlay)" opacity=".6"/>
-      <!-- Feet -->
-      <rect x="74" y="153" width="14" height="4" rx="2" fill="${g}"/>
-      <rect x="192" y="153" width="14" height="4" rx="2" fill="${g}"/>
-      <ellipse cx="140" cy="160" rx="80" ry="5" fill="rgba(0,0,0,.12)"/>
-    `, 280, 168);
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  ORDER SUMMARY
-  // ═══════════════════════════════════════════════════
-  function renderOrderSummary() {
-    const f = state.furniture;
-    if (!f) return;
-    const features = [...state.features].map(id => FEATURE_DATA[id]?.name || id).join(', ') || 'None';
-    const fmt = n => 'R' + Math.round(n).toLocaleString('en-ZA');
-
-    document.getElementById('orderSummaryCard').innerHTML = `
-      <div class="summary-card-title">✦ Your Custom ${f.name} Brief</div>
-      <div class="summary-row"><span>Piece</span><strong>${f.name}</strong></div>
-      <div class="summary-row"><span>Dimensions</span><strong>${state.dims.w}W × ${state.dims.d}D × ${state.dims.h}H mm</strong></div>
-      <div class="summary-row"><span>Timber</span><strong>${state.timber.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-      <div class="summary-row"><span>Finish</span><strong>${state.finish.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-      ${f.hasUpholstery ? `<div class="summary-row"><span>Upholstery</span><strong>${state.upholstery.label} · ${state.fabricColour}</strong></div>` : ''}
-      <div class="summary-row"><span>Hardware</span><strong>${state.hardware.label.trim().replace(/\+.*/,'').trim()}</strong></div>
-      <div class="summary-row"><span>Add-ons</span><strong>${features}</strong></div>
-      <div class="summary-row"><span>Lead time</span><strong>${f.leadTime}</strong></div>
-      <div class="summary-total-row">
-        <span class="summary-total-label">Estimated total</span>
-        <span class="summary-total-val">${fmt(state._total || 0)}</span>
-      </div>
-    `;
-  }
-
-  // ═══════════════════════════════════════════════════
-  //  FORM SUBMISSION
-  // ═══════════════════════════════════════════════════
-  function submitOrder(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    // Simulate submission (replace with real API call / Netlify form)
-    setTimeout(() => {
-      const ref = 'OID-' + Date.now().toString().slice(-6);
-      document.getElementById('successRef').textContent = 'REF: ' + ref;
-      document.getElementById('orderForm').style.display = 'none';
-      document.getElementById('step5Nav').style.display = 'none';
-      document.getElementById('successState').classList.add('visible');
-    }, 1200);
-  }
-
-  function resetConfigurator() {
-    state.step = 1;
-    state.furniture = null;
-    state.features.clear();
-    document.getElementById('orderForm').style.display = 'block';
-    document.getElementById('step5Nav').style.display = 'flex';
-    document.getElementById('successState').classList.remove('visible');
-    document.getElementById('submitBtn').disabled = false;
-    document.getElementById('submitBtn').textContent = '✦   Submit My Furniture Brief';
-    document.querySelectorAll('.furniture-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('previewPlaceholder').style.display = 'block';
-    document.getElementById('furnitureSvgContainer').style.display = 'none';
-    document.getElementById('previewMeta').style.display = 'none';
-    document.getElementById('qBase').textContent = '—';
-    document.getElementById('qTotal').textContent = '—';
-    goToStep(1);
-  }
-  </script>
+      <div class="cart-item-price">${R(i.price*i.qty)}</div>
+    </div>`).join('');
+  body.querySelectorAll('.cart-item-rm').forEach(b => b.addEventListener('click', ()=>rmFromList(b.dataset.key)));
+  document.getElementById('cartTotal').textContent = R(total);
+  ft.style.display='flex';
+
+  const lines = list.map(i=>`• ${i.name}${i.sz?' ('+i.sz+')':''} [${i.id}] x${i.qty} = ${R(i.price*i.qty)}`).join('\n');
+  const waText = encodeURIComponent(`Hi Opulent Interior D-Zines,\n\nI'd like to enquire about:\n\n${lines}\n\nEstimated Total: ${R(total)}\n\nPlease confirm availability, lead time and delivery. Thank you!`);
+  document.getElementById('cartWA').onclick = ()=>window.open(`https://wa.me/27674017626?text=${waText}`,'_blank');
+  const emailText = encodeURIComponent(`Hi Opulent Interior D-Zines,\n\nPlease find my furniture enquiry below:\n\n${lines.replace(/•/g,'-')}\n\nEstimated Total: ${R(total)}\n\nKindly confirm pricing, availability, lead time, and delivery. Thank you.`);
+  document.getElementById('cartEmail').onclick = ()=>{ window.location.href=`mailto:info@opulentinteriordzines.co.za?subject=Furniture Enquiry – ${totalItems} Item${totalItems!==1?'s':''}&body=${emailText}`; };
+}
+
+/* cart open/close */
+const openCart = ()=>{ document.getElementById('cartSidebar').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
+const closeCart = ()=>{ document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow=''; };
+document.getElementById('cartBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+/* ── toast ── */
+let toastTmr;
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTmr); toastTmr=setTimeout(()=>t.classList.remove('show'),2800); }
+
+/* ── mobile nav ── */
+const hbg = document.getElementById('hamburger');
+const nl = document.getElementById('navLinks');
+hbg.addEventListener('click', ()=>{ const o=nl.classList.toggle('open'); hbg.setAttribute('aria-expanded',o); });
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ nl.classList.remove('open'); hbg.setAttribute('aria-expanded',false); }));
+
+/* ── scroll reveal ── */
+function initReveal(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*55); obs.unobserve(e.target); } });
+  },{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+/* ── init ── */
+buildCards();
+</script>
 </body>
 </html>
