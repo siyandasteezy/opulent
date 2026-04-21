@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Furniture Studio | Opulent Interior D-Zines</title>
+  <meta name="description" content="Design your bespoke furniture online. Choose your piece, set your dimensions, select premium materials and finishes. Crafted to your exact specification in Gauteng, South Africa." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.opulentinteriordzines.co.za/shop" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ───────────────────────────────── */
+    :root {
+      --navy:        #0d1626;
+      --navy-mid:    #1e2d4a;
+      --navy-light:  #2a3f63;
+      --gold:        #b8864e;
+      --gold-light:  #d4a96a;
+      --gold-pale:   #f5efe6;
+      --white:       #ffffff;
+      --off-white:   #faf8f4;
+      --sand:        #e8dcc8;
+      --sand-light:  #f0e8d8;
+      --text-dark:   #1a1824;
+      --text-mid:    #5c5470;
+      --text-light:  #8e8aa0;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --shadow-sm:   0 2px 8px rgba(13,22,38,.08);
+      --shadow-md:   0 6px 24px rgba(13,22,38,.12);
+      --shadow-lg:   0 16px 48px rgba(13,22,38,.18);
+      --transition:  all .25s ease;
+    }
+
+    /* ─── Reset & Base ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+      background: var(--off-white);
+      min-height: 100vh;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    input, select, textarea { font-family: inherit; }
+
+    /* ─── Navigation ──────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(13,22,38,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,134,78,.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 500;
+      color: var(--white); letter-spacing: .04em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 400; letter-spacing: .06em;
+      color: rgba(255,255,255,.75); text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+    .nav-cta {
+      padding: .5rem 1.25rem;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      border-radius: var(--radius-sm);
+      transition: var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+    /* ─── Page Hero ───────────────────────────────────── */
+    .shop-hero {
+      padding: 7rem 2rem 3rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      text-align: center;
+    }
+    .shop-hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .4rem 1rem;
+      background: rgba(184,134,78,.15);
+      border: 1px solid rgba(184,134,78,.35);
+      border-radius: 99px;
+      font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 1.5rem;
+    }
+    .shop-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300; color: var(--white); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .shop-hero h1 em { font-style: italic; color: var(--gold-light); }
+    .shop-hero p {
+      max-width: 52ch; margin: 0 auto;
+      font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.7;
+    }
+    .hero-steps {
+      display: flex; justify-content: center; gap: 2rem;
+      margin-top: 2.5rem; flex-wrap: wrap;
+    }
+    .hero-step {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .8rem; color: rgba(255,255,255,.6); letter-spacing: .04em;
+    }
+    .hero-step-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 600; flex-shrink: 0;
+    }
+
+    /* ─── Configurator Layout ─────────────────────────── */
+    .configurator-wrapper {
+      max-width: 1400px; margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 1100px) {
+      .configurator-wrapper { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Panel Card ──────────────────────────────────── */
+    .panel {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--sand);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 500; color: var(--navy);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .panel-title-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+    }
+    .panel-body { padding: 1.75rem; }
+
+    /* ─── Step Tabs ───────────────────────────────────── */
+    .step-tabs {
+      display: flex; gap: .5rem; margin-bottom: 1.75rem; flex-wrap: wrap;
+    }
+    .step-tab {
+      flex: 1; min-width: 100px;
+      padding: .55rem .75rem;
+      border: 2px solid var(--sand);
+      border-radius: var(--radius-sm);
+      font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+      color: var(--text-mid); text-transform: uppercase;
+      background: var(--white); transition: var(--transition);
+      display: flex; align-items: center; gap: .4rem; justify-content: center;
+    }
+    .step-tab:hover { border-color: var(--gold); color: var(--gold); }
+    .step-tab.active {
+      border-color: var(--gold); background: var(--gold);
+      color: var(--navy); font-weight: 600;
+    }
+    .step-tab.done { border-color: var(--gold); color: var(--gold); }
+    .step-tab.done::before { content: "✓ "; }
+
+    /* ─── Step Panels ─────────────────────────────────── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    /* ─── Furniture Type Grid ─────────────────────────── */
+    .furniture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .furniture-card {
+      border: 2px solid var(--sand);
+      border-radius: var(--radius-md);
+      padding: 1.25rem .75rem;
+      text-align: center; cursor: pointer;
+      transition: var(--transition);
+      background: var(--white);
+      position: relative;
+    }
+    .furniture-card:hover {
+      border-color: var(--gold); transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .furniture-card.selected {
+      border-color: var(--gold); background: var(--gold-pale);
+    }
+    .furniture-card.selected::after {
+      content: "✓";
+      position: absolute; top: .4rem; right: .5rem;
+      font-size: .75rem; color: var(--gold); font-weight: 700;
+    }
+    .furniture-card-icon {
+      font-size: 2.25rem; margin-bottom: .6rem; display: block;
+    }
+    .furniture-card-name {
+      font-size: .78rem; font-weight: 500; color: var(--text-dark);
+      letter-spacing: .03em; line-height: 1.3;
+    }
+    .furniture-card-from {
+      font-size: .7rem; color: var(--gold); margin-top: .25rem;
+    }
+
+    /* ─── Dimension Inputs ────────────────────────────── */
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) { .dimension-grid { grid-template-columns: 1fr; } }
+    .dim-group label {
+      display: block; font-size: .75rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-mid); margin-bottom: .4rem;
+    }
+    .dim-input-wrap {
+      display: flex; align-items: center;
+      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
+      overflow: hidden; transition: var(--transition);
+    }
+    .dim-input-wrap:focus-within { border-color: var(--gold); }
+    .dim-input-wrap input {
+      flex: 1; padding: .6rem .75rem;
+      border: none; outline: none;
+      font-size: .95rem; color: var(--text-dark);
+      background: transparent;
+    }
+    .dim-unit {
+      padding: .6rem .75rem;
+      font-size: .75rem; color: var(--text-light);
+      background: var(--off-white); border-left: 1px solid var(--sand);
+    }
+    .dim-presets {
+      display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem;
+    }
+    .dim-preset {
+      padding: .3rem .65rem;
+      border: 1px solid var(--sand); border-radius: 99px;
+      font-size: .72rem; color: var(--text-mid);
+      cursor: pointer; transition: var(--transition);
+    }
+    .dim-preset:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── Option Select Groups ────────────────────────── */
+    .option-section { margin-bottom: 1.75rem; }
+    .option-label {
+      font-size: .78rem; font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-mid);
+      margin-bottom: .75rem; display: flex; align-items: center; gap: .4rem;
+    }
+    .option-label-badge {
+      padding: .1rem .5rem;
+      background: var(--gold-pale); border: 1px solid var(--sand);
+      border-radius: 99px; font-size: .65rem; color: var(--gold);
+      font-weight: 600;
+    }
+    .swatch-row {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+    }
+    .swatch {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .5rem .85rem;
+      border: 2px solid var(--sand); border-radius: var(--radius-sm);
+      cursor: pointer; transition: var(--transition);
+      font-size: .8rem; color: var(--text-dark);
+    }
+    .swatch:hover { border-color: var(--gold); }
+    .swatch.selected { border-color: var(--gold); background: var(--gold-pale); font-weight: 500; }
+    .swatch-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.1); flex-shrink: 0;
+    }
+    .swatch-premium { font-size: .65rem; color: var(--gold); margin-left: .2rem; }
+
+    .custom-select {
+      width: 100%;
+      padding: .65rem 1rem;
+      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
+      font-family: inherit; font-size: .9rem; color: var(--text-dark);
+      background: var(--white); cursor: pointer; outline: none;
+      transition: var(--transition);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8864e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .custom-select:focus { border-color: var(--gold); }
+
+    /* ─── Feature Toggles ─────────────────────────────── */
+    .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+    }
+    .feature-toggle {
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding: .85rem; border: 2px solid var(--sand);
+      border-radius: var(--radius-sm); cursor: pointer;
+      transition: var(--transition);
+    }
+    .feature-toggle:hover { border-color: var(--gold-light); }
+    .feature-toggle.selected { border-color: var(--gold); background: var(--gold-pale); }
+    .feature-check {
+      width: 18px; height: 18px; flex-shrink: 0;
+      border: 2px solid var(--sand); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; transition: var(--transition);
+      margin-top: 1px;
+    }
+    .feature-toggle.selected .feature-check {
+      background: var(--gold); border-color: var(--gold); color: var(--white);
+    }
+    .feature-info { flex: 1; }
+    .feature-name { font-size: .82rem; font-weight: 500; color: var(--text-dark); }
+    .feature-desc { font-size: .72rem; color: var(--text-light); margin-top: .1rem; }
+    .feature-price { font-size: .72rem; color: var(--gold); font-weight: 500; }
+
+    /* ─── Navigation Buttons ──────────────────────────── */
+    .step-nav {
+      display: flex; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--sand);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: var(--radius-sm);
+      font-size: .85rem; font-weight: 500; letter-spacing: .04em;
+      transition: var(--transition);
+    }
+    .btn-outline {
+      border: 1.5px solid var(--sand); color: var(--text-mid);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy); font-weight: 600;
+      box-shadow: 0 4px 16px rgba(184,134,78,.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(184,134,78,.4);
+    }
+    .btn-primary:disabled {
+      opacity: .5; cursor: not-allowed; transform: none;
+    }
+    .btn-full { width: 100%; justify-content: center; }
+
+    /* ─── Live Preview Panel ──────────────────────────── */
+    .preview-panel {
+      position: sticky; top: 5rem;
+    }
+    .preview-visual {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 2.5rem;
+      min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .preview-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(184,134,78,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(184,134,78,.05) 0%, transparent 50%);
+    }
+
+    /* SVG Furniture Previews */
+    .furniture-svg {
+      width: 100%; max-width: 280px; height: auto;
+      position: relative; z-index: 1;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,.35));
+    }
+    .furniture-svg-placeholder {
+      text-align: center; color: rgba(255,255,255,.3);
+      position: relative; z-index: 1;
+    }
+    .furniture-svg-placeholder svg { width: 80px; height: 80px; opacity: .4; margin: 0 auto 1rem; display: block; }
+    .furniture-svg-placeholder p { font-size: .85rem; }
+
+    .preview-meta {
+      background: var(--white);
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--sand);
+    }
+    .preview-piece-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 500; color: var(--navy);
+    }
+    .preview-specs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: .4rem .75rem; margin-top: .75rem;
+    }
+    .preview-spec {
+      font-size: .75rem; color: var(--text-mid);
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .preview-spec strong { color: var(--text-dark); }
+
+    .quote-panel { padding: 1.5rem 1.75rem; background: var(--white); }
+    .quote-line {
+      display: flex; justify-content: space-between;
+      font-size: .82rem; color: var(--text-mid); margin-bottom: .6rem;
+    }
+    .quote-line strong { color: var(--text-dark); }
+    .quote-divider { border: none; border-top: 1px solid var(--sand); margin: .85rem 0; }
+    .quote-total {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .quote-total-label {
+      font-size: .85rem; color: var(--text-mid); font-weight: 500;
+    }
+    .quote-total-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem; font-weight: 500; color: var(--navy);
+    }
+    .quote-note {
+      font-size: .72rem; color: var(--text-light); margin-top: .35rem; text-align: right;
+    }
+    .quote-lead-time {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .65rem .85rem;
+      background: var(--off-white); border-radius: var(--radius-sm);
+      font-size: .78rem; color: var(--text-mid);
+      margin-top: 1rem;
+    }
+    .quote-lead-icon { font-size: 1rem; }
+
+    /* ─── Order Form ──────────────────────────────────── */
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: .75rem; font-weight: 500; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--text-mid);
+    }
+    .form-control {
+      padding: .65rem .9rem;
+      border: 1.5px solid var(--sand); border-radius: var(--radius-sm);
+      font-family: inherit; font-size: .9rem; color: var(--text-dark);
+      background: var(--white); outline: none;
+      transition: var(--transition);
+    }
+    .form-control:focus { border-color: var(--gold); }
+    textarea.form-control { resize: vertical; min-height: 100px; }
+    .form-helper {
+      font-size: .7rem; color: var(--text-light); margin-top: .2rem;
+    }
+
+    /* ─── Order Summary ───────────────────────────────── */
+    .summary-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius-md); padding: 1.5rem;
+      margin-bottom: 1.5rem; color: var(--white);
+    }
+    .summary-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--gold-light);
+      margin-bottom: 1rem; letter-spacing: .03em;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between;
+      font-size: .82rem; color: rgba(255,255,255,.7);
+      padding: .3rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row strong { color: var(--white); }
+    .summary-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: .85rem; padding-top: .85rem;
+      border-top: 1px solid rgba(184,134,78,.3);
+    }
+    .summary-total-label { font-size: .85rem; color: rgba(255,255,255,.65); }
+    .summary-total-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 500; color: var(--gold-light);
+    }
+
+    /* ─── Success State ───────────────────────────────── */
+    .success-state {
+      display: none; text-align: center; padding: 3rem 1.5rem;
+    }
+    .success-state.visible { display: block; }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a7f4b, #22a163);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 24px rgba(26,127,75,.3);
+    }
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem; font-weight: 400; color: var(--navy);
+      margin-bottom: .75rem;
+    }
+    .success-msg { font-size: .9rem; color: var(--text-mid); line-height: 1.6; max-width: 42ch; margin: 0 auto 2rem; }
+    .success-ref {
+      display: inline-block; padding: .5rem 1.25rem;
+      background: var(--gold-pale); border: 1px solid var(--sand);
+      border-radius: var(--radius-sm); font-size: .8rem;
+      color: var(--gold); font-weight: 500; letter-spacing: .05em;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Gallery Inspiration ─────────────────────────── */
+    .inspiration-section {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+    .section-eyebrow {
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 300; color: var(--navy); line-height: 1.2;
+    }
+    .inspo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .inspo-card {
+      border-radius: var(--radius-md); overflow: hidden;
+      background: var(--white); box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .inspo-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .inspo-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .inspo-info { padding: 1rem 1.25rem; }
+    .inspo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--navy); font-weight: 500; }
+    .inspo-detail { font-size: .78rem; color: var(--text-mid); margin-top: .2rem; }
+    .inspo-price { font-size: .82rem; color: var(--gold); font-weight: 500; margin-top: .35rem; }
+
+    /* ─── Process Strip ───────────────────────────────── */
+    .process-strip {
+      background: var(--navy); padding: 3rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .process-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .process-step { text-align: center; }
+    .process-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; color: rgba(184,134,78,.3);
+      line-height: 1; margin-bottom: .5rem;
+    }
+    .process-step-title {
+      font-size: .9rem; font-weight: 500; color: var(--white); margin-bottom: .4rem;
+    }
+    .process-step-desc { font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+    /* ─── Footer ──────────────────────────────────────── */
+    .footer {
+      background: var(--navy); padding: 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.4); }
+    .footer-back {
+      font-size: .8rem; color: var(--gold-light);
+      display: flex; align-items: center; gap: .4rem;
+      transition: var(--transition);
+    }
+    .footer-back:hover { color: var(--white); }
+
+    /* ─── Tooltip / Info ──────────────────────────────── */
+    .info-note {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .85rem 1rem;
+      background: var(--off-white); border: 1px solid var(--sand);
+      border-radius: var(--radius-sm); margin-top: 1rem;
+      font-size: .78rem; color: var(--text-mid); line-height: 1.5;
+    }
+    .info-note-icon { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
+
+    /* ─── Mobile Nav ──────────────────────────────────── */
+    .hamburger { display: none; flex-direction: column; gap: 4px; padding: .4rem; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--navy); padding: 1.5rem; flex-direction: column; border-top: 1px solid rgba(184,134,78,.2); }
+      .nav-links.open { display: flex; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Animations ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .5s ease both; }
+    .fade-up-2 { animation: fadeUp .5s .1s ease both; }
+    .fade-up-3 { animation: fadeUp .5s .2s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────── -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">Opulent <span>Interior</span> D-Zines</a>
+    <div class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/#services">Services</a>
+      <a href="/shop.html">Shop</a>
+      <a href="/configure.html" class="active">✦ Configure</a>
+      <a href="/#gallery">Gallery</a>
+      <a href="/#contact" class="nav-cta">Get In Touch</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────── -->
+  <section class="shop-hero">
+    <div class="shop-hero-badge">✦ Bespoke Furniture Studio</div>
+    <h1 class="fade-up">Design Your <em>Perfect</em> Piece</h1>
+    <p class="fade-up-2">
+      Configure every detail of your furniture online — materials, dimensions, finishes, and features.
+      Our craftsmen build it to your exact specification, right here in Gauteng.
+    </p>
+    <div class="hero-steps fade-up-3">
+      <div class="hero-step"><span class="hero-step-num">1</span> Choose your piece</div>
+      <div class="hero-step"><span class="hero-step-num">2</span> Set dimensions</div>
+      <div class="hero-step"><span class="hero-step-num">3</span> Pick materials</div>
+      <div class="hero-step"><span class="hero-step-num">4</span> Add features</div>
+      <div class="hero-step"><span class="hero-step-num">5</span> Request your quote</div>
+    </div>
+  </section>
+
+  <!-- ─── Process Strip ─────────────────────────────── -->
+  <div class="process-strip">
+    <div class="process-inner">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-step-title">Design Online</div>
+        <div class="process-step-desc">Configure your piece in our studio tool — dimensions, materials, finishes</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-step-title">Review &amp; Confirm</div>
+        <div class="process-step-desc">We contact you within 24 hours with a detailed quote and production timeline</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-step-title">Expert Craft</div>
+        <div class="process-step-desc">Skilled Gauteng artisans handcraft your piece to exact specification</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-step-title">Delivered &amp; Installed</div>
+        <div class="process-step-desc">White-glove delivery and installation anywhere in South Africa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Configurator ───────────────────────────────── -->
+  <main>
+    <div class="configurator-wrapper">
+
+      <!-- Left: Configuration Steps -->
+      <div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="panel-title-icon">✦</span>
+              Furniture Configurator
+            </div>
+            <div id="progressLabel" style="font-size:.78rem;color:var(--text-light);">Step 1 of 4</div>
+          </div>
+          <div class="panel-body">
+
+            <!-- Step Tabs -->
+            <div class="step-tabs" role="tablist">
+              <button class="step-tab active" data-step="1" role="tab">① Piece</button>
+              <button class="step-tab" data-step="2" role="tab">② Size</button>
+              <button class="step-tab" data-step="3" role="tab">③ Materials</button>
+              <button class="step-tab" data-step="4" role="tab">④ Features</button>
+            </div>
+
+            <!-- ── Step 1: Choose Piece ── -->
+            <div class="step-panel active" id="step-1">
+              <div class="furniture-grid" id="furnitureGrid">
+                <!-- populated by JS -->
+              </div>
+              <div class="step-nav">
+                <button class="btn btn-primary" id="nextBtn1" onclick="goToStep(2)">
+                  Continue to Dimensions →
+                </button>
+              </div>
+            </div>
+
+            <!-- ── Step 2: Dimensions ── -->
+            <div class="step-panel" id="step-2">
+              <div id="dimensionContent">
+                <!-- populated by JS based on furniture selection -->
+              </div>
+              <div class="step-nav">
+                <button class="btn btn-outline" onclick="goToStep(1)">← Back</button>
+                <button class="btn btn-primary" onclick="goToStep(3)">Continue to Materials →</button>
+              </div>
+            </div>
+
+            <!-- ── Step 3: Materials & Finishes ── -->
+            <div class="step-panel" id="step-3">
+
+              <div class="option-section">
+                <div class="option-label">
+                  Primary Timber
+                  <span class="option-label-badge">Required</span>
+                </div>
+                <div class="swatch-row" id="timberSwatches">
+                  <label class="swatch selected" data-group="timber" data-val="oak" data-mult="1.0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#c8a96e;"></span> Solid Oak
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="walnut" data-mult="1.3" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#5c3a1e;"></span> Walnut <span class="swatch-premium">+30%</span>
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="mahogany" data-mult="1.5" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#7b2d26;"></span> Mahogany <span class="swatch-premium">+50%</span>
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="ash" data-mult="0.9" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#d4c4a0;"></span> Ash <span class="swatch-premium">−10%</span>
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="pine" data-mult="0.75" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#e8d5a0;"></span> Pine <span class="swatch-premium">−25%</span>
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="teak" data-mult="1.6" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#8b5e3c;"></span> Teak <span class="swatch-premium">+60%</span>
+                  </label>
+                  <label class="swatch" data-group="timber" data-val="ebony" data-mult="2.0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#1a1008;"></span> Ebony <span class="swatch-premium">+100%</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="option-section">
+                <div class="option-label">Finish</div>
+                <div class="swatch-row" id="finishSwatches">
+                  <label class="swatch selected" data-group="finish" data-val="natural" data-mult="1.0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:linear-gradient(135deg,#e8d5b0,#c8a96e);"></span> Natural
+                  </label>
+                  <label class="swatch" data-group="finish" data-val="dark-stain" data-mult="1.05" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#3a2010;"></span> Dark Stain
+                  </label>
+                  <label class="swatch" data-group="finish" data-val="white-wash" data-mult="1.05" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#f0ece5;border:1px solid #ddd;"></span> White Wash
+                  </label>
+                  <label class="swatch" data-group="finish" data-val="matt-black" data-mult="1.08" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#1a1a1a;"></span> Matt Black
+                  </label>
+                  <label class="swatch" data-group="finish" data-val="charcoal" data-mult="1.08" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#3d3d3d;"></span> Charcoal
+                  </label>
+                  <label class="swatch" data-group="finish" data-val="raw" data-mult="0.95" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#d4b896;"></span> Raw / Unfinished
+                  </label>
+                </div>
+              </div>
+
+              <div class="option-section" id="upholsterySection" style="display:none;">
+                <div class="option-label">
+                  Upholstery Fabric
+                  <span class="option-label-badge">For this piece</span>
+                </div>
+                <select class="custom-select" id="upholsterySelect" onchange="updateQuote()">
+                  <option value="linen-0" data-add="0">Linen Blend — Included</option>
+                  <option value="cotton-0" data-add="0">Cotton Weave — Included</option>
+                  <option value="velvet-2500" data-add="2500">Premium Velvet +R2,500</option>
+                  <option value="leather-5000" data-add="5000">Full-Grain Leather +R5,000</option>
+                  <option value="bouclé-3500" data-add="3500">Bouclé +R3,500</option>
+                  <option value="chenille-2000" data-add="2000">Chenille +R2,000</option>
+                  <option value="performance-1500" data-add="1500">Performance Fabric +R1,500</option>
+                </select>
+                <div class="option-section" style="margin-top:1rem;margin-bottom:0;">
+                  <div class="option-label">Upholstery Colour</div>
+                  <div class="swatch-row" id="fabricColourSwatches">
+                    <label class="swatch selected" data-group="fabric-colour" data-val="ivory" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#f5f0e8;border:1px solid #ddd;"></span> Ivory
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="sand" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#c8b090;"></span> Sand
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="slate" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#708090;"></span> Slate
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="sage" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#8fad8a;"></span> Sage
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="navy" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#0d1626;"></span> Navy
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="terracotta" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#c0624a;"></span> Terracotta
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="charcoal-fab" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#3d3d3d;"></span> Charcoal
+                    </label>
+                    <label class="swatch" data-group="fabric-colour" data-val="blush" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#e8b4a0;"></span> Blush
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-section">
+                <div class="option-label">Hardware &amp; Fittings</div>
+                <div class="swatch-row" id="hardwareSwatches">
+                  <label class="swatch selected" data-group="hardware" data-val="satin-brass" data-add="0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#b8924e;"></span> Satin Brass
+                  </label>
+                  <label class="swatch" data-group="hardware" data-val="brushed-chrome" data-add="0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#b0b8c0;"></span> Brushed Chrome
+                  </label>
+                  <label class="swatch" data-group="hardware" data-val="matt-black-hw" data-add="0" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#1a1a1a;"></span> Matt Black
+                  </label>
+                  <label class="swatch" data-group="hardware" data-val="antique-brass" data-add="800" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#7c5f30;"></span> Antique Brass <span class="swatch-premium">+R800</span>
+                  </label>
+                  <label class="swatch" data-group="hardware" data-val="rose-gold" data-add="1200" onclick="selectSwatch(this)">
+                    <span class="swatch-dot" style="background:#c0806a;"></span> Rose Gold <span class="swatch-premium">+R1,200</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="step-nav">
+                <button class="btn btn-outline" onclick="goToStep(2)">← Back</button>
+                <button class="btn btn-primary" onclick="goToStep(4)">Continue to Features →</button>
+              </div>
+            </div>
+
+            <!-- ── Step 4: Features ── -->
+            <div class="step-panel" id="step-4">
+              <div class="feature-grid" id="featureGrid">
+                <!-- populated by JS -->
+              </div>
+              <div class="info-note">
+                <span class="info-note-icon">ℹ️</span>
+                Not sure which features suit your space? Our design consultants will advise during your quote review. Select anything you're interested in — nothing is finalised until you confirm with us.
+              </div>
+              <div class="step-nav">
+                <button class="btn btn-outline" onclick="goToStep(3)">← Back</button>
+                <button class="btn btn-primary" onclick="goToStep(5)">Proceed to Order →</button>
+              </div>
+            </div>
+
+            <!-- ── Step 5: Order Details ── -->
+            <div class="step-panel" id="step-5">
+              <div class="summary-card" id="orderSummaryCard"></div>
+
+              <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" required placeholder="Sipho" />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" class="form-control" id="lastName" required placeholder="Dlamini" />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" class="form-control" id="email" required placeholder="you@example.com" />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" class="form-control" id="phone" required placeholder="+27 xx xxx xxxx" />
+                  </div>
+                  <div class="form-group">
+                    <label for="province">Province</label>
+                    <select class="form-control custom-select" id="province">
+                      <option value="">Select province...</option>
+                      <option value="gauteng">Gauteng</option>
+                      <option value="western-cape">Western Cape</option>
+                      <option value="kwazulu-natal">KwaZulu-Natal</option>
+                      <option value="eastern-cape">Eastern Cape</option>
+                      <option value="limpopo">Limpopo</option>
+                      <option value="mpumalanga">Mpumalanga</option>
+                      <option value="north-west">North West</option>
+                      <option value="free-state">Free State</option>
+                      <option value="northern-cape">Northern Cape</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="timeline">Desired Timeline</label>
+                    <select class="form-control custom-select" id="timeline">
+                      <option value="flexible">Flexible</option>
+                      <option value="6-8weeks">6–8 Weeks</option>
+                      <option value="10-12weeks">10–12 Weeks</option>
+                      <option value="3-6months">3–6 Months</option>
+                      <option value="urgent">Urgent (discuss)</option>
+                    </select>
+                  </div>
+                  <div class="form-group full">
+                    <label for="additionalNotes">Additional Notes or Requirements</label>
+                    <textarea class="form-control" id="additionalNotes" placeholder="Any special requirements, existing décor to match, room dimensions, access constraints, etc."></textarea>
+                    <span class="form-helper">The more detail you share, the more accurate your quote will be.</span>
+                  </div>
+                  <div class="form-group full">
+                    <label for="referenceImages">Inspiration / Reference (optional)</label>
+                    <input type="url" class="form-control" id="referenceImages" placeholder="Link to Pinterest board, Houzz, Google Drive folder, etc." />
+                    <span class="form-helper">Share a link to reference images that inspire your vision.</span>
+                  </div>
+                </div>
+
+                <div style="margin-top:1.5rem;">
+                  <div class="info-note" style="margin-bottom:1rem;">
+                    <span class="info-note-icon">🔒</span>
+                    Your information is used solely to prepare and send your furniture quote. We do not share your data with third parties.
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                    ✦ &nbsp; Submit My Furniture Brief
+                  </button>
+                </div>
+              </form>
+
+              <div class="success-state" id="successState">
+                <div class="success-icon">✓</div>
+                <div class="success-title">Brief Received — Thank You!</div>
+                <p class="success-msg">
+                  Your custom furniture specification has been received. One of our craftsmen and design consultants will review your brief and contact you within <strong>24 business hours</strong> with a detailed quotation.
+                </p>
+                <div class="success-ref" id="successRef">REF: OID-000000</div>
+                <div style="display:flex;flex-direction:column;gap:.75rem;align-items:center;">
+                  <a href="/" class="btn btn-primary">Return to Homepage</a>
+                  <button class="btn btn-outline" onclick="resetConfigurator()">Configure Another Piece</button>
+                </div>
+              </div>
+
+              <div class="step-nav" id="step5Nav">
+                <button class="btn btn-outline" onclick="goToStep(4)">← Edit Features</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Live Preview Panel -->
+      <div class="preview-panel">
+        <div class="panel">
+          <div class="preview-visual" id="previewVisual">
+            <div class="furniture-svg-placeholder" id="previewPlaceholder">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="40" width="60" height="8" rx="3" fill="currentColor" opacity=".5"/>
+                <rect x="14" y="48" width="6" height="20" rx="2" fill="currentColor" opacity=".4"/>
+                <rect x="60" y="48" width="6" height="20" rx="2" fill="currentColor" opacity=".4"/>
+                <rect x="8" y="28" width="64" height="14" rx="4" fill="currentColor" opacity=".6"/>
+              </svg>
+              <p>Select a furniture piece<br>to see your preview</p>
+            </div>
+            <div id="furnitureSvgContainer" style="display:none;width:100%;max-width:320px;"></div>
+          </div>
+
+          <div class="preview-meta" id="previewMeta" style="display:none;">
+            <div class="preview-piece-name" id="previewName">—</div>
+            <div class="preview-specs" id="previewSpecs"></div>
+          </div>
+
+          <div class="quote-panel">
+            <div class="quote-line"><span>Base price</span><strong id="qBase">—</strong></div>
+            <div class="quote-line"><span>Material</span><strong id="qMaterial">Oak (×1.0)</strong></div>
+            <div class="quote-line"><span>Finish</span><strong id="qFinish">Natural (×1.0)</strong></div>
+            <div class="quote-line"><span>Size adjustment</span><strong id="qSize">—</strong></div>
+            <div class="quote-line"><span>Features &amp; extras</span><strong id="qExtras">R0</strong></div>
+            <hr class="quote-divider" />
+            <div class="quote-total">
+              <span class="quote-total-label">Estimated Total</span>
+              <span class="quote-total-price" id="qTotal">—</span>
+            </div>
+            <div class="quote-note">*Estimate only. Final quote confirmed after review.</div>
+            <div class="quote-lead-time" id="leadTimeDisplay">
+              <span class="quote-lead-icon">🕐</span>
+              <span id="leadTimeText">Select a piece to see production time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /configurator-wrapper -->
+
+    <!-- ─── Inspiration Gallery ─────────────────────── -->
+    <section class="inspiration-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Portfolio</div>
+        <h2 class="section-title">Recent Custom Pieces</h2>
+      </div>
+      <div class="inspo-grid">
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#c8a96e22,#5c3a1e22);">🪑</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Walnut Lounge Chair</div>
+            <div class="inspo-detail">Solid walnut frame · Ivory bouclé · Sandton residence</div>
+            <div class="inspo-price">From R12,500</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#1e2d4a22,#b8864e22);">🛏️</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Emperor Bed Frame</div>
+            <div class="inspo-detail">Oak with upholstered headboard · Leather finish · Waterfall Estate</div>
+            <div class="inspo-price">From R22,000</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#7b2d2622,#c8a96e22);">🪵</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Live-Edge Dining Table</div>
+            <div class="inspo-detail">Mahogany slab · Natural finish · 2800mm · Bryanston home</div>
+            <div class="inspo-price">From R35,000</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#1a182422,#d4a96a22);">📚</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Floor-to-Ceiling Bookcase</div>
+            <div class="inspo-detail">Dark stained oak · Antique brass hardware · Houghton library</div>
+            <div class="inspo-price">From R28,000</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#c8a96e22,#1e2d4a22);">🛋️</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Modular Corner Sofa</div>
+            <div class="inspo-detail">Ash frame · Full-grain leather · Terracotta · Constantia villa</div>
+            <div class="inspo-price">From R48,000</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <div class="inspo-img" style="background:linear-gradient(135deg,#e8dcc822,#0d162622);">🚪</div>
+          <div class="inspo-info">
+            <div class="inspo-name">Walk-in Wardrobe System</div>
+            <div class="inspo-detail">Teak veneer · Rose gold hardware · Rivonia penthouse</div>
+            <div class="inspo-price">From R55,000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-copy">© 2026 Opulent Interior D-Zines · Gauteng, South Africa</div>
+    <a href="/" class="footer-back">← Back to main site</a>
+  </footer>
+
+
+  <script>
+  // ═══════════════════════════════════════════════════
+  //  DATA
+  // ═══════════════════════════════════════════════════
+  const FURNITURE = [
+    {
+      id: 'dining-table', icon: '🪵', name: 'Dining Table',
+      basePrice: 12000, from: 'R12,000',
+      leadTime: '8–10 weeks',
+      dims: { w: 1800, d: 900, h: 760 },
+      presets: { w: [1400,1600,1800,2200,2600], d: [800,900,1000,1100], h: [720,740,760,780] },
+      hasUpholstery: false,
+      features: ['drawers','cable-mgmt','extension','glass-insert','lazy-susan'],
+      svgFn: drawDiningTable
+    },
+    {
+      id: 'coffee-table', icon: '☕', name: 'Coffee Table',
+      basePrice: 5500, from: 'R5,500',
+      leadTime: '5–7 weeks',
+      dims: { w: 1200, d: 600, h: 420 },
+      presets: { w: [900,1100,1200,1400], d: [500,600,700], h: [380,420,460] },
+      hasUpholstery: false,
+      features: ['lower-shelf','drawers','lift-top','castors','glass-insert'],
+      svgFn: drawCoffeeTable
+    },
+    {
+      id: 'sofa', icon: '🛋️', name: 'Sofa',
+      basePrice: 22000, from: 'R22,000',
+      leadTime: '10–12 weeks',
+      dims: { w: 2200, d: 900, h: 850 },
+      presets: { w: [1800,2000,2200,2600,3000], d: [800,900,1000,1100], h: [750,800,850,900] },
+      hasUpholstery: true,
+      features: ['sofa-bed','chaise','storage-base','electric-recliner','usb-ports','feather-fill'],
+      svgFn: drawSofa
+    },
+    {
+      id: 'armchair', icon: '🪑', name: 'Armchair',
+      basePrice: 8500, from: 'R8,500',
+      leadTime: '6–8 weeks',
+      dims: { w: 800, d: 850, h: 900 },
+      presets: { w: [700,750,800,850,900], d: [800,850,900], h: [800,850,900,950] },
+      hasUpholstery: true,
+      features: ['swivel-base','recliner','foot-stool','wing-back','feather-fill'],
+      svgFn: drawArmchair
+    },
+    {
+      id: 'bed-frame', icon: '🛏️', name: 'Bed Frame',
+      basePrice: 18000, from: 'R18,000',
+      leadTime: '8–10 weeks',
+      dims: { w: 1800, d: 2000, h: 1200 },
+      presets: { w: [900,1200,1500,1800,2000], d: [1900,2000,2200], h: [900,1000,1100,1200,1400] },
+      hasUpholstery: true,
+      features: ['storage-base','floating-nightstands','reading-lights','charging-dock','upholstered-headboard','footboard'],
+      svgFn: drawBed
+    },
+    {
+      id: 'wardrobe', icon: '🚪', name: 'Wardrobe',
+      basePrice: 28000, from: 'R28,000',
+      leadTime: '10–14 weeks',
+      dims: { w: 2400, d: 600, h: 2200 },
+      presets: { w: [1800,2000,2200,2400,3000,4000], d: [550,600,650], h: [2100,2200,2400] },
+      hasUpholstery: false,
+      features: ['full-mirror','pull-out-trays','shoe-rack','island-unit','lighting','soft-close','lockable'],
+      svgFn: drawWardrobe
+    },
+    {
+      id: 'bookcase', icon: '📚', name: 'Bookcase',
+      basePrice: 14000, from: 'R14,000',
+      leadTime: '7–9 weeks',
+      dims: { w: 1800, d: 400, h: 2200 },
+      presets: { w: [900,1200,1500,1800,2400], d: [300,350,400,450], h: [1800,2000,2200,2400] },
+      hasUpholstery: false,
+      features: ['glass-doors','lighting','ladder-rail','adjustable-shelves','cable-mgmt','lockable'],
+      svgFn: drawBookcase
+    },
+    {
+      id: 'tv-unit', icon: '📺', name: 'TV Unit',
+      basePrice: 9500, from: 'R9,500',
+      leadTime: '6–8 weeks',
+      dims: { w: 1800, d: 500, h: 500 },
+      presets: { w: [1400,1600,1800,2000,2200], d: [400,450,500,550], h: [400,450,500,550,600] },
+      hasUpholstery: false,
+      features: ['cable-mgmt','led-backlight','floating','glass-doors','drawers','corner-unit'],
+      svgFn: drawTvUnit
+    },
+    {
+      id: 'desk', icon: '🖥️', name: 'Desk',
+      basePrice: 8000, from: 'R8,000',
+      leadTime: '5–7 weeks',
+      dims: { w: 1600, d: 750, h: 760 },
+      presets: { w: [1200,1400,1600,1800,2000], d: [650,700,750,800], h: [720,740,760,780] },
+      hasUpholstery: false,
+      features: ['cable-mgmt','drawers','hutch','monitor-riser','usb-ports','sit-stand'],
+      svgFn: drawDesk
+    },
+    {
+      id: 'side-table', icon: '🪔', name: 'Side Table',
+      basePrice: 3200, from: 'R3,200',
+      leadTime: '4–5 weeks',
+      dims: { w: 500, d: 500, h: 600 },
+      presets: { w: [400,450,500,550,600], d: [400,450,500,550], h: [500,550,600,650] },
+      hasUpholstery: false,
+      features: ['drawer','lower-shelf','castors','wireless-charging'],
+      svgFn: drawSideTable
+    },
+  ];
+
+  const FEATURE_DATA = {
+    'drawers':            { name: 'Drawers', desc: 'Soft-close drawer units', price: 2800 },
+    'cable-mgmt':         { name: 'Cable Management', desc: 'Built-in cable routing', price: 600 },
+    'extension':          { name: 'Extension Leaves', desc: 'Seat 4 more guests', price: 4500 },
+    'glass-insert':       { name: 'Glass Insert', desc: 'Tempered safety glass top', price: 3200 },
+    'lazy-susan':         { name: 'Lazy Susan', desc: 'Central rotating tray', price: 1800 },
+    'lower-shelf':        { name: 'Lower Shelf', desc: 'Storage shelf below', price: 1200 },
+    'lift-top':           { name: 'Lift Top', desc: 'Hinged working surface', price: 2500 },
+    'castors':            { name: 'Castors', desc: 'Easy-roll wheels', price: 800 },
+    'sofa-bed':           { name: 'Sofa Bed', desc: 'Folds out to double bed', price: 8000 },
+    'chaise':             { name: 'Chaise Extension', desc: 'L-shape chaise section', price: 6500 },
+    'storage-base':       { name: 'Storage Base', desc: 'Lift-up base storage', price: 4500 },
+    'electric-recliner':  { name: 'Electric Recliner', desc: 'Motorised recline', price: 9500 },
+    'usb-ports':          { name: 'USB Charging', desc: 'Built-in USB-A & C ports', price: 1200 },
+    'feather-fill':       { name: 'Feather Fill', desc: 'Premium feather cushions', price: 3500 },
+    'swivel-base':        { name: 'Swivel Base', desc: '360° swivel mechanism', price: 2200 },
+    'recliner':           { name: 'Recliner Mechanism', desc: 'Manual recliner', price: 3500 },
+    'foot-stool':         { name: 'Matching Ottoman', desc: 'Coordinating foot stool', price: 4200 },
+    'wing-back':          { name: 'Wing-Back Design', desc: 'Classic high wing sides', price: 1800 },
+    'floating-nightstands': { name: 'Floating Nightstands', desc: 'Wall-mounted (pair)', price: 5500 },
+    'reading-lights':     { name: 'Reading Lights', desc: 'Integrated LED lights', price: 2800 },
+    'charging-dock':      { name: 'Charging Dock', desc: 'USB & wireless charging', price: 1800 },
+    'upholstered-headboard': { name: 'Upholstered Headboard', desc: 'Fabric or leather panel', price: 4500 },
+    'footboard':          { name: 'Footboard', desc: 'Matching foot rail', price: 2200 },
+    'full-mirror':        { name: 'Full-Length Mirror', desc: 'Integrated floor mirror', price: 4800 },
+    'pull-out-trays':     { name: 'Pull-Out Trays', desc: 'Accessories trays', price: 2200 },
+    'shoe-rack':          { name: 'Shoe Rack Section', desc: 'Angled shoe shelves', price: 2800 },
+    'island-unit':        { name: 'Centre Island', desc: 'Free-standing island unit', price: 12000 },
+    'lighting':           { name: 'LED Interior Lighting', desc: 'Motion-activated LEDs', price: 2500 },
+    'soft-close':         { name: 'Soft-Close Fittings', desc: 'All doors & drawers', price: 1800 },
+    'lockable':           { name: 'Lockable Doors', desc: 'Security key locks', price: 1200 },
+    'glass-doors':        { name: 'Glass Door Panels', desc: 'Tempered glass fronts', price: 4200 },
+    'ladder-rail':        { name: 'Rolling Ladder Rail', desc: 'Library-style ladder', price: 6500 },
+    'adjustable-shelves': { name: 'Adjustable Shelves', desc: 'Movable shelf pins', price: 800 },
+    'led-backlight':      { name: 'LED Backlighting', desc: 'Ambient LED strip', price: 1800 },
+    'floating':           { name: 'Wall-Mounted / Floating', desc: 'Hidden bracket system', price: 2800 },
+    'corner-unit':        { name: 'Corner Extension', desc: 'L-shape corner unit', price: 5500 },
+    'hutch':              { name: 'Overhead Hutch', desc: 'Upper bookcase unit', price: 4500 },
+    'monitor-riser':      { name: 'Monitor Riser', desc: 'Raised monitor shelf', price: 1200 },
+    'sit-stand':          { name: 'Sit-Stand Mechanism', desc: 'Electric height adjust', price: 9500 },
+    'drawer':             { name: 'Drawer', desc: 'Single storage drawer', price: 1200 },
+    'wireless-charging':  { name: 'Wireless Charging', desc: 'Integrated Qi charger', price: 1800 },
+  };
+
+  // ═══════════════════════════════════════════════════
+  //  STATE
+  // ═══════════════════════════════════════════════════
+  const state = {
+    step: 1,
+    furniture: null,
+    dims: {},
+    timber: { val: 'oak', mult: 1.0, label: 'Solid Oak' },
+    finish: { val: 'natural', mult: 1.0, label: 'Natural' },
+    upholstery: { add: 0, label: 'Linen Blend' },
+    fabricColour: 'Ivory',
+    hardware: { val: 'satin-brass', add: 0, label: 'Satin Brass' },
+    features: new Set(),
+  };
+
+  // ═══════════════════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════════════════
+  document.addEventListener('DOMContentLoaded', () => {
+    renderFurnitureGrid();
+    // hamburger
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  });
+
+  function renderFurnitureGrid() {
+    const grid = document.getElementById('furnitureGrid');
+    grid.innerHTML = FURNITURE.map(f => `
+      <div class="furniture-card" data-id="${f.id}" onclick="selectFurniture('${f.id}')">
+        <span class="furniture-card-icon">${f.icon}</span>
+        <div class="furniture-card-name">${f.name}</div>
+        <div class="furniture-card-from">${f.from}</div>
+      </div>
+    `).join('');
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  STEP NAVIGATION
+  // ═══════════════════════════════════════════════════
+  function goToStep(n) {
+    if (n === 2 && !state.furniture) { alert('Please select a furniture piece first.'); return; }
+    state.step = n;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+
+    document.querySelectorAll('.step-tab').forEach(t => {
+      const s = parseInt(t.dataset.step);
+      t.classList.toggle('active', s === n);
+      t.classList.toggle('done', s < n);
+    });
+
+    document.getElementById('progressLabel').textContent = `Step ${n} of 4${n === 5 ? ' — Review' : ''}`;
+
+    if (n === 2) renderDimensions();
+    if (n === 4) renderFeatures();
+    if (n === 5) renderOrderSummary();
+
+    updateQuote();
+    updatePreview();
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  FURNITURE SELECTION
+  // ═══════════════════════════════════════════════════
+  function selectFurniture(id) {
+    state.furniture = FURNITURE.find(f => f.id === id);
+    state.dims = { ...state.furniture.dims };
+    state.features.clear();
+
+    document.querySelectorAll('.furniture-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.id === id);
+    });
+
+    // Show/hide upholstery
+    document.getElementById('upholsterySection').style.display =
+      state.furniture.hasUpholstery ? 'block' : 'none';
+
+    updateQuote();
+    updatePreview();
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  DIMENSIONS
+  // ═══════════════════════════════════════════════════
+  function renderDimensions() {
+    const f = state.furniture;
+    if (!f) return;
+    const dimNames = { w: 'Width', d: 'Depth', h: 'Height' };
+    const dimDescs = { w: '(left to right)', d: '(front to back)', h: '(floor to top)' };
+
+    let html = `<p style="font-size:.85rem;color:var(--text-mid);margin-bottom:1.25rem;line-height:1.6;">
+      Set exact dimensions for your ${f.name.toLowerCase()}. All measurements in millimetres.
+      Standard sizes shown below — or enter any custom value.
+    </p>
+    <div class="dimension-grid">`;
+
+    for (const dim of ['w','d','h']) {
+      html += `
+        <div class="dim-group">
+          <label>${dimNames[dim]} ${dimDescs[dim]}</label>
+          <div class="dim-input-wrap">
+            <input type="number" id="dim-${dim}" value="${state.dims[dim]}"
+              min="100" max="10000" step="10"
+              onchange="updateDim('${dim}', this.value)" />
+            <span class="dim-unit">mm</span>
+          </div>
+          <div class="dim-presets">
+            ${f.presets[dim].map(v => `<button class="dim-preset" onclick="setDim('${dim}',${v})">${v}</button>`).join('')}
+          </div>
+        </div>`;
+    }
+
+    html += `</div>
+    <div class="info-note">
+      <span class="info-note-icon">📐</span>
+      Need a non-standard size? Enter any value — our craftsmen work to millimetre precision.
+      Sizes beyond standard presets may affect lead time and pricing.
+    </div>`;
+
+    document.getElementById('dimensionContent').innerHTML = html;
+  }
+
+  function updateDim(dim, val) {
+    state.dims[dim] = parseInt(val) || state.furniture.dims[dim];
+    updateQuote();
+    updatePreview();
+  }
+
+  function setDim(dim, val) {
+    state.dims[dim] = val;
+    const el = document.getElementById('dim-' + dim);
+    if (el) el.value = val;
+    updateQuote();
+    updatePreview();
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  SWATCHES
+  // ═══════════════════════════════════════════════════
+  function selectSwatch(el) {
+    const group = el.dataset.group;
+    document.querySelectorAll(`[data-group="${group}"]`).forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+
+    if (group === 'timber') {
+      state.timber = { val: el.dataset.val, mult: parseFloat(el.dataset.mult), label: el.textContent.trim() };
+    } else if (group === 'finish') {
+      state.finish = { val: el.dataset.val, mult: parseFloat(el.dataset.mult), label: el.textContent.trim() };
+    } else if (group === 'hardware') {
+      state.hardware = { val: el.dataset.val, add: parseFloat(el.dataset.add||0), label: el.textContent.trim() };
+    } else if (group === 'fabric-colour') {
+      state.fabricColour = el.dataset.val;
+    }
+
+    updateQuote();
+    updatePreview();
+  }
+
+  // Upholstery select
+  document.addEventListener('DOMContentLoaded', () => {
+    const sel = document.getElementById('upholsterySelect');
+    if (sel) sel.addEventListener('change', function() {
+      const opt = this.options[this.selectedIndex];
+      state.upholstery = { add: parseInt(opt.dataset.add||0), label: opt.text.split(' +')[0].split(' —')[0] };
+      updateQuote();
+    });
+  });
+
+  // ═══════════════════════════════════════════════════
+  //  FEATURES
+  // ═══════════════════════════════════════════════════
+  function renderFeatures() {
+    const f = state.furniture;
+    if (!f) return;
+    const grid = document.getElementById('featureGrid');
+    grid.innerHTML = f.features.map(fid => {
+      const fd = FEATURE_DATA[fid];
+      if (!fd) return '';
+      const sel = state.features.has(fid);
+      return `
+        <div class="feature-toggle ${sel ? 'selected' : ''}" onclick="toggleFeature('${fid}', this)">
+          <div class="feature-check">${sel ? '✓' : ''}</div>
+          <div class="feature-info">
+            <div class="feature-name">${fd.name}</div>
+            <div class="feature-desc">${fd.desc}</div>
+            <div class="feature-price">+R${fd.price.toLocaleString()}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function toggleFeature(id, el) {
+    if (state.features.has(id)) {
+      state.features.delete(id);
+      el.classList.remove('selected');
+      el.querySelector('.feature-check').textContent = '';
+    } else {
+      state.features.add(id);
+      el.classList.add('selected');
+      el.querySelector('.feature-check').textContent = '✓';
+    }
+    updateQuote();
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  QUOTE CALCULATION
+  // ═══════════════════════════════════════════════════
+  function updateQuote() {
+    const f = state.furniture;
+    if (!f) return;
+
+    const basePrice = f.basePrice;
+
+    // Size multiplier: relative to default dimensions
+    const defVol = f.dims.w * f.dims.d * f.dims.h;
+    const curVol = (state.dims.w||f.dims.w) * (state.dims.d||f.dims.d) * (state.dims.h||f.dims.h);
+    const sizeRatio = Math.pow(curVol / defVol, 0.4); // dampened exponent
+
+    // Material & finish
+    const matMult = state.timber.mult;
+    const finMult = state.finish.mult || 1.0;
+
+    // Features extras
+    let extrasTotal = state.hardware.add || 0;
+    extrasTotal += state.upholstery.add || 0;
+    state.features.forEach(fid => {
+      extrasTotal += FEATURE_DATA[fid]?.price || 0;
+    });
+
+    const subtotal = Math.round(basePrice * matMult * finMult * sizeRatio);
+    const total = subtotal + extrasTotal;
+
+    const fmt = n => 'R' + Math.round(n).toLocaleString('en-ZA');
+
+    document.getElementById('qBase').textContent = fmt(basePrice);
+    document.getElementById('qMaterial').textContent = `${state.timber.label.split(' ')[state.timber.label.split(' ').length - 1]} (×${matMult})`;
+    document.getElementById('qFinish').textContent = `${state.finish.label.replace(/\s+/g,'').split('/')[0]} (×${finMult})`;
+    document.getElementById('qSize').textContent = sizeRatio !== 1 ? `×${sizeRatio.toFixed(2)}` : 'Standard';
+    document.getElementById('qExtras').textContent = fmt(extrasTotal);
+    document.getElementById('qTotal').textContent = fmt(total);
+    document.getElementById('leadTimeText').textContent = `Estimated production: ${f.leadTime} · Delivery extra`;
+
+    // preview meta
+    if (document.getElementById('previewMeta')) {
+      document.getElementById('previewMeta').style.display = 'block';
+      document.getElementById('previewName').textContent = f.name;
+      document.getElementById('previewSpecs').innerHTML = `
+        <div class="preview-spec">📐 <strong>${state.dims.w||f.dims.w}×${state.dims.d||f.dims.d}×${state.dims.h||f.dims.h}mm</strong></div>
+        <div class="preview-spec">🪵 <strong>${state.timber.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+        <div class="preview-spec">🎨 <strong>${state.finish.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+        <div class="preview-spec">🔩 <strong>${state.hardware.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+      `;
+    }
+
+    state._total = total;
+    state._subtotal = subtotal;
+    state._extrasTotal = extrasTotal;
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  SVG PREVIEW
+  // ═══════════════════════════════════════════════════
+  function getTimberFill() {
+    const fills = {
+      oak: '#c8a86e', walnut: '#5c3a1e', mahogany: '#7b2d26',
+      ash: '#d4c4a0', pine: '#e8d5a0', teak: '#8b5e3c', ebony: '#1a1008'
+    };
+    return fills[state.timber.val] || '#c8a86e';
+  }
+  function getFinishOpacity() {
+    const ops = {
+      'natural': 1, 'dark-stain': 0.7, 'white-wash': 0.3,
+      'matt-black': 0.1, 'charcoal': 0.2, 'raw': 0.9
+    };
+    return ops[state.finish.val] ?? 1;
+  }
+  function getGoldTone() {
+    const tones = {
+      'satin-brass': '#b8924e', 'brushed-chrome': '#b0b8c0',
+      'matt-black-hw': '#2a2a2a', 'antique-brass': '#7c5f30', 'rose-gold': '#c0806a'
+    };
+    return tones[state.hardware.val] || '#b8924e';
+  }
+  function mixColour(hex, opacity, bg = '#1e2d4a') {
+    // Mix timber colour with dark stain / finish
+    return hex;
+  }
+
+  function updatePreview() {
+    const f = state.furniture;
+    const placeholder = document.getElementById('previewPlaceholder');
+    const container = document.getElementById('furnitureSvgContainer');
+    if (!f) { placeholder.style.display='block'; container.style.display='none'; return; }
+    placeholder.style.display = 'none';
+    container.style.display = 'block';
+    container.innerHTML = f.svgFn();
+  }
+
+  // ─── SVG Drawing Functions ─────────────────────────
+
+  function svgWrap(content, vw=280, vh=200) {
+    const wood = getTimberFill();
+    const gold = getGoldTone();
+    const fin = state.finish.val;
+    const overlay = fin === 'dark-stain' ? 'rgba(0,0,0,0.38)' :
+                    fin === 'white-wash' ? 'rgba(255,255,255,0.55)' :
+                    fin === 'matt-black' ? 'rgba(10,10,10,0.72)' :
+                    fin === 'charcoal'   ? 'rgba(30,30,30,0.58)' :
+                    fin === 'raw'        ? 'rgba(230,210,180,0.15)' : 'transparent';
+    return `<svg viewBox="0 0 ${vw} ${vh}" xmlns="http://www.w3.org/2000/svg" class="furniture-svg"
+      style="--wood:${wood};--gold:${gold};--overlay:${overlay};">
+      <defs>
+        <pattern id="grain" patternUnits="userSpaceOnUse" width="4" height="60" patternTransform="rotate(15)">
+          <line x1="0" y1="0" x2="0" y2="60" stroke="${wood}" stroke-width="1.5" opacity=".18"/>
+        </pattern>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".25"/>
+        </filter>
+      </defs>
+      ${content}
+    </svg>`;
+  }
+
+  function drawDiningTable() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Table top -->
+      <rect x="20" y="55" width="240" height="22" rx="4" fill="${w}" filter="url(#shadow)"/>
+      <rect x="20" y="55" width="240" height="22" rx="4" fill="url(#grain)" opacity=".6"/>
+      <rect x="20" y="55" width="240" height="22" rx="4" fill="var(--overlay)" opacity=".8"/>
+      <!-- Table top highlight -->
+      <rect x="22" y="56" width="238" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+      <!-- Apron front -->
+      <rect x="30" y="77" width="220" height="10" rx="2" fill="${w}" opacity=".85"/>
+      <rect x="30" y="77" width="220" height="10" rx="2" fill="url(#grain)" opacity=".4"/>
+      <rect x="30" y="77" width="220" height="10" rx="2" fill="var(--overlay)" opacity=".7"/>
+      <!-- Legs -->
+      <rect x="35" y="87" width="12" height="70" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="35" y="87" width="12" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="233" y="87" width="12" height="70" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="233" y="87" width="12" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <!-- Leg feet caps -->
+      <rect x="33" y="153" width="16" height="4" rx="2" fill="${g}" opacity=".9"/>
+      <rect x="231" y="153" width="16" height="4" rx="2" fill="${g}" opacity=".9"/>
+      <!-- Shadow on floor -->
+      <ellipse cx="140" cy="162" rx="110" ry="8" fill="rgba(0,0,0,.15)"/>
+    `, 280, 175);
+  }
+
+  function drawCoffeeTable() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <rect x="25" y="90" width="230" height="16" rx="4" fill="${w}" filter="url(#shadow)"/>
+      <rect x="25" y="90" width="230" height="16" rx="4" fill="url(#grain)" opacity=".6"/>
+      <rect x="25" y="90" width="230" height="16" rx="4" fill="var(--overlay)" opacity=".8"/>
+      <rect x="27" y="91" width="226" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+      <!-- shelf -->
+      <rect x="40" y="130" width="200" height="10" rx="3" fill="${w}" opacity=".7"/>
+      <rect x="40" y="130" width="200" height="10" rx="3" fill="var(--overlay)" opacity=".6"/>
+      <!-- Legs -->
+      <rect x="40" y="106" width="10" height="48" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="40" y="106" width="10" height="48" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="230" y="106" width="10" height="48" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="230" y="106" width="10" height="48" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="38" y="150" width="14" height="4" rx="2" fill="${g}"/>
+      <rect x="228" y="150" width="14" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="158" rx="110" ry="6" fill="rgba(0,0,0,.15)"/>
+    `, 280, 168);
+  }
+
+  function drawSofa() {
+    const w = getTimberFill(), g = getGoldTone();
+    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fc = fabric[state.fabricColour] || '#e8d5c0';
+    return svgWrap(`
+      <!-- Back rest -->
+      <rect x="15" y="55" width="250" height="65" rx="8" fill="${fc}" filter="url(#shadow)"/>
+      <rect x="17" y="57" width="246" height="20" rx="6" fill="rgba(255,255,255,.08)"/>
+      <!-- Seat cushions -->
+      <rect x="15" y="108" width="120" height="38" rx="6" fill="${fc}" opacity=".95"/>
+      <rect x="143" y="108" width="122" height="38" rx="6" fill="${fc}" opacity=".95"/>
+      <rect x="15" y="108" width="120" height="8" rx="4" fill="rgba(255,255,255,.09)"/>
+      <rect x="143" y="108" width="122" height="8" rx="4" fill="rgba(255,255,255,.09)"/>
+      <!-- Cushion divide -->
+      <line x1="139" y1="108" x2="139" y2="146" stroke="rgba(0,0,0,.08)" stroke-width="2"/>
+      <!-- Arms -->
+      <rect x="5" y="78" width="18" height="68" rx="6" fill="${fc}" opacity=".9"/>
+      <rect x="257" y="78" width="18" height="68" rx="6" fill="${fc}" opacity=".9"/>
+      <!-- Legs -->
+      <rect x="22" y="143" width="10" height="20" rx="3" fill="${w}"/>
+      <rect x="248" y="143" width="10" height="20" rx="3" fill="${w}"/>
+      <rect x="22" y="159" width="10" height="4" rx="2" fill="${g}"/>
+      <rect x="248" y="159" width="10" height="4" rx="2" fill="${g}"/>
+      <!-- Piping detail -->
+      <rect x="15" y="120" width="250" height="2" rx="1" fill="rgba(0,0,0,.06)"/>
+      <ellipse cx="140" cy="167" rx="120" ry="6" fill="rgba(0,0,0,.15)"/>
+    `, 280, 175);
+  }
+
+  function drawArmchair() {
+    const w = getTimberFill(), g = getGoldTone();
+    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fc = fabric[state.fabricColour] || '#e8d5c0';
+    return svgWrap(`
+      <rect x="55" y="55" width="170" height="70" rx="10" fill="${fc}" filter="url(#shadow)"/>
+      <rect x="57" y="57" width="166" height="22" rx="8" fill="rgba(255,255,255,.09)"/>
+      <rect x="55" y="112" width="170" height="42" rx="8" fill="${fc}" opacity=".95"/>
+      <rect x="55" y="112" width="170" height="10" rx="5" fill="rgba(255,255,255,.09)"/>
+      <!-- Arms -->
+      <rect x="42" y="80" width="22" height="62" rx="7" fill="${fc}" opacity=".9"/>
+      <rect x="216" y="80" width="22" height="62" rx="7" fill="${fc}" opacity=".9"/>
+      <!-- Legs -->
+      <rect x="65" y="151" width="12" height="22" rx="3" fill="${w}"/>
+      <rect x="203" y="151" width="12" height="22" rx="3" fill="${w}"/>
+      <rect x="63" y="169" width="16" height="4" rx="2" fill="${g}"/>
+      <rect x="201" y="169" width="16" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="177" rx="90" ry="6" fill="rgba(0,0,0,.15)"/>
+    `, 280, 185);
+  }
+
+  function drawBed() {
+    const w = getTimberFill(), g = getGoldTone();
+    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fc = fabric[state.fabricColour] || '#e8d5c0';
+    return svgWrap(`
+      <!-- Headboard -->
+      <rect x="20" y="30" width="240" height="80" rx="10" fill="${fc}" filter="url(#shadow)"/>
+      <rect x="22" y="32" width="236" height="25" rx="8" fill="rgba(255,255,255,.1)"/>
+      <!-- Headboard timber cap -->
+      <rect x="20" y="30" width="240" height="8" rx="4" fill="${w}"/>
+      <!-- Base -->
+      <rect x="15" y="108" width="250" height="46" rx="6" fill="${w}" opacity=".9"/>
+      <rect x="15" y="108" width="250" height="46" rx="6" fill="url(#grain)" opacity=".5"/>
+      <rect x="15" y="108" width="250" height="46" rx="6" fill="var(--overlay)" opacity=".7"/>
+      <!-- Mattress -->
+      <rect x="20" y="95" width="240" height="20" rx="4" fill="#f5f2ee"/>
+      <!-- Pillow -->
+      <rect x="30" y="98" width="90" height="14" rx="4" fill="rgba(255,255,255,.7)"/>
+      <rect x="158" y="98" width="90" height="14" rx="4" fill="rgba(255,255,255,.7)"/>
+      <!-- Legs -->
+      <rect x="22" y="150" width="12" height="18" rx="3" fill="${w}"/>
+      <rect x="246" y="150" width="12" height="18" rx="3" fill="${w}"/>
+      <rect x="20" y="164" width="16" height="4" rx="2" fill="${g}"/>
+      <rect x="244" y="164" width="16" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="172" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
+    `, 280, 180);
+  }
+
+  function drawWardrobe() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Carcass -->
+      <rect x="20" y="20" width="240" height="155" rx="5" fill="${w}" filter="url(#shadow)"/>
+      <rect x="20" y="20" width="240" height="155" rx="5" fill="url(#grain)" opacity=".5"/>
+      <rect x="20" y="20" width="240" height="155" rx="5" fill="var(--overlay)" opacity=".75"/>
+      <!-- Top cap -->
+      <rect x="18" y="17" width="244" height="8" rx="3" fill="${w}" opacity=".85"/>
+      <!-- Door divider -->
+      <line x1="140" y1="20" x2="140" y2="175" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+      <!-- Door panels -->
+      <rect x="26" y="28" width="106" height="138" rx="3" fill="${w}" opacity=".55"/>
+      <rect x="26" y="28" width="106" height="138" rx="3" fill="var(--overlay)" opacity=".4"/>
+      <rect x="148" y="28" width="106" height="138" rx="3" fill="${w}" opacity=".55"/>
+      <rect x="148" y="28" width="106" height="138" rx="3" fill="var(--overlay)" opacity=".4"/>
+      <!-- Panel insets -->
+      <rect x="30" y="32" width="98" height="60" rx="2" fill="rgba(0,0,0,.06)"/>
+      <rect x="30" y="97" width="98" height="65" rx="2" fill="rgba(0,0,0,.06)"/>
+      <rect x="152" y="32" width="98" height="60" rx="2" fill="rgba(0,0,0,.06)"/>
+      <rect x="152" y="97" width="98" height="65" rx="2" fill="rgba(0,0,0,.06)"/>
+      <!-- Handles -->
+      <rect x="129" y="93" width="6" height="20" rx="3" fill="${g}"/>
+      <rect x="145" y="93" width="6" height="20" rx="3" fill="${g}"/>
+      <!-- Base plinth -->
+      <rect x="14" y="172" width="252" height="8" rx="3" fill="${w}" opacity=".7"/>
+      <ellipse cx="140" cy="182" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
+    `, 280, 188);
+  }
+
+  function drawBookcase() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Sides -->
+      <rect x="20" y="15" width="12" height="160" rx="3" fill="${w}" filter="url(#shadow)"/>
+      <rect x="248" y="15" width="12" height="160" rx="3" fill="${w}"/>
+      <rect x="20" y="15" width="12" height="160" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="248" y="15" width="12" height="160" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <!-- Top & bottom -->
+      <rect x="18" y="13" width="244" height="10" rx="3" fill="${w}"/>
+      <rect x="18" y="13" width="244" height="10" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="18" y="163" width="244" height="10" rx="3" fill="${w}"/>
+      <rect x="18" y="163" width="244" height="10" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <!-- Shelves -->
+      <rect x="32" y="50" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
+      <rect x="32" y="50" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
+      <rect x="32" y="95" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
+      <rect x="32" y="95" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
+      <rect x="32" y="137" width="216" height="8" rx="2" fill="${w}" opacity=".8"/>
+      <rect x="32" y="137" width="216" height="8" rx="2" fill="var(--overlay)" opacity=".65"/>
+      <!-- Books (decorative) -->
+      <rect x="35" y="20" width="10" height="28" rx="1" fill="#8b2020" opacity=".7"/>
+      <rect x="47" y="20" width="8" height="28" rx="1" fill="#1e4a8b" opacity=".7"/>
+      <rect x="57" y="20" width="12" height="28" rx="1" fill="#2a6e3a" opacity=".7"/>
+      <rect x="71" y="20" width="9" height="28" rx="1" fill="#8b6e20" opacity=".7"/>
+      <rect x="82" y="20" width="11" height="28" rx="1" fill="#5a2a8b" opacity=".7"/>
+      <rect x="35" y="58" width="12" height="32" rx="1" fill="#c0624a" opacity=".7"/>
+      <rect x="49" y="58" width="8" height="32" rx="1" fill="#1a5c8a" opacity=".7"/>
+      <rect x="59" y="58" width="14" height="32" rx="1" fill="#3a7a4a" opacity=".7"/>
+      <rect x="75" y="58" width="9" height="32" rx="1" fill="#7a4e28" opacity=".7"/>
+      <ellipse cx="140" cy="175" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
+    `, 280, 182);
+  }
+
+  function drawTvUnit() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Main body -->
+      <rect x="15" y="65" width="250" height="80" rx="6" fill="${w}" filter="url(#shadow)"/>
+      <rect x="15" y="65" width="250" height="80" rx="6" fill="url(#grain)" opacity=".5"/>
+      <rect x="15" y="65" width="250" height="80" rx="6" fill="var(--overlay)" opacity=".75"/>
+      <!-- Top surface highlight -->
+      <rect x="17" y="66" width="246" height="6" rx="3" fill="rgba(255,255,255,.1)"/>
+      <!-- Doors / sections -->
+      <rect x="22" y="73" width="70" height="64" rx="3" fill="${w}" opacity=".5"/>
+      <rect x="22" y="73" width="70" height="64" rx="3" fill="var(--overlay)" opacity=".4"/>
+      <rect x="105" y="73" width="70" height="64" rx="3" fill="rgba(0,0,0,.04)"/>
+      <rect x="188" y="73" width="70" height="64" rx="3" fill="${w}" opacity=".5"/>
+      <rect x="188" y="73" width="70" height="64" rx="3" fill="var(--overlay)" opacity=".4"/>
+      <!-- Handles -->
+      <rect x="53" y="102" width="8" height="4" rx="2" fill="${g}"/>
+      <rect x="219" y="102" width="8" height="4" rx="2" fill="${g}"/>
+      <!-- Dividers -->
+      <line x1="96" y1="73" x2="96" y2="137" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
+      <line x1="184" y1="73" x2="184" y2="137" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
+      <!-- Legs -->
+      <rect x="35" y="143" width="10" height="18" rx="3" fill="${w}" opacity=".8"/>
+      <rect x="235" y="143" width="10" height="18" rx="3" fill="${w}" opacity=".8"/>
+      <rect x="33" y="157" width="14" height="4" rx="2" fill="${g}"/>
+      <rect x="233" y="157" width="14" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="163" rx="120" ry="6" fill="rgba(0,0,0,.12)"/>
+    `, 280, 170);
+  }
+
+  function drawDesk() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Desktop -->
+      <rect x="15" y="70" width="250" height="18" rx="4" fill="${w}" filter="url(#shadow)"/>
+      <rect x="15" y="70" width="250" height="18" rx="4" fill="url(#grain)" opacity=".6"/>
+      <rect x="15" y="70" width="250" height="18" rx="4" fill="var(--overlay)" opacity=".8"/>
+      <rect x="17" y="71" width="246" height="5" rx="2" fill="rgba(255,255,255,.12)"/>
+      <!-- Drawer pedestal right -->
+      <rect x="195" y="88" width="65" height="68" rx="4" fill="${w}" opacity=".8"/>
+      <rect x="195" y="88" width="65" height="68" rx="4" fill="var(--overlay)" opacity=".65"/>
+      <rect x="200" y="95" width="55" height="18" rx="2" fill="rgba(0,0,0,.05)"/>
+      <rect x="200" y="118" width="55" height="18" rx="2" fill="rgba(0,0,0,.05)"/>
+      <rect x="200" y="141" width="55" height="10" rx="2" fill="rgba(0,0,0,.05)"/>
+      <!-- Drawer handles -->
+      <rect x="223" y="102" width="8" height="3" rx="1.5" fill="${g}"/>
+      <rect x="223" y="124" width="8" height="3" rx="1.5" fill="${g}"/>
+      <!-- Legs left -->
+      <rect x="20" y="88" width="12" height="68" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="20" y="88" width="12" height="68" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="18" y="152" width="16" height="4" rx="2" fill="${g}"/>
+      <rect x="258" y="152" width="16" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="160" rx="115" ry="6" fill="rgba(0,0,0,.12)"/>
+    `, 280, 168);
+  }
+
+  function drawSideTable() {
+    const w = getTimberFill(), g = getGoldTone();
+    return svgWrap(`
+      <!-- Top -->
+      <rect x="65" y="65" width="150" height="14" rx="4" fill="${w}" filter="url(#shadow)"/>
+      <rect x="65" y="65" width="150" height="14" rx="4" fill="url(#grain)" opacity=".6"/>
+      <rect x="65" y="65" width="150" height="14" rx="4" fill="var(--overlay)" opacity=".8"/>
+      <rect x="67" y="66" width="146" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+      <!-- Apron -->
+      <rect x="75" y="79" width="130" height="8" rx="2" fill="${w}" opacity=".8"/>
+      <rect x="75" y="79" width="130" height="8" rx="2" fill="var(--overlay)" opacity=".7"/>
+      <!-- Legs -->
+      <rect x="76" y="87" width="10" height="70" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="76" y="87" width="10" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <rect x="194" y="87" width="10" height="70" rx="3" fill="${w}" opacity=".9"/>
+      <rect x="194" y="87" width="10" height="70" rx="3" fill="var(--overlay)" opacity=".7"/>
+      <!-- Shelf -->
+      <rect x="80" y="135" width="120" height="8" rx="2" fill="${w}" opacity=".7"/>
+      <rect x="80" y="135" width="120" height="8" rx="2" fill="var(--overlay)" opacity=".6"/>
+      <!-- Feet -->
+      <rect x="74" y="153" width="14" height="4" rx="2" fill="${g}"/>
+      <rect x="192" y="153" width="14" height="4" rx="2" fill="${g}"/>
+      <ellipse cx="140" cy="160" rx="80" ry="5" fill="rgba(0,0,0,.12)"/>
+    `, 280, 168);
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  ORDER SUMMARY
+  // ═══════════════════════════════════════════════════
+  function renderOrderSummary() {
+    const f = state.furniture;
+    if (!f) return;
+    const features = [...state.features].map(id => FEATURE_DATA[id]?.name || id).join(', ') || 'None';
+    const fmt = n => 'R' + Math.round(n).toLocaleString('en-ZA');
+
+    document.getElementById('orderSummaryCard').innerHTML = `
+      <div class="summary-card-title">✦ Your Custom ${f.name} Brief</div>
+      <div class="summary-row"><span>Piece</span><strong>${f.name}</strong></div>
+      <div class="summary-row"><span>Dimensions</span><strong>${state.dims.w}W × ${state.dims.d}D × ${state.dims.h}H mm</strong></div>
+      <div class="summary-row"><span>Timber</span><strong>${state.timber.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+      <div class="summary-row"><span>Finish</span><strong>${state.finish.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+      ${f.hasUpholstery ? `<div class="summary-row"><span>Upholstery</span><strong>${state.upholstery.label} · ${state.fabricColour}</strong></div>` : ''}
+      <div class="summary-row"><span>Hardware</span><strong>${state.hardware.label.trim().replace(/\+.*/,'').trim()}</strong></div>
+      <div class="summary-row"><span>Add-ons</span><strong>${features}</strong></div>
+      <div class="summary-row"><span>Lead time</span><strong>${f.leadTime}</strong></div>
+      <div class="summary-total-row">
+        <span class="summary-total-label">Estimated total</span>
+        <span class="summary-total-val">${fmt(state._total || 0)}</span>
+      </div>
+    `;
+  }
+
+  // ═══════════════════════════════════════════════════
+  //  FORM SUBMISSION
+  // ═══════════════════════════════════════════════════
+  function submitOrder(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Simulate submission (replace with real API call / Netlify form)
+    setTimeout(() => {
+      const ref = 'OID-' + Date.now().toString().slice(-6);
+      document.getElementById('successRef').textContent = 'REF: ' + ref;
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('step5Nav').style.display = 'none';
+      document.getElementById('successState').classList.add('visible');
+    }, 1200);
+  }
+
+  function resetConfigurator() {
+    state.step = 1;
+    state.furniture = null;
+    state.features.clear();
+    document.getElementById('orderForm').style.display = 'block';
+    document.getElementById('step5Nav').style.display = 'flex';
+    document.getElementById('successState').classList.remove('visible');
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = '✦   Submit My Furniture Brief';
+    document.querySelectorAll('.furniture-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('previewPlaceholder').style.display = 'block';
+    document.getElementById('furnitureSvgContainer').style.display = 'none';
+    document.getElementById('previewMeta').style.display = 'none';
+    document.getElementById('qBase').textContent = '—';
+    document.getElementById('qTotal').textContent = '—';
+    goToStep(1);
+  }
+  </script>
+</body>
+</html>
