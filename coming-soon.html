@@ -586,29 +586,35 @@
     setInterval(tick, 1000);
 
     /* ── Notify form ── */
-    document.getElementById('notifyForm').addEventListener('submit', function(e){
+    document.getElementById('notifyForm').addEventListener('submit', async function(e){
       e.preventDefault();
       const email = document.getElementById('notifyEmail').value.trim();
       if(!email || !email.includes('@')) return;
 
-      // Replace with your actual form endpoint (Netlify Forms, Formspree, etc.)
-      this.style.display = 'none';
-      document.getElementById('notifySuccess').style.display = 'block';
+      const btn = this.querySelector('.notify-btn');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
 
-      // Netlify-compatible hidden form submission fallback
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'notify', 'email': email }).toString()
-      }).catch(() => {}); // silent fail — display already updated
+      try {
+        const res = await fetch('https://formspree.io/f/mpqbybnq', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        if(res.ok){
+          this.style.display = 'none';
+          document.getElementById('notifySuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
     });
   </script>
-
-  <!-- Netlify form detection -->
-  <form name="notify" netlify netlify-honeypot="bot-field" hidden>
-    <input type="email" name="email"/>
-    <input name="bot-field"/>
-  </form>
 
 </body>
 </html>
