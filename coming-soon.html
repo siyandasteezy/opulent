@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Coming Soon | Opulent Interior D-Zines</title>
+  <meta name="description" content="Something extraordinary is being crafted. Opulent Interior D-Zines — South Africa's premier luxury interior design and custom furniture studio."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --navy:       #0d1626;
+      --navy-mid:   #1e2d4a;
+      --navy-light: #2a3f63;
+      --gold:       #b8864e;
+      --gold-light: #d4a96a;
+      --gold-pale:  #f9f0e3;
+      --white:      #ffffff;
+      --off-white:  #faf8f4;
+      --sand:       #e8dcc8;
+      --text-mid:   #5c5470;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+
+    body {
+      font-family: var(--sans);
+      min-height: 100vh;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Background texture layers ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(184,134,78,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 100% 100%, rgba(30,45,74,.9)    0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0%   80%,  rgba(184,134,78,.08) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 120px,
+          rgba(184,134,78,.03) 120px,
+          rgba(184,134,78,.03) 121px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 120px,
+          rgba(184,134,78,.03) 120px,
+          rgba(184,134,78,.03) 121px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Logo bar ── */
+    .top-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 3rem;
+    }
+
+    .logo-text {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      color: var(--white);
+    }
+
+    .logo-text span {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .logo-sub {
+      display: block;
+      font-family: var(--sans);
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-top: .2rem;
+    }
+
+    .contact-pill {
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      border: 1px solid rgba(255,255,255,.15);
+      padding: .5rem 1.2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all .3s;
+    }
+
+    .contact-pill:hover {
+      color: var(--gold-light);
+      border-color: rgba(184,134,78,.5);
+      background: rgba(184,134,78,.06);
+    }
+
+    /* ── Main stage ── */
+    .stage {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(184,134,78,.1);
+      border: 1px solid rgba(184,134,78,.25);
+      border-radius: 40px;
+      padding: .55rem 1.4rem;
+      margin-bottom: 2.2rem;
+      animation: fadeSlideDown .8s ease both;
+    }
+
+    .badge::before, .badge::after {
+      content: '✦';
+      font-size: .5rem;
+      opacity: .6;
+    }
+
+    .headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -.01em;
+      color: var(--white);
+      margin-bottom: 1.8rem;
+      animation: fadeSlideUp .9s .1s ease both;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.8rem;
+      animation: fadeSlideUp .9s .2s ease both;
+    }
+
+    .ornament-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .ornament-line:last-child {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .ornament-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.55);
+      max-width: 520px;
+      line-height: 1.85;
+      margin-bottom: 3.5rem;
+      animation: fadeSlideUp .9s .3s ease both;
+    }
+
+    /* ── Countdown ── */
+    .countdown {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      animation: fadeSlideUp .9s .4s ease both;
+    }
+
+    .count-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .count-num {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--white);
+      min-width: 3.5rem;
+      text-align: center;
+    }
+
+    .count-sep {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: rgba(184,134,78,.35);
+      align-self: flex-start;
+      margin-top: .3rem;
+      line-height: 1;
+    }
+
+    .count-label {
+      font-size: .55rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+
+    /* ── Email form ── */
+    .notify-form {
+      display: flex;
+      gap: 0;
+      max-width: 460px;
+      width: 100%;
+      margin-bottom: 3rem;
+      animation: fadeSlideUp .9s .5s ease both;
+    }
+
+    .notify-input {
+      flex: 1;
+      padding: 1rem 1.4rem;
+      font-family: var(--sans);
+      font-size: .8rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
+      border-right: none;
+      border-radius: 4px 0 0 4px;
+      color: var(--white);
+      outline: none;
+      transition: border-color .3s, background .3s;
+    }
+
+    .notify-input::placeholder { color: rgba(255,255,255,.3); }
+
+    .notify-input:focus {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(184,134,78,.5);
+    }
+
+    .notify-btn {
+      padding: 1rem 1.6rem;
+      font-family: var(--sans);
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--white);
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .3s, transform .2s;
+    }
+
+    .notify-btn:hover { opacity: .88; transform: translateX(2px); }
+
+    .notify-success {
+      display: none;
+      font-size: .78rem;
+      color: var(--gold-light);
+      letter-spacing: .08em;
+      animation: fadeSlideUp .5s ease both;
+    }
+
+    /* ── Social links ── */
+    .socials {
+      display: flex;
+      gap: 1.2rem;
+      animation: fadeSlideUp .9s .6s ease both;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      color: rgba(255,255,255,.4);
+      font-size: .7rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .3s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(184,134,78,.08);
+      transform: translateY(-3px);
+    }
+
+    /* ── Floating product teaser cards ── */
+    .teasers {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .teaser-card {
+      position: absolute;
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      background: rgba(30,45,74,.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(184,134,78,.12);
+      animation: floatCard var(--dur, 18s) var(--delay, 0s) ease-in-out infinite;
+    }
+
+    .teaser-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(.55) saturate(.6);
+      mix-blend-mode: luminosity;
+    }
+
+    .teaser-card:nth-child(1) { width:180px;height:220px; top:12%; left:3%;  --dur:20s; --delay:0s; }
+    .teaser-card:nth-child(2) { width:140px;height:170px; top:55%; left:5%;  --dur:24s; --delay:3s; }
+    .teaser-card:nth-child(3) { width:160px;height:200px; top:20%; right:4%; --dur:22s; --delay:1s; }
+    .teaser-card:nth-child(4) { width:130px;height:160px; top:65%; right:3%; --dur:26s; --delay:5s; }
+    .teaser-card:nth-child(5) { width:110px;height:140px; top:80%; left:20%; --dur:19s; --delay:8s; }
+    .teaser-card:nth-child(6) { width:120px;height:150px; top:8%;  right:22%;--dur:23s; --delay:4s; }
+
+    /* ── Bottom bar ── */
+    .bottom-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3rem;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    .bottom-copy {
+      font-size: .62rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.22);
+      text-transform: uppercase;
+    }
+
+    .bottom-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .bottom-links a {
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.22);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .bottom-links a:hover { color: var(--gold-light); }
+
+    /* ── Animations ── */
+    @keyframes fadeSlideDown {
+      from { opacity:0; transform:translateY(-16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes floatCard {
+      0%   { opacity:0;   transform:translateY(30px) scale(.95); }
+      10%  { opacity:1; }
+      45%  { opacity:.7;  transform:translateY(-20px) scale(1); }
+      55%  { opacity:.7;  transform:translateY(-22px) scale(1.01); }
+      90%  { opacity:1; }
+      100% { opacity:0;   transform:translateY(30px) scale(.95); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width:768px) {
+      .top-bar   { padding:1.4rem 1.5rem; }
+      .bottom-bar{ padding:1.2rem 1.5rem; flex-direction:column; gap:.8rem; text-align:center; }
+      .bottom-links{ justify-content:center; }
+      .contact-pill{ display:none; }
+      .countdown { gap:1.2rem; }
+      .teaser-card{ display:none; }
+      .headline  { font-size:clamp(2.6rem,12vw,4rem); }
+      .notify-form{ flex-direction:column; }
+      .notify-input { border-right:1px solid rgba(255,255,255,.15); border-radius:4px; border-bottom:none; }
+      .notify-btn   { border-radius:4px; }
+    }
+
+    @media (max-width:480px) {
+      .countdown{ gap:.8rem; }
+      .count-sep{ display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating product teasers (decorative) -->
+  <div class="teasers" aria-hidden="true">
+    <div class="teaser-card"><img src="images/furniture/TSCH001.jpg" alt=""/></div>
+    <div class="teaser-card"><img src="images/furniture/BED001.jpg"  alt=""/></div>
+    <div class="teaser-card"><img src="images/furniture/DWAN001.jpg" alt=""/></div>
+    <div class="teaser-card"><img src="images/furniture/LSCH001.jpg" alt=""/></div>
+    <div class="teaser-card"><img src="images/furniture/TSCH003.jpg" alt=""/></div>
+    <div class="teaser-card"><img src="images/furniture/OTTMN001.jpg" alt=""/></div>
+  </div>
+
+  <!-- Top logo bar -->
+  <header class="top-bar">
+    <div>
+      <div class="logo-text">Opulent <span>Interior</span> D-Zines</div>
+      <span class="logo-sub">Gauteng, South Africa</span>
+    </div>
+    <a href="mailto:info@opulentinteriordzines.co.za" class="contact-pill">Get in touch</a>
+  </header>
+
+  <!-- Main content -->
+  <main class="stage">
+
+    <div class="badge">Something Extraordinary Is Being Crafted</div>
+
+    <h1 class="headline">
+      Coming<br/><em>Soon</em>
+    </h1>
+
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-diamond"></span>
+      <span class="ornament-line"></span>
+    </div>
+
+    <p class="sub">
+      We are putting the finishing touches on a new digital experience
+      worthy of our craft. Luxury interiors and bespoke furniture,
+      delivered with precision — launching shortly.
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown" aria-label="Countdown timer">
+      <div class="count-block">
+        <span class="count-num" id="cd-days">00</span>
+        <span class="count-label">Days</span>
+      </div>
+      <span class="count-sep">:</span>
+      <div class="count-block">
+        <span class="count-num" id="cd-hours">00</span>
+        <span class="count-label">Hours</span>
+      </div>
+      <span class="count-sep">:</span>
+      <div class="count-block">
+        <span class="count-num" id="cd-mins">00</span>
+        <span class="count-label">Minutes</span>
+      </div>
+      <span class="count-sep">:</span>
+      <div class="count-block">
+        <span class="count-num" id="cd-secs">00</span>
+        <span class="count-label">Seconds</span>
+      </div>
+    </div>
+
+    <!-- Notify form -->
+    <form class="notify-form" id="notifyForm" novalidate>
+      <input
+        class="notify-input"
+        type="email"
+        placeholder="Your email address"
+        id="notifyEmail"
+        autocomplete="email"
+        aria-label="Email address for launch notification"
+        required
+      />
+      <button class="notify-btn" type="submit">Notify Me</button>
+    </form>
+    <p class="notify-success" id="notifySuccess">✦ &nbsp;You're on the list — we'll be in touch.</p>
+
+    <!-- Social links -->
+    <div class="socials">
+      <a class="social-link" href="#" aria-label="Instagram">ig</a>
+      <a class="social-link" href="#" aria-label="Facebook">fb</a>
+      <a class="social-link" href="#" aria-label="Pinterest">pt</a>
+      <a class="social-link" href="https://wa.me/27674017626" aria-label="WhatsApp" target="_blank" rel="noopener">wa</a>
+    </div>
+
+  </main>
+
+  <!-- Bottom bar -->
+  <footer class="bottom-bar">
+    <span class="bottom-copy">&copy; 2026 Opulent Interior D-Zines</span>
+    <nav class="bottom-links">
+      <a href="mailto:info@opulentinteriordzines.co.za">Contact</a>
+      <a href="https://wa.me/27674017626" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/index.html">Main Site</a>
+    </nav>
+  </footer>
+
+  <script>
+    /* ── Countdown: set your launch date here ── */
+    const LAUNCH = new Date('2026-08-01T00:00:00+02:00'); // SAST
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function tick(){
+      const now  = new Date();
+      const diff = LAUNCH - now;
+
+      if(diff <= 0){
+        document.getElementById('countdown').innerHTML =
+          '<p style="font-family:var(--serif);font-size:1.8rem;color:var(--gold-light);font-style:italic">We\'re live!</p>';
+        return;
+      }
+
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      const secs  = Math.floor((diff % 60000)    / 1000);
+
+      document.getElementById('cd-days').textContent  = pad(days);
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-mins').textContent  = pad(mins);
+      document.getElementById('cd-secs').textContent  = pad(secs);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+
+    /* ── Notify form ── */
+    document.getElementById('notifyForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('notifyEmail').value.trim();
+      if(!email || !email.includes('@')) return;
+
+      // Replace with your actual form endpoint (Netlify Forms, Formspree, etc.)
+      this.style.display = 'none';
+      document.getElementById('notifySuccess').style.display = 'block';
+
+      // Netlify-compatible hidden form submission fallback
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'notify', 'email': email }).toString()
+      }).catch(() => {}); // silent fail — display already updated
+    });
+  </script>
+
+  <!-- Netlify form detection -->
+  <form name="notify" netlify netlify-honeypot="bot-field" hidden>
+    <input type="email" name="email"/>
+    <input name="bot-field"/>
+  </form>
+
+</body>
+</html>
