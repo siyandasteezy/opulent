@@ -45,8 +45,7 @@
     #nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.9rem 0;box-shadow:var(--shadow-sm)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:0 2rem}
     .nav-logo{text-decoration:none}
-    .nav-logo-text{font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--navy);letter-spacing:.04em;line-height:1.2}
-    .nav-logo-sub{display:block;font-size:.6rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-family:var(--sans)}
+    .nav-logo img{height:48px;width:auto;display:block}
     .nav-links{display:flex;list-style:none;gap:2.2rem;align-items:center}
     .nav-links a{text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);transition:color .3s;position:relative}
     .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
@@ -207,7 +206,7 @@
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="Opulent Interior D-Zines Home">
-      <div class="nav-logo-text">Opulent Interior D-Zines<span class="nav-logo-sub">Luxury · Custom Furniture</span></div>
+      <img src="images/logoOp.png" alt="Opulent Interior D-Zines"/>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="/">Home</a></li>
