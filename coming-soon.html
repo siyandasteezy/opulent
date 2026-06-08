@@ -587,7 +587,7 @@
     /* ── Notify form — saves to Supabase + Formspree fallback ── */
     (function(){
       const sbScript  = document.createElement('script');
-      sbScript.src    = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      sbScript.src    = 'js/supabase.min.js';
       sbScript.onload = () => {
         const cfg = document.createElement('script');
         cfg.src   = 'js/supabase-config.js';
