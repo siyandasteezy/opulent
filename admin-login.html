@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Sign In | Opulent Interior D-Zines</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#0d1626;--navy-mid:#1e2d4a;--navy-light:#263d60;
+      --gold:#b8864e;--gold-light:#d4a96a;--gold-pale:#f9f0e3;
+      --white:#ffffff;--off-white:#faf8f4;--border:#e8e2d6;
+      --text:#1a1824;--text-mid:#5c5470;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      --radius:4px;
+    }
+    html,body{height:100%;font-family:var(--sans)}
+    body{
+      display:grid;grid-template-columns:1fr 1fr;min-height:100vh;
+      background:var(--navy);
+    }
+
+    /* ── Left panel ── */
+    .left-panel{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 60%,var(--navy-light) 100%);
+      display:flex;flex-direction:column;justify-content:space-between;padding:3rem;
+    }
+    .left-panel::before{
+      content:'';position:absolute;inset:0;
+      background-image:repeating-linear-gradient(60deg,transparent 0,transparent 80px,rgba(184,134,78,.04) 80px,rgba(184,134,78,.04) 81px),
+                       repeating-linear-gradient(-60deg,transparent 0,transparent 80px,rgba(184,134,78,.03) 80px,rgba(184,134,78,.03) 81px);
+    }
+    .left-panel::after{
+      content:'';position:absolute;top:0;right:0;bottom:0;width:1px;
+      background:linear-gradient(to bottom,transparent,rgba(184,134,78,.3),transparent);
+    }
+    .panel-brand{position:relative;z-index:1}
+    .panel-logo{height:90px;width:auto;filter:brightness(0) invert(1);display:block;margin-bottom:2rem}
+    .panel-tagline{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:300;color:var(--white);line-height:1.2}
+    .panel-tagline em{font-style:italic;color:var(--gold-light);display:block}
+    .panel-footer{position:relative;z-index:1}
+    .panel-footer-text{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase}
+    .panel-stats{display:flex;gap:2.5rem;margin-bottom:1.5rem}
+    .panel-stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gold-light);display:block;line-height:1}
+    .panel-stat-label{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-top:.3rem}
+
+    /* ── Right panel (form) ── */
+    .right-panel{
+      background:var(--off-white);display:flex;align-items:center;justify-content:center;padding:3rem 2rem;
+    }
+    .login-box{width:100%;max-width:420px}
+    .login-header{margin-bottom:2.5rem;text-align:center}
+    .login-icon{
+      width:60px;height:60px;background:var(--navy);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;
+      font-size:1.4rem;
+    }
+    .login-title{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--text);margin-bottom:.3rem}
+    .login-sub{font-size:.83rem;color:var(--text-mid)}
+
+    .form-group{margin-bottom:1.2rem}
+    .form-group label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:.5rem}
+    .form-group input{
+      width:100%;padding:.95rem 1rem;border:1.5px solid var(--border);background:var(--white);
+      border-radius:var(--radius);font-family:var(--sans);font-size:.9rem;color:var(--text);
+      outline:none;transition:border-color .3s,box-shadow .3s;
+    }
+    .form-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,78,.12)}
+    .form-group input::placeholder{color:#ccc}
+
+    #err-msg{
+      display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:var(--radius);
+      padding:.8rem 1rem;margin-bottom:1.2rem;font-size:.83rem;color:#b91c1c;
+    }
+    #err-msg.show{display:block}
+
+    .btn-login{
+      width:100%;padding:1rem;background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+      color:var(--white);border:none;border-radius:var(--radius);
+      font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+      cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;
+    }
+    .btn-login:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,22,38,.3)}
+    .btn-login:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+    .login-footer{margin-top:2rem;text-align:center;font-size:.75rem;color:var(--text-mid)}
+    .login-footer a{color:var(--gold);text-decoration:none}
+    .login-footer a:hover{text-decoration:underline}
+
+    /* spinner */
+    .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:var(--white);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media(max-width:768px){
+      body{grid-template-columns:1fr}
+      .left-panel{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Left brand panel -->
+<div class="left-panel">
+  <div class="panel-brand">
+    <img class="panel-logo" src="images/logoOp.png" alt="Opulent Interior D-Zines"/>
+    <p class="panel-tagline">
+      Distinguished Spaces,
+      <em>Opulent by Design.</em>
+    </p>
+  </div>
+  <div class="panel-footer">
+    <div class="panel-stats">
+      <div>
+        <span class="panel-stat-num">65</span>
+        <span class="panel-stat-label">Products</span>
+      </div>
+      <div>
+        <span class="panel-stat-num">L1</span>
+        <span class="panel-stat-label">BBBEE</span>
+      </div>
+      <div>
+        <span class="panel-stat-num">2013</span>
+        <span class="panel-stat-label">Est.</span>
+      </div>
+    </div>
+    <p class="panel-footer-text">Secure Admin Portal · Opulent Interior D-Zines</p>
+  </div>
+</div>
+
+<!-- Right login panel -->
+<div class="right-panel">
+  <div class="login-box">
+    <div class="login-header">
+      <div class="login-icon">🔐</div>
+      <h1 class="login-title">Admin Sign In</h1>
+      <p class="login-sub">Enter your credentials to access the dashboard</p>
+    </div>
+
+    <div id="err-msg" role="alert" aria-live="polite"></div>
+
+    <form id="login-form" novalidate>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="admin@example.com"
+               required autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••••••"
+               required autocomplete="current-password"/>
+      </div>
+      <button type="submit" class="btn-login" id="login-btn">
+        Sign In
+      </button>
+    </form>
+
+    <p class="login-footer">
+      <a href="/">← Back to website</a>
+    </p>
+  </div>
+</div>
+
+<!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // If already signed in, skip login
+  (async () => {
+    const { data: { session } } = await db.auth.getSession();
+    if (session) window.location.href = 'admin.html';
+  })();
+
+  const form   = document.getElementById('login-form');
+  const btn    = document.getElementById('login-btn');
+  const errBox = document.getElementById('err-msg');
+
+  function setErr(msg) {
+    errBox.textContent = msg;
+    errBox.classList.toggle('show', !!msg);
+  }
+  function setLoading(on) {
+    btn.disabled = on;
+    btn.innerHTML = on
+      ? '<div class="spinner"></div> Signing in…'
+      : 'Sign In';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setErr('');
+    setLoading(true);
+
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const { error } = await db.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setErr(error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password. Please try again.'
+        : error.message);
+      setLoading(false);
+    } else {
+      window.location.href = 'admin.html';
+    }
+  });
+</script>
+</body>
+</html>

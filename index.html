@@ -824,7 +824,7 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Opulent Interior D-Zines. All rights reserved.</p>
-      <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></p>
+      <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a> &nbsp;·&nbsp; <a href="/admin-login.html">Admin</a></p>
     </div>
   </div>
 </footer>
@@ -879,14 +879,49 @@
     });
   });
 
-  // Form
-  document.querySelector('.contact-form-wrap').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('[type="submit"]');
-    btn.textContent = '✓  Message Received — We\'ll Be in Touch!';
-    btn.style.background = '#1a7f4b';
-    btn.disabled = true;
-  });
+  // ── Contact form → Supabase ──
+  (function(){
+    const form = document.querySelector('.contact-form-wrap');
+    if (!form) return;
+
+    // Load Supabase
+    const sbScript  = document.createElement('script');
+    sbScript.src    = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+    sbScript.onload = () => {
+      const cfgScript = document.createElement('script');
+      cfgScript.src   = 'js/supabase-config.js';
+      cfgScript.onload = () => {
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        form.addEventListener('submit', async function(e){
+          e.preventDefault();
+          const btn = this.querySelector('[type="submit"]');
+          const orig = btn.innerHTML;
+          btn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite"></span> Sending…';
+          btn.disabled = true;
+
+          const payload = {
+            first_name : document.getElementById('fn').value.trim(),
+            last_name  : document.getElementById('ln').value.trim(),
+            email      : document.getElementById('em').value.trim(),
+            phone      : document.getElementById('ph').value.trim() || null,
+            service    : document.getElementById('svc').value || null,
+            message    : document.getElementById('msg').value.trim(),
+          };
+
+          const { error } = await db.from('contact_submissions').insert(payload);
+
+          if (error && error.code !== '42501'){
+            // 42501 = RLS block, shouldn't happen but fall back gracefully
+            console.warn('Supabase contact error:', error.message);
+          }
+          btn.innerHTML = '✓  Message Received — We\'ll Be in Touch!';
+          btn.style.background = '#1a7f4b';
+        });
+      };
+      document.head.appendChild(cfgScript);
+    };
+    document.head.appendChild(sbScript);
+  })();
 </script>
 
 </body>

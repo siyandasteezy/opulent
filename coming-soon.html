@@ -584,35 +584,48 @@
     tick();
     setInterval(tick, 1000);
 
-    /* ── Notify form ── */
-    document.getElementById('notifyForm').addEventListener('submit', async function(e){
-      e.preventDefault();
-      const email = document.getElementById('notifyEmail').value.trim();
-      if(!email || !email.includes('@')) return;
+    /* ── Notify form — saves to Supabase + Formspree fallback ── */
+    (function(){
+      const sbScript  = document.createElement('script');
+      sbScript.src    = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      sbScript.onload = () => {
+        const cfg = document.createElement('script');
+        cfg.src   = 'js/supabase-config.js';
+        cfg.onload = () => {
+          const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          document.getElementById('notifyForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            const email = document.getElementById('notifyEmail').value.trim();
+            if (!email || !email.includes('@')) return;
 
-      const btn = this.querySelector('.notify-btn');
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
+            const btn = this.querySelector('.notify-btn');
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
 
-      try {
-        const res = await fetch('https://formspree.io/f/mpqbybnq', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
-        });
+            // Save to Supabase (primary)
+            try {
+              await db.from('email_subscribers').insert({ email, source: 'coming-soon' });
+            } catch(err) {
+              console.warn('Supabase sub error:', err);
+            }
 
-        if(res.ok){
-          this.style.display = 'none';
-          document.getElementById('notifySuccess').style.display = 'block';
-        } else {
-          btn.textContent = 'Try again';
-          btn.disabled = false;
-        }
-      } catch {
-        btn.textContent = 'Try again';
-        btn.disabled = false;
-      }
-    });
+            // Formspree backup
+            try {
+              await fetch('https://formspree.io/f/mpqbybnq', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+              });
+            } catch(_){}
+
+            this.style.display = 'none';
+            document.getElementById('notifySuccess').style.display = 'block';
+          });
+        };
+        document.head.appendChild(cfg);
+      };
+      document.head.appendChild(sbScript);
+    })();
   </script>
 
 </body>

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Dashboard | Opulent Interior D-Zines</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#0d1626;--navy-mid:#1e2d4a;--navy-light:#263d60;
+      --gold:#b8864e;--gold-light:#d4a96a;--gold-pale:#f9f0e3;
+      --white:#ffffff;--off-white:#faf8f4;--bg:#f0ede8;
+      --border:#e8e2d6;--border-dark:#d0c8bc;
+      --text:#1a1824;--text-mid:#5c5470;--text-light:#8e8aa0;
+      --green:#15803d;--green-bg:#f0fdf4;--green-border:#86efac;
+      --red:#b91c1c;--red-bg:#fef2f2;--red-border:#fca5a5;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      --radius:4px;--radius-lg:8px;
+      --shadow-sm:0 2px 8px rgba(0,0,0,.06);
+      --shadow-md:0 4px 16px rgba(0,0,0,.10);
+      --sidebar-w:260px;
+    }
+    html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--text)}
+
+    /* ════════════ LAYOUT ════════════ */
+    .layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh}
+
+    /* ════════════ SIDEBAR ════════════ */
+    #sidebar{
+      background:var(--navy);display:flex;flex-direction:column;
+      position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);z-index:500;
+      overflow-y:auto;
+    }
+    .sidebar-brand{padding:1.8rem 1.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+    .sidebar-logo{height:70px;width:auto;filter:brightness(0) invert(1);display:block;margin-bottom:.8rem}
+    .sidebar-title{font-family:var(--serif);font-size:.95rem;font-weight:300;color:rgba(255,255,255,.5);letter-spacing:.1em}
+
+    .sidebar-nav{flex:1;padding:1.2rem 0}
+    .nav-section-label{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:.5rem 1.5rem .5rem;margin-top:.5rem}
+    .nav-item{
+      display:flex;align-items:center;gap:.8rem;
+      padding:.75rem 1.5rem;font-size:.8rem;font-weight:500;letter-spacing:.04em;
+      color:rgba(255,255,255,.55);text-decoration:none;cursor:pointer;border:none;background:none;width:100%;
+      transition:all .2s;position:relative;
+    }
+    .nav-item:hover{color:rgba(255,255,255,.9);background:rgba(255,255,255,.05)}
+    .nav-item.active{color:var(--gold-light);background:rgba(184,134,78,.1)}
+    .nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold)}
+    .nav-icon{font-size:1rem;width:20px;text-align:center}
+    .nav-badge{
+      margin-left:auto;background:var(--gold);color:var(--white);
+      border-radius:100px;padding:.1rem .5rem;font-size:.62rem;font-weight:700;
+      display:none;
+    }
+    .nav-badge.show{display:inline}
+
+    .sidebar-footer{padding:1.2rem 1.5rem;border-top:1px solid rgba(255,255,255,.07)}
+    .sidebar-user{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:.8rem;word-break:break-all}
+    .btn-signout{
+      display:flex;align-items:center;gap:.5rem;width:100%;padding:.6rem 1rem;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+      border-radius:var(--radius);color:rgba(255,255,255,.55);font-family:var(--sans);font-size:.75rem;
+      cursor:pointer;transition:all .2s;
+    }
+    .btn-signout:hover{background:rgba(185,28,28,.2);border-color:rgba(185,28,28,.4);color:#fca5a5}
+
+    /* ════════════ MAIN ════════════ */
+    .main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;min-height:100vh}
+
+    .topbar{
+      background:var(--white);border-bottom:1px solid var(--border);
+      padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:400;
+    }
+    .topbar-left h1{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--text)}
+    .topbar-left p{font-size:.75rem;color:var(--text-light);margin-top:.1rem}
+    .topbar-right{display:flex;align-items:center;gap:.8rem}
+    .topbar-time{font-size:.72rem;color:var(--text-light)}
+
+    .main-content{flex:1;padding:2rem}
+
+    /* ════════════ SECTIONS ════════════ */
+    .section{display:none}
+    .section.active{display:block}
+
+    /* ════════════ STAT CARDS ════════════ */
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    .stat-card{
+      background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);
+      padding:1.5rem;display:flex;align-items:flex-start;gap:1rem;
+    }
+    .stat-icon{
+      width:48px;height:48px;border-radius:var(--radius);
+      display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+    }
+    .stat-icon.navy{background:var(--navy)}
+    .stat-icon.gold{background:linear-gradient(135deg,var(--gold),var(--gold-light))}
+    .stat-icon.green{background:#15803d}
+    .stat-icon.red{background:#b91c1c}
+    .stat-num{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--text);line-height:1;margin-bottom:.2rem}
+    .stat-label{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-light)}
+
+    /* ════════════ PANELS ════════════ */
+    .panel{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:1.5rem;overflow:hidden}
+    .panel-header{
+      padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .panel-title{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--text)}
+    .panel-sub{font-size:.72rem;color:var(--text-light);margin-top:.15rem}
+    .panel-body{padding:0}
+
+    /* ════════════ TOOLBAR ════════════ */
+    .toolbar{
+      padding:1rem 1.5rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;background:var(--off-white);
+    }
+    .toolbar input[type="search"]{
+      flex:1;min-width:180px;padding:.6rem 1rem;
+      border:1.5px solid var(--border);border-radius:var(--radius);
+      font-family:var(--sans);font-size:.82rem;color:var(--text);outline:none;background:var(--white);
+      transition:border-color .2s;
+    }
+    .toolbar input[type="search"]:focus{border-color:var(--gold)}
+    .toolbar select{
+      padding:.6rem .9rem;border:1.5px solid var(--border);border-radius:var(--radius);
+      font-family:var(--sans);font-size:.8rem;color:var(--text-mid);background:var(--white);
+      outline:none;cursor:pointer;
+    }
+    .toolbar select:focus{border-color:var(--gold)}
+    .btn-sm{
+      padding:.55rem 1rem;font-family:var(--sans);font-size:.72rem;font-weight:600;
+      letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:var(--radius);
+      cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    .btn-navy{background:var(--navy);color:var(--white)}
+    .btn-navy:hover{background:var(--navy-mid)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--white)}
+    .btn-gold:hover{filter:brightness(1.05)}
+    .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text-mid)}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+    .btn-danger{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red)}
+    .btn-danger:hover{background:var(--red);color:var(--white)}
+    .btn-success{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+    .btn-success:hover{background:var(--green);color:var(--white)}
+
+    /* ════════════ TABLE ════════════ */
+    .tbl-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    thead th{
+      padding:.8rem 1rem;text-align:left;font-size:.65rem;font-weight:600;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);
+      background:var(--off-white);border-bottom:1px solid var(--border);
+      white-space:nowrap;
+    }
+    tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:hover{background:var(--off-white)}
+    td{padding:.8rem 1rem;color:var(--text-mid);vertical-align:middle}
+    td.primary{color:var(--text);font-weight:500}
+    td.mono{font-family:monospace;font-size:.78rem;color:var(--text-light)}
+
+    .badge{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.2rem .6rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.1em;
+      white-space:nowrap;
+    }
+    .badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+    .badge-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+    .badge-gold{background:var(--gold-pale);color:var(--gold);border:1px solid #e8d8c0}
+    .badge-navy{background:#e8ecf2;color:var(--navy-mid);border:1px solid #c5ccd8}
+
+    .actions{display:flex;gap:.4rem;flex-wrap:wrap}
+
+    /* Toggle switch */
+    .toggle{position:relative;display:inline-block;width:38px;height:21px;cursor:pointer}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle-slider{
+      position:absolute;inset:0;background:#d1d5db;border-radius:100px;transition:.3s;
+    }
+    .toggle-slider::before{
+      content:'';position:absolute;height:15px;width:15px;left:3px;bottom:3px;
+      background:var(--white);border-radius:50%;transition:.3s;
+    }
+    .toggle input:checked+.toggle-slider{background:var(--green)}
+    .toggle input:checked+.toggle-slider::before{transform:translateX(17px)}
+
+    /* Stock input */
+    .stock-input{
+      width:70px;padding:.4rem .5rem;border:1.5px solid var(--border);border-radius:var(--radius);
+      font-family:var(--sans);font-size:.82rem;text-align:center;color:var(--text);
+      outline:none;transition:border-color .2s;
+    }
+    .stock-input:focus{border-color:var(--gold)}
+
+    /* ════════════ ENQUIRY ROW ════════════ */
+    .enq-unread td{background:rgba(184,134,78,.04)}
+    .enq-unread .enq-name{font-weight:600;color:var(--text)}
+    .msg-preview{
+      max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      font-size:.78rem;color:var(--text-light);
+    }
+
+    /* ════════════ DASHBOARD RECENT ════════════ */
+    .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .recent-list{list-style:none}
+    .recent-item{
+      display:flex;align-items:center;gap:1rem;padding:.9rem 1.5rem;
+      border-bottom:1px solid var(--border);font-size:.82rem;
+    }
+    .recent-item:last-child{border-bottom:none}
+    .recent-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    .recent-dot.unread{background:var(--red)}
+    .recent-main{flex:1}
+    .recent-main strong{display:block;color:var(--text);font-size:.83rem}
+    .recent-main span{font-size:.72rem;color:var(--text-light)}
+    .recent-time{font-size:.7rem;color:var(--text-light);white-space:nowrap}
+
+    /* ════════════ MODAL ════════════ */
+    .modal-overlay{
+      display:none;position:fixed;inset:0;background:rgba(13,22,38,.6);z-index:800;
+      align-items:center;justify-content:center;padding:1.5rem;
+    }
+    .modal-overlay.open{display:flex}
+    .modal{
+      background:var(--white);border-radius:var(--radius-lg);
+      max-width:600px;width:100%;max-height:90vh;overflow-y:auto;
+      box-shadow:0 24px 64px rgba(0,0,0,.25);
+    }
+    .modal-head{
+      padding:1.5rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;background:var(--white);z-index:1;
+    }
+    .modal-head h2{font-family:var(--serif);font-size:1.4rem;font-weight:400}
+    .modal-close{
+      background:none;border:1.5px solid var(--border);border-radius:var(--radius);
+      width:32px;height:32px;font-size:1rem;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;color:var(--text-mid);transition:.2s;
+    }
+    .modal-close:hover{border-color:var(--gold);color:var(--gold)}
+    .modal-body{padding:1.5rem}
+
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    .field-group{margin-bottom:1rem}
+    .field-group label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.4rem}
+    .field-group input,.field-group select,.field-group textarea{
+      width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);
+      font-family:var(--sans);font-size:.85rem;color:var(--text);background:var(--white);outline:none;transition:.2s;
+    }
+    .field-group input:focus,.field-group select:focus,.field-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,78,.1)}
+    .field-group textarea{height:100px;resize:vertical}
+    .modal-foot{
+      padding:1.2rem 1.5rem;border-top:1px solid var(--border);
+      display:flex;gap:.7rem;justify-content:flex-end;
+    }
+
+    /* ════════════ TOAST ════════════ */
+    #toast{
+      position:fixed;bottom:2rem;right:2rem;z-index:1000;
+      background:var(--navy);color:var(--white);padding:.9rem 1.4rem;border-radius:var(--radius-lg);
+      font-size:.82rem;display:flex;align-items:center;gap:.6rem;
+      transform:translateY(10px);opacity:0;transition:all .3s;pointer-events:none;
+      border-left:3px solid var(--gold);
+    }
+    #toast.show{transform:translateY(0);opacity:1}
+    #toast.error{border-left-color:var(--red)}
+
+    /* ════════════ LOADING ════════════ */
+    .loading{
+      text-align:center;padding:3rem;color:var(--text-light);
+      font-size:.83rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;
+    }
+    .spin{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ════════════ EMPTY STATE ════════════ */
+    .empty{text-align:center;padding:3rem;color:var(--text-light)}
+    .empty-icon{font-size:2.5rem;margin-bottom:.8rem}
+    .empty p{font-size:.83rem}
+
+    /* ════════════ RESPONSIVE ════════════ */
+    @media(max-width:1100px){
+      .stats-row{grid-template-columns:repeat(2,1fr)}
+      .dash-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:900px){
+      :root{--sidebar-w:220px}
+    }
+    @media(max-width:768px){
+      :root{--sidebar-w:0px}
+      #sidebar{transform:translateX(-260px);width:260px;transition:transform .3s}
+      #sidebar.open{transform:translateX(0)}
+      .main{margin-left:0}
+      .stats-row{grid-template-columns:1fr 1fr}
+      .field-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ SIDEBAR ════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img class="sidebar-logo" src="images/logoOp.png" alt="Opulent Interior D-Zines"/>
+    <div class="sidebar-title">Admin Dashboard</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <button class="nav-item active" data-section="dashboard">
+      <span class="nav-icon">📊</span> Dashboard
+    </button>
+
+    <div class="nav-section-label">Catalogue</div>
+    <button class="nav-item" data-section="products">
+      <span class="nav-icon">🪑</span> Products
+    </button>
+
+    <div class="nav-section-label">Communication</div>
+    <button class="nav-item" data-section="enquiries">
+      <span class="nav-icon">✉️</span> Enquiries
+      <span class="nav-badge" id="enq-badge">0</span>
+    </button>
+    <button class="nav-item" data-section="subscribers">
+      <span class="nav-icon">📬</span> Subscribers
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user" id="sidebar-user"></div>
+    <button class="btn-signout" id="btn-signout">
+      <span>🚪</span> Sign Out
+    </button>
+  </div>
+</aside>
+
+<!-- ════════════ MAIN ════════════ -->
+<div class="main">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1 id="topbar-title">Dashboard</h1>
+      <p id="topbar-sub">Welcome back to Opulent Interior D-Zines admin</p>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-time" id="topbar-time"></span>
+      <a href="/" class="btn-sm btn-ghost" target="_blank">↗ View Site</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- ─── DASHBOARD ─── -->
+    <div id="sec-dashboard" class="section active">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon navy">🪑</div>
+          <div>
+            <div class="stat-num" id="stat-total-products">—</div>
+            <div class="stat-label">Total Products</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div>
+            <div class="stat-num" id="stat-visible-products">—</div>
+            <div class="stat-label">Visible Products</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold">✉️</div>
+          <div>
+            <div class="stat-num" id="stat-unread-enq">—</div>
+            <div class="stat-label">Unread Enquiries</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">📬</div>
+          <div>
+            <div class="stat-num" id="stat-subscribers">—</div>
+            <div class="stat-label">Subscribers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Recent Enquiries</div>
+              <div class="panel-sub">Latest messages from clients</div>
+            </div>
+            <button class="btn-sm btn-ghost" onclick="switchSection('enquiries')">View All</button>
+          </div>
+          <ul class="recent-list" id="dash-recent-enq">
+            <li class="loading"><div class="spin"></div></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Recent Subscribers</div>
+              <div class="panel-sub">Latest newsletter sign-ups</div>
+            </div>
+            <button class="btn-sm btn-ghost" onclick="switchSection('subscribers')">View All</button>
+          </div>
+          <ul class="recent-list" id="dash-recent-sub">
+            <li class="loading"><div class="spin"></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PRODUCTS ─── -->
+    <div id="sec-products" class="section">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Products Catalogue</div>
+            <div class="panel-sub" id="prod-count-sub">Loading…</div>
+          </div>
+          <div style="display:flex;gap:.6rem">
+            <button class="btn-sm btn-gold" onclick="openAddProduct()">+ Add Product</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="prod-search" placeholder="Search by name or SKU…" oninput="renderProducts()"/>
+          <select id="prod-cat-filter" onchange="renderProducts()">
+            <option value="">All Categories</option>
+            <option value="couch">3-Seater Couch</option>
+            <option value="chesterfield">Chesterfield</option>
+            <option value="lshape">L-Shape Couch</option>
+            <option value="ushape">U-Shape Couch</option>
+            <option value="occasional">Occasional Chair</option>
+            <option value="dining">Dining Chair</option>
+            <option value="daybed">Daybed / Chaise</option>
+            <option value="bedset">Headboard &amp; Base Set</option>
+            <option value="headboard">Headboard</option>
+            <option value="ottoman">Ottoman</option>
+          </select>
+          <select id="prod-vis-filter" onchange="renderProducts()">
+            <option value="">All</option>
+            <option value="true">Visible</option>
+            <option value="false">Hidden</option>
+          </select>
+        </div>
+        <div class="tbl-wrap">
+          <table id="products-table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price (ZAR)</th>
+                <th>Stock Qty</th>
+                <th>Visible</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody">
+              <tr><td colspan="7" class="loading"><div class="spin"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ENQUIRIES ─── -->
+    <div id="sec-enquiries" class="section">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Client Enquiries</div>
+            <div class="panel-sub" id="enq-count-sub">Loading…</div>
+          </div>
+          <button class="btn-sm btn-ghost" onclick="markAllRead()">Mark All Read</button>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="enq-search" placeholder="Search by name or email…" oninput="renderEnquiries()"/>
+          <select id="enq-status-filter" onchange="renderEnquiries()">
+            <option value="">All</option>
+            <option value="unread">Unread</option>
+            <option value="read">Read</option>
+          </select>
+        </div>
+        <div class="tbl-wrap">
+          <table id="enquiries-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Service</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiries-tbody">
+              <tr><td colspan="7" class="loading"><div class="spin"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SUBSCRIBERS ─── -->
+    <div id="sec-subscribers" class="section">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Email Subscribers</div>
+            <div class="panel-sub" id="sub-count-sub">Loading…</div>
+          </div>
+          <button class="btn-sm btn-ghost" id="btn-export-csv" onclick="exportCSV()">↓ Export CSV</button>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="sub-search" placeholder="Search email…" oninput="renderSubscribers()"/>
+        </div>
+        <div class="tbl-wrap">
+          <table id="subscribers-table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Source</th>
+                <th>Date Subscribed</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="subscribers-tbody">
+              <tr><td colspan="4" class="loading"><div class="spin"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /main -->
+
+<!-- ════════════ PRODUCT MODAL ════════════ -->
+<div class="modal-overlay" id="product-modal" onclick="closeModal(event,'product-modal')">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="prod-modal-title">Edit Product</h2>
+      <button class="modal-close" onclick="closeModalById('product-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pm-id"/>
+      <div class="field-row">
+        <div class="field-group">
+          <label>SKU / ID</label>
+          <input type="text" id="pm-sku" readonly style="background:var(--off-white)"/>
+        </div>
+        <div class="field-group">
+          <label>Category</label>
+          <input type="text" id="pm-cat" readonly style="background:var(--off-white)"/>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Product Name</label>
+        <input type="text" id="pm-name" placeholder="Product name"/>
+      </div>
+      <div class="field-row" id="pm-price-single-row">
+        <div class="field-group">
+          <label>Price (ZAR)</label>
+          <input type="number" id="pm-price" placeholder="0"/>
+        </div>
+        <div class="field-group">
+          <label>Stock Quantity</label>
+          <input type="number" id="pm-stock" placeholder="0" min="0"/>
+        </div>
+      </div>
+      <div class="field-row" id="pm-price-sized-row" style="display:none">
+        <div class="field-group">
+          <label>Queen Price (ZAR)</label>
+          <input type="number" id="pm-price-q" placeholder="0"/>
+        </div>
+        <div class="field-group">
+          <label>King Price (ZAR)</label>
+          <input type="number" id="pm-price-k" placeholder="0"/>
+        </div>
+      </div>
+      <div style="display:none" id="pm-stock-sized-row">
+        <div class="field-group">
+          <label>Stock Quantity</label>
+          <input type="number" id="pm-stock-s" placeholder="0" min="0"/>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label>Visible on Shop</label>
+          <select id="pm-visible">
+            <option value="true">Yes — Visible</option>
+            <option value="false">No — Hidden</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Featured</label>
+          <select id="pm-featured">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('product-modal')">Cancel</button>
+      <button class="btn-sm btn-navy" onclick="saveProduct()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ ENQUIRY MODAL ════════════ -->
+<div class="modal-overlay" id="enquiry-modal" onclick="closeModal(event,'enquiry-modal')">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Enquiry Detail</h2>
+      <button class="modal-close" onclick="closeModalById('enquiry-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="enq-modal-body">
+    </div>
+    <div class="modal-foot">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('enquiry-modal')">Close</button>
+      <button class="btn-sm btn-success" id="enq-mark-read-btn">Mark as Read</button>
+      <button class="btn-sm btn-danger" id="enq-delete-btn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ TOAST ════════════ -->
+<div id="toast"></div>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════
+   OPULENT ADMIN — main.js
+   ═══════════════════════════════════════════════════════ */
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* ── State ── */
+let allProducts    = [];
+let allEnquiries   = [];
+let allSubscribers = [];
+let currentSection = 'dashboard';
+
+/* ════════ INIT ════════ */
+(async () => {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) { window.location.href = 'admin-login.html'; return; }
+
+  document.getElementById('sidebar-user').textContent = session.user.email;
+  startClock();
+  await Promise.all([ loadProducts(), loadEnquiries(), loadSubscribers() ]);
+  updateDashboard();
+})();
+
+/* ════════ CLOCK ════════ */
+function startClock(){
+  const el = document.getElementById('topbar-time');
+  const tick = () => el.textContent = new Date().toLocaleString('en-ZA',{weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  tick(); setInterval(tick, 30000);
+}
+
+/* ════════ NAV ════════ */
+document.querySelectorAll('.nav-item[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => switchSection(btn.dataset.section));
+});
+function switchSection(name){
+  currentSection = name;
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  const titles = {dashboard:'Dashboard',products:'Products',enquiries:'Enquiries',subscribers:'Subscribers'};
+  const subs   = {dashboard:'Overview of your store activity',products:'Manage your furniture catalogue',enquiries:'Client messages and enquiries',subscribers:'Newsletter sign-up list'};
+  document.getElementById('topbar-title').textContent = titles[name];
+  document.getElementById('topbar-sub').textContent   = subs[name];
+}
+
+document.getElementById('btn-signout').addEventListener('click', async () => {
+  await db.auth.signOut();
+  window.location.href = 'admin-login.html';
+});
+
+/* ════════ TOAST ════════ */
+let toastTimer;
+function toast(msg, isError=false){
+  const el = document.getElementById('toast');
+  el.textContent = (isError ? '⚠️ ' : '✓ ') + msg;
+  el.className = 'show' + (isError ? ' error' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.className = '', 3200);
+}
+
+/* ════════ MODAL HELPERS ════════ */
+function closeModal(e, id){ if(e.target.id===id) closeModalById(id); }
+function closeModalById(id){ document.getElementById(id).classList.remove('open'); }
+function openModalById(id){ document.getElementById(id).classList.add('open'); }
+
+/* ════════ FORMAT ════════ */
+const ZAR = n => n != null ? 'R ' + Number(n).toLocaleString('en-ZA') : '—';
+const fmtDate = s => s ? new Date(s).toLocaleString('en-ZA',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+
+/* ═══════════════════════════════════════════
+   PRODUCTS
+   ═══════════════════════════════════════════ */
+async function loadProducts(){
+  const { data, error } = await db.from('products').select('*').order('id');
+  if (error){ toast('Could not load products: ' + error.message, true); return; }
+  allProducts = data || [];
+  renderProducts();
+  document.getElementById('prod-count-sub').textContent = allProducts.length + ' products in catalogue';
+}
+
+function filterProducts(){
+  const q   = document.getElementById('prod-search').value.toLowerCase();
+  const cat = document.getElementById('prod-cat-filter').value;
+  const vis = document.getElementById('prod-vis-filter').value;
+  return allProducts.filter(p => {
+    if (q && !p.id.toLowerCase().includes(q) && !p.name.toLowerCase().includes(q)) return false;
+    if (cat && p.category !== cat) return false;
+    if (vis !== '' && String(p.visible) !== vis) return false;
+    return true;
+  });
+}
+
+function renderProducts(){
+  const filtered = filterProducts();
+  const tbody = document.getElementById('products-tbody');
+  if (!filtered.length){
+    tbody.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">🔍</div><p>No products match your filters.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(p => {
+    const priceStr = p.has_sizes
+      ? `Q: ${ZAR(p.price_queen)} / K: ${ZAR(p.price_king)}`
+      : ZAR(p.price);
+    const visBadge = p.visible
+      ? `<span class="badge badge-green">● Visible</span>`
+      : `<span class="badge badge-red">● Hidden</span>`;
+    return `<tr>
+      <td class="mono">${p.id}</td>
+      <td class="primary">${p.name}</td>
+      <td><span class="badge badge-navy">${p.category_label}</span></td>
+      <td style="white-space:nowrap">${priceStr}</td>
+      <td>
+        <input class="stock-input" type="number" min="0" value="${p.stock_qty}"
+               onchange="updateStock('${p.id}', this.value)"
+               title="Edit stock quantity"/>
+      </td>
+      <td>${visBadge}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-sm btn-ghost" onclick="openEditProduct('${p.id}')">Edit</button>
+          <button class="btn-sm ${p.visible ? 'btn-danger' : 'btn-success'}"
+                  onclick="toggleVisible('${p.id}', ${!p.visible})">
+            ${p.visible ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function updateStock(id, val){
+  const qty = parseInt(val, 10);
+  if (isNaN(qty) || qty < 0) return;
+  const { error } = await db.from('products').update({ stock_qty: qty }).eq('id', id);
+  if (error) { toast('Failed to update stock', true); return; }
+  const p = allProducts.find(x => x.id === id);
+  if (p) p.stock_qty = qty;
+  toast('Stock updated for ' + id);
+  updateDashboard();
+}
+
+async function toggleVisible(id, newVal){
+  const { error } = await db.from('products').update({ visible: newVal }).eq('id', id);
+  if (error) { toast('Failed to update visibility', true); return; }
+  const p = allProducts.find(x => x.id === id);
+  if (p) p.visible = newVal;
+  renderProducts();
+  updateDashboard();
+  toast(id + (newVal ? ' is now visible' : ' is now hidden'));
+}
+
+function openEditProduct(id){
+  const p = allProducts.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('prod-modal-title').textContent = 'Edit Product';
+  document.getElementById('pm-id').value      = p.id;
+  document.getElementById('pm-sku').value     = p.id;
+  document.getElementById('pm-cat').value     = p.category_label;
+  document.getElementById('pm-name').value    = p.name;
+  document.getElementById('pm-visible').value = String(p.visible);
+  document.getElementById('pm-featured').value= String(p.featured);
+  if (p.has_sizes){
+    document.getElementById('pm-price-single-row').style.display = 'none';
+    document.getElementById('pm-price-sized-row').style.display  = '';
+    document.getElementById('pm-stock-sized-row').style.display  = '';
+    document.getElementById('pm-price-q').value  = p.price_queen || '';
+    document.getElementById('pm-price-k').value  = p.price_king  || '';
+    document.getElementById('pm-stock-s').value  = p.stock_qty;
+  } else {
+    document.getElementById('pm-price-single-row').style.display = '';
+    document.getElementById('pm-price-sized-row').style.display  = 'none';
+    document.getElementById('pm-stock-sized-row').style.display  = 'none';
+    document.getElementById('pm-price').value   = p.price || '';
+    document.getElementById('pm-stock').value   = p.stock_qty;
+  }
+  openModalById('product-modal');
+}
+
+function openAddProduct(){
+  document.getElementById('prod-modal-title').textContent = 'Add New Product';
+  document.getElementById('pm-id').value      = '';
+  document.getElementById('pm-sku').value     = '';
+  document.getElementById('pm-sku').removeAttribute('readonly');
+  document.getElementById('pm-cat').value     = '';
+  document.getElementById('pm-cat').removeAttribute('readonly');
+  document.getElementById('pm-name').value    = '';
+  document.getElementById('pm-price').value   = '';
+  document.getElementById('pm-stock').value   = '0';
+  document.getElementById('pm-visible').value = 'true';
+  document.getElementById('pm-featured').value= 'false';
+  document.getElementById('pm-price-single-row').style.display = '';
+  document.getElementById('pm-price-sized-row').style.display  = 'none';
+  document.getElementById('pm-stock-sized-row').style.display  = 'none';
+  openModalById('product-modal');
+}
+
+async function saveProduct(){
+  const id       = document.getElementById('pm-id').value || document.getElementById('pm-sku').value.toUpperCase();
+  const name     = document.getElementById('pm-name').value.trim();
+  const visible  = document.getElementById('pm-visible').value === 'true';
+  const featured = document.getElementById('pm-featured').value === 'true';
+  const existing = allProducts.find(x => x.id === id);
+  const has_sizes = existing ? existing.has_sizes : false;
+
+  if (!name){ toast('Name is required', true); return; }
+
+  let upd = { name, visible, featured };
+  if (has_sizes){
+    upd.price_queen = parseFloat(document.getElementById('pm-price-q').value) || null;
+    upd.price_king  = parseFloat(document.getElementById('pm-price-k').value) || null;
+    upd.stock_qty   = parseInt(document.getElementById('pm-stock-s').value, 10) || 0;
+  } else {
+    upd.price     = parseFloat(document.getElementById('pm-price').value) || null;
+    upd.stock_qty = parseInt(document.getElementById('pm-stock').value, 10) || 0;
+  }
+
+  let error;
+  if (existing){
+    ({ error } = await db.from('products').update(upd).eq('id', id));
+  } else {
+    upd.id = id;
+    upd.category       = document.getElementById('pm-cat').value || 'other';
+    upd.category_label = document.getElementById('pm-cat').value || 'Other';
+    upd.image_url      = `images/furniture/${id}.jpg`;
+    ({ error } = await db.from('products').insert(upd));
+  }
+
+  if (error){ toast('Save failed: ' + error.message, true); return; }
+  closeModalById('product-modal');
+  toast('Product saved ✓');
+  await loadProducts();
+  updateDashboard();
+}
+
+/* ═══════════════════════════════════════════
+   ENQUIRIES
+   ═══════════════════════════════════════════ */
+async function loadEnquiries(){
+  const { data, error } = await db.from('contact_submissions').select('*').order('created_at', {ascending:false});
+  if (error){ toast('Could not load enquiries: ' + error.message, true); return; }
+  allEnquiries = data || [];
+  renderEnquiries();
+  const unread = allEnquiries.filter(e => !e.is_read).length;
+  const badge = document.getElementById('enq-badge');
+  badge.textContent = unread;
+  badge.classList.toggle('show', unread > 0);
+  document.getElementById('enq-count-sub').textContent =
+    allEnquiries.length + ' total · ' + unread + ' unread';
+}
+
+function filterEnquiries(){
+  const q      = document.getElementById('enq-search').value.toLowerCase();
+  const status = document.getElementById('enq-status-filter').value;
+  return allEnquiries.filter(e => {
+    const name = (e.first_name + ' ' + e.last_name).toLowerCase();
+    if (q && !name.includes(q) && !e.email.toLowerCase().includes(q)) return false;
+    if (status === 'unread' && e.is_read) return false;
+    if (status === 'read' && !e.is_read) return false;
+    return true;
+  });
+}
+
+function renderEnquiries(){
+  const filtered = filterEnquiries();
+  const tbody = document.getElementById('enquiries-tbody');
+  if (!filtered.length){
+    tbody.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">✉️</div><p>No enquiries found.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(e => {
+    const name  = e.first_name + ' ' + e.last_name;
+    const badge = e.is_read
+      ? `<span class="badge badge-green">Read</span>`
+      : `<span class="badge badge-gold">Unread</span>`;
+    return `<tr class="${e.is_read ? '' : 'enq-unread'}">
+      <td style="white-space:nowrap">${fmtDate(e.created_at)}</td>
+      <td class="primary enq-name">${name}</td>
+      <td>${e.email}</td>
+      <td>${e.phone || '—'}</td>
+      <td>${e.service || '—'}</td>
+      <td>${badge}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-sm btn-ghost" onclick="openEnquiry('${e.id}')">View</button>
+          ${!e.is_read ? `<button class="btn-sm btn-success" onclick="markRead('${e.id}')">Mark Read</button>` : ''}
+          <button class="btn-sm btn-danger" onclick="deleteEnquiry('${e.id}')">Delete</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openEnquiry(id){
+  const e = allEnquiries.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('enq-modal-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Name</div>
+           <div style="font-size:.92rem;color:var(--text)">${e.first_name} ${e.last_name}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Date</div>
+           <div style="font-size:.92rem;color:var(--text)">${fmtDate(e.created_at)}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Email</div>
+           <a href="mailto:${e.email}" style="color:var(--gold)">${e.email}</a></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Phone</div>
+           <div style="font-size:.92rem;color:var(--text)">${e.phone || '—'}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Service</div>
+           <div style="font-size:.92rem;color:var(--text)">${e.service || '—'}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Status</div>
+           <div>${e.is_read ? '<span class="badge badge-green">Read</span>' : '<span class="badge badge-gold">Unread</span>'}</div></div>
+    </div>
+    <div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.6rem">Message</div>
+    <div style="background:var(--off-white);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:.88rem;color:var(--text-mid);line-height:1.75;white-space:pre-wrap">${e.message}</div>
+    <div style="margin-top:1rem;display:flex;gap:.8rem">
+      <a href="mailto:${e.email}?subject=Re: Your enquiry at Opulent Interior D-Zines" class="btn-sm btn-navy" style="text-decoration:none;display:inline-flex;align-items:center;gap:.4rem">✉️ Reply by Email</a>
+      ${e.phone ? `<a href="tel:${e.phone}" class="btn-sm btn-ghost" style="text-decoration:none">📞 Call</a>` : ''}
+    </div>
+  `;
+  document.getElementById('enq-mark-read-btn').onclick = () => { markRead(e.id); closeModalById('enquiry-modal'); };
+  document.getElementById('enq-delete-btn').onclick    = () => { deleteEnquiry(e.id); closeModalById('enquiry-modal'); };
+  openModalById('enquiry-modal');
+  if (!e.is_read) markRead(e.id);
+}
+
+async function markRead(id){
+  await db.from('contact_submissions').update({ is_read: true }).eq('id', id);
+  const e = allEnquiries.find(x => x.id === id);
+  if (e) e.is_read = true;
+  renderEnquiries();
+  const unread = allEnquiries.filter(e => !e.is_read).length;
+  const badge = document.getElementById('enq-badge');
+  badge.textContent = unread;
+  badge.classList.toggle('show', unread > 0);
+  document.getElementById('enq-count-sub').textContent = allEnquiries.length + ' total · ' + unread + ' unread';
+  updateDashboard();
+}
+
+async function markAllRead(){
+  await db.from('contact_submissions').update({ is_read: true }).eq('is_read', false);
+  allEnquiries.forEach(e => e.is_read = true);
+  renderEnquiries();
+  document.getElementById('enq-badge').classList.remove('show');
+  document.getElementById('enq-count-sub').textContent = allEnquiries.length + ' total · 0 unread';
+  updateDashboard();
+  toast('All enquiries marked as read');
+}
+
+async function deleteEnquiry(id){
+  if (!confirm('Delete this enquiry? This cannot be undone.')) return;
+  const { error } = await db.from('contact_submissions').delete().eq('id', id);
+  if (error){ toast('Delete failed', true); return; }
+  allEnquiries = allEnquiries.filter(x => x.id !== id);
+  renderEnquiries();
+  updateDashboard();
+  toast('Enquiry deleted');
+}
+
+/* ═══════════════════════════════════════════
+   SUBSCRIBERS
+   ═══════════════════════════════════════════ */
+async function loadSubscribers(){
+  const { data, error } = await db.from('email_subscribers').select('*').order('subscribed_at', {ascending:false});
+  if (error){ toast('Could not load subscribers: ' + error.message, true); return; }
+  allSubscribers = data || [];
+  renderSubscribers();
+  document.getElementById('sub-count-sub').textContent = allSubscribers.length + ' subscribers';
+}
+
+function renderSubscribers(){
+  const q = document.getElementById('sub-search').value.toLowerCase();
+  const filtered = allSubscribers.filter(s => !q || s.email.toLowerCase().includes(q));
+  const tbody = document.getElementById('subscribers-tbody');
+  if (!filtered.length){
+    tbody.innerHTML = `<tr><td colspan="4"><div class="empty"><div class="empty-icon">📬</div><p>No subscribers yet.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(s => `
+    <tr>
+      <td class="primary">${s.email}</td>
+      <td><span class="badge badge-navy">${s.source || 'coming-soon'}</span></td>
+      <td>${fmtDate(s.subscribed_at)}</td>
+      <td>
+        <button class="btn-sm btn-danger" onclick="deleteSubscriber('${s.id}')">Remove</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function deleteSubscriber(id){
+  if (!confirm('Remove this subscriber?')) return;
+  const { error } = await db.from('email_subscribers').delete().eq('id', id);
+  if (error){ toast('Delete failed', true); return; }
+  allSubscribers = allSubscribers.filter(x => x.id !== id);
+  renderSubscribers();
+  document.getElementById('sub-count-sub').textContent = allSubscribers.length + ' subscribers';
+  toast('Subscriber removed');
+}
+
+function exportCSV(){
+  const rows = [['Email','Source','Subscribed At']];
+  allSubscribers.forEach(s => rows.push([s.email, s.source || 'coming-soon', s.subscribed_at]));
+  const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'opulent-subscribers-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  toast('CSV downloaded');
+}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD
+   ═══════════════════════════════════════════ */
+function updateDashboard(){
+  const totalP  = allProducts.length;
+  const visP    = allProducts.filter(p => p.visible).length;
+  const unread  = allEnquiries.filter(e => !e.is_read).length;
+  const totalS  = allSubscribers.length;
+
+  document.getElementById('stat-total-products').textContent  = totalP;
+  document.getElementById('stat-visible-products').textContent = visP;
+  document.getElementById('stat-unread-enq').textContent      = unread;
+  document.getElementById('stat-subscribers').textContent      = totalS;
+
+  // Recent enquiries (5)
+  const reEnq = document.getElementById('dash-recent-enq');
+  const recent5 = allEnquiries.slice(0, 5);
+  reEnq.innerHTML = recent5.length ? recent5.map(e => `
+    <li class="recent-item">
+      <div class="recent-dot ${e.is_read ? '' : 'unread'}"></div>
+      <div class="recent-main">
+        <strong>${e.first_name} ${e.last_name}</strong>
+        <span>${e.service || 'General enquiry'} · ${e.email}</span>
+      </div>
+      <div class="recent-time">${fmtDate(e.created_at).split(',')[0]}</div>
+    </li>
+  `).join('') : '<li class="loading" style="font-size:.82rem">No enquiries yet.</li>';
+
+  // Recent subscribers (5)
+  const reSub = document.getElementById('dash-recent-sub');
+  const recent5s = allSubscribers.slice(0, 5);
+  reSub.innerHTML = recent5s.length ? recent5s.map(s => `
+    <li class="recent-item">
+      <div class="recent-dot"></div>
+      <div class="recent-main">
+        <strong>${s.email}</strong>
+        <span>${s.source || 'coming-soon'}</span>
+      </div>
+      <div class="recent-time">${fmtDate(s.subscribed_at).split(',')[0]}</div>
+    </li>
+  `).join('') : '<li class="loading" style="font-size:.82rem">No subscribers yet.</li>';
+}
+</script>
+</body>
+</html>
