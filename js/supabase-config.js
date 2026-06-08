@@ -14,5 +14,5 @@
  * controls exactly what anonymous visitors can and cannot do.
  */
 
-const SUPABASE_URL      = 'https://YOUR-PROJECT-ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+const SUPABASE_URL      = 'https://ocnwpbrfwqczlgzaukuy.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_xDj0pOqqzknlDlfM8tD3hQ_Fx2gkak2';
