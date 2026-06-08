@@ -6,6 +6,8 @@
   <title>Coming Soon | Opulent Interior D-Zines</title>
   <meta name="description" content="Something extraordinary is being crafted. Opulent Interior D-Zines — South Africa's premier luxury interior design and custom furniture studio."/>
   <meta name="robots" content="noindex, nofollow"/>
+  <!-- Permissive CSP for standalone hosting (Afrihost, etc.) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://ocnwpbrfwqczlgzaukuy.supabase.co https://formspree.io; frame-ancestors 'none';"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -585,49 +587,75 @@
     setInterval(tick, 1000);
 
     /* ── Notify form — saves to Supabase + Formspree fallback ── */
-    (function(){
-      const sbScript  = document.createElement('script');
-      sbScript.src    = 'js/supabase.min.js';
-      sbScript.onload = () => {
-        const cfg = document.createElement('script');
-        cfg.src   = 'js/supabase-config.js';
-        cfg.onload = () => {
-          const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-          document.getElementById('notifyForm').addEventListener('submit', async function(e){
-            e.preventDefault();
-            const email = document.getElementById('notifyEmail').value.trim();
-            if (!email || !email.includes('@')) return;
+    /* Supabase SDK loaded from CDN below; config inlined — no js/ folder needed */
+    async function initNotifyForm() {
+      const SUPABASE_URL      = 'https://ocnwpbrfwqczlgzaukuy.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_xDj0pOqqzknlDlfM8tD3hQ_Fx2gkak2';
 
-            const btn = this.querySelector('.notify-btn');
-            btn.textContent = 'Sending…';
-            btn.disabled = true;
+      if (typeof supabase === 'undefined') {
+        console.warn('Supabase SDK not loaded — subscriber form in Formspree-only mode');
+        bindFormspreeOnly();
+        return;
+      }
 
-            // Save to Supabase (primary)
-            const { error: sbError } = await db.from('email_subscribers')
-              .insert({ email, source: 'coming-soon' });
-            // 23505 = duplicate email (unique violation) — treat as success
-            if (sbError && sbError.code !== '23505') {
-              console.warn('Supabase subscriber error:', sbError.message);
-            }
+      const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-            // Formspree backup
-            try {
-              await fetch('https://formspree.io/f/mpqbybnq', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-              });
-            } catch(_){}
+      document.getElementById('notifyForm').addEventListener('submit', async function(e){
+        e.preventDefault();
+        const email = document.getElementById('notifyEmail').value.trim();
+        if (!email || !email.includes('@')) return;
 
+        const btn = this.querySelector('.notify-btn');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        // Save to Supabase (primary)
+        const { error: sbError } = await db.from('email_subscribers')
+          .insert({ email, source: 'coming-soon' });
+        // 23505 = duplicate email — treat as graceful success
+        if (sbError && sbError.code !== '23505') {
+          console.warn('Supabase subscriber error:', sbError.message);
+        }
+
+        // Formspree backup
+        try {
+          await fetch('https://formspree.io/f/mpqbybnq', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+        } catch(_){}
+
+        this.style.display = 'none';
+        document.getElementById('notifySuccess').style.display = 'block';
+      });
+    }
+
+    function bindFormspreeOnly() {
+      document.getElementById('notifyForm').addEventListener('submit', async function(e){
+        e.preventDefault();
+        const email = document.getElementById('notifyEmail').value.trim();
+        if (!email || !email.includes('@')) return;
+        const btn = this.querySelector('.notify-btn');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        try {
+          const res = await fetch('https://formspree.io/f/mpqbybnq', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          if (res.ok) {
             this.style.display = 'none';
             document.getElementById('notifySuccess').style.display = 'block';
-          });
-        };
-        document.head.appendChild(cfg);
-      };
-      document.head.appendChild(sbScript);
-    })();
+          } else { btn.textContent = 'Try again'; btn.disabled = false; }
+        } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+      });
+    }
   </script>
+  <!-- Supabase SDK — loaded directly so coming-soon.html is self-contained -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"
+          onload="initNotifyForm()" onerror="bindFormspreeOnly()"></script>
 
 </body>
 </html>
