@@ -603,10 +603,11 @@
             btn.disabled = true;
 
             // Save to Supabase (primary)
-            try {
-              await db.from('email_subscribers').insert({ email, source: 'coming-soon' });
-            } catch(err) {
-              console.warn('Supabase sub error:', err);
+            const { error: sbError } = await db.from('email_subscribers')
+              .insert({ email, source: 'coming-soon' });
+            // 23505 = duplicate email (unique violation) — treat as success
+            if (sbError && sbError.code !== '23505') {
+              console.warn('Supabase subscriber error:', sbError.message);
             }
 
             // Formspree backup
