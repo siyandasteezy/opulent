@@ -111,15 +111,6 @@
 
     /* ── stats ── */
     #stats{padding:6rem 0;background:var(--white)}
-    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border:1px solid var(--border)}
-    .stat-cell{padding:3rem 2.5rem;text-align:center;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background .3s}
-    .stat-cell:last-child{border-right:none}
-    .stat-cell:hover{background:var(--off-white)}
-    .stat-cell::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);transition:width .4s;border-radius:2px}
-    .stat-cell:hover::after{width:60%}
-    .stat-num{font-family:var(--serif);font-size:3.5rem;font-weight:300;line-height:1;color:var(--navy);margin-bottom:.5rem}
-    .stat-num span{font-size:2rem;color:var(--gold)}
-    .stat-label{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light)}
 
     /* ── about ── */
     #about{padding:9rem 0;background:var(--off-white)}
@@ -288,7 +279,6 @@
       .hamburger{display:flex}
       .nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--white);justify-content:center;align-items:center;gap:2.5rem;z-index:800}
       .nav-links.open a{color:var(--text);font-size:1rem}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
       .about-grid,.why-grid,.contact-wrap{grid-template-columns:1fr;gap:3rem}
       .about-photo-inset{display:none}
       .services-grid,.sectors-grid{grid-template-columns:1fr}
@@ -412,17 +402,6 @@
   </div>
 </div>
 
-<!-- ── STATS ── -->
-<section id="stats" aria-label="Key facts">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-cell reveal"><div class="stat-num">2013</div><div class="stat-label">Established</div></div>
-      <div class="stat-cell reveal"><div class="stat-num">1</div><div class="stat-label">BBBEE Level</div></div>
-      <div class="stat-cell reveal"><div class="stat-num">100<span>%</span></div><div class="stat-label">Black Female Owned</div></div>
-      <div class="stat-cell reveal"><div class="stat-num">6<span>+</span></div><div class="stat-label">Core Services</div></div>
-    </div>
-  </div>
-</section>
 
 <!-- ── ABOUT ── -->
 <section id="about" aria-labelledby="about-h">
