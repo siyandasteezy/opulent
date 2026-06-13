@@ -1078,6 +1078,11 @@
   </footer>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
   <script>
   // ═══════════════════════════════════════════════════
   //  DATA
@@ -1854,20 +1859,50 @@
   // ═══════════════════════════════════════════════════
   //  FORM SUBMISSION
   // ═══════════════════════════════════════════════════
-  function submitOrder(e) {
+  async function submitOrder(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = 'Sending...';
 
-    // Simulate submission (replace with real API call / Netlify form)
-    setTimeout(() => {
-      const ref = 'OID-' + Date.now().toString().slice(-6);
-      document.getElementById('successRef').textContent = 'REF: ' + ref;
-      document.getElementById('orderForm').style.display = 'none';
-      document.getElementById('step5Nav').style.display = 'none';
-      document.getElementById('successState').classList.add('visible');
-    }, 1200);
+    const ref = 'OID-' + Date.now().toString().slice(-6);
+
+    const payload = {
+      ref_code:         ref,
+      first_name:       document.getElementById('firstName').value.trim(),
+      last_name:        document.getElementById('lastName').value.trim(),
+      email:            document.getElementById('email').value.trim(),
+      phone:            document.getElementById('phone').value.trim(),
+      province:         document.getElementById('province').value || null,
+      timeline:         document.getElementById('timeline').value || null,
+      notes:            document.getElementById('additionalNotes').value.trim() || null,
+      reference_images: document.getElementById('referenceImages').value.trim() || null,
+      furniture_name:   state.furniture?.name || null,
+      furniture_id:     state.furniture?.id   || null,
+      dimensions:       state.dims && Object.keys(state.dims).length ? state.dims : null,
+      timber:           state.timber?.label    || null,
+      finish_type:      state.finish?.label    || null,
+      upholstery:       state.upholstery?.label || null,
+      fabric_colour:    state.fabricColour      || null,
+      hardware:         state.hardware?.label   || null,
+      features:         state.features.size ? [...state.features].map(id => FEATURE_DATA[id]?.name || id) : null,
+      estimated_total:  state._total            || null,
+    };
+
+    const { error } = await db.from('configure_submissions').insert(payload);
+
+    if (error) {
+      console.warn('Configure submission error:', error.message);
+      btn.disabled = false;
+      btn.textContent = '✦   Submit My Furniture Brief';
+      alert('Something went wrong — please try again or contact us directly at info@opulentinteriordzines.co.za');
+      return;
+    }
+
+    document.getElementById('successRef').textContent = 'REF: ' + ref;
+    document.getElementById('orderForm').style.display = 'none';
+    document.getElementById('step5Nav').style.display = 'none';
+    document.getElementById('successState').classList.add('visible');
   }
 
   function resetConfigurator() {

@@ -330,6 +330,10 @@
     <button class="nav-item" data-section="subscribers">
       <span class="nav-icon">📬</span> Subscribers
     </button>
+    <button class="nav-item" data-section="orders">
+      <span class="nav-icon">🛋️</span> Custom Orders
+      <span class="nav-badge" id="orders-badge">0</span>
+    </button>
   </nav>
 
   <div class="sidebar-footer">
@@ -387,6 +391,13 @@
             <div class="stat-label">Subscribers</div>
           </div>
         </div>
+        <div class="stat-card">
+          <div class="stat-icon navy">🛋️</div>
+          <div>
+            <div class="stat-num" id="stat-orders">—</div>
+            <div class="stat-label">Custom Orders</div>
+          </div>
+        </div>
       </div>
 
       <div class="dash-grid">
@@ -413,6 +424,58 @@
           <ul class="recent-list" id="dash-recent-sub">
             <li class="loading"><div class="spin"></div></li>
           </ul>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Recent Custom Orders</div>
+              <div class="panel-sub">Latest configure submissions</div>
+            </div>
+            <button class="btn-sm btn-ghost" onclick="switchSection('orders')">View All</button>
+          </div>
+          <ul class="recent-list" id="dash-recent-orders">
+            <li class="loading"><div class="spin"></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CUSTOM ORDERS ─── -->
+    <div id="sec-orders" class="section">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Custom Orders</div>
+            <div class="panel-sub" id="orders-count-sub">Loading…</div>
+          </div>
+          <button class="btn-sm btn-ghost" onclick="markAllOrdersRead()">Mark All Read</button>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="orders-search" placeholder="Search by name, email or ref…" oninput="renderOrders()"/>
+          <select id="orders-status-filter" onchange="renderOrders()">
+            <option value="">All</option>
+            <option value="unread">Unread</option>
+            <option value="read">Read</option>
+          </select>
+        </div>
+        <div class="tbl-wrap">
+          <table id="orders-table">
+            <thead>
+              <tr>
+                <th>Ref</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Furniture</th>
+                <th>Est. Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <tr><td colspan="8" class="loading"><div class="spin"></div></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -651,6 +714,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let allProducts    = [];
 let allEnquiries   = [];
 let allSubscribers = [];
+let allOrders      = [];
 let currentSection = 'dashboard';
 
 /* ════════ INIT ════════ */
@@ -660,7 +724,7 @@ let currentSection = 'dashboard';
 
   document.getElementById('sidebar-user').textContent = session.user.email;
   startClock();
-  await Promise.all([ loadProducts(), loadEnquiries(), loadSubscribers() ]);
+  await Promise.all([ loadProducts(), loadEnquiries(), loadSubscribers(), loadOrders() ]);
   updateDashboard();
 })();
 
@@ -680,8 +744,8 @@ function switchSection(name){
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  const titles = {dashboard:'Dashboard',products:'Products',enquiries:'Enquiries',subscribers:'Subscribers'};
-  const subs   = {dashboard:'Overview of your store activity',products:'Manage your furniture catalogue',enquiries:'Client messages and enquiries',subscribers:'Newsletter sign-up list'};
+  const titles = {dashboard:'Dashboard',products:'Products',enquiries:'Enquiries',subscribers:'Subscribers',orders:'Custom Orders'};
+  const subs   = {dashboard:'Overview of your store activity',products:'Manage your furniture catalogue',enquiries:'Client messages and enquiries',subscribers:'Newsletter sign-up list',orders:'Configure form submissions'};
   document.getElementById('topbar-title').textContent = titles[name];
   document.getElementById('topbar-sub').textContent   = subs[name];
 }
@@ -1062,6 +1126,7 @@ function updateDashboard(){
   document.getElementById('stat-visible-products').textContent = visP;
   document.getElementById('stat-unread-enq').textContent      = unread;
   document.getElementById('stat-subscribers').textContent      = totalS;
+  document.getElementById('stat-orders').textContent           = allOrders.length;
 
   // Recent enquiries (5)
   const reEnq = document.getElementById('dash-recent-enq');
@@ -1090,6 +1155,163 @@ function updateDashboard(){
       <div class="recent-time">${fmtDate(s.subscribed_at).split(',')[0]}</div>
     </li>
   `).join('') : '<li class="loading" style="font-size:.82rem">No subscribers yet.</li>';
+
+  // Recent custom orders (5)
+  const reOrd = document.getElementById('dash-recent-orders');
+  const recent5o = allOrders.slice(0, 5);
+  reOrd.innerHTML = recent5o.length ? recent5o.map(o => `
+    <li class="recent-item">
+      <div class="recent-dot ${o.is_read ? '' : 'unread'}"></div>
+      <div class="recent-main">
+        <strong>${o.first_name} ${o.last_name}</strong>
+        <span>${o.furniture_name || 'Custom piece'} · ${o.ref_code}</span>
+      </div>
+      <div class="recent-time">${fmtDate(o.created_at).split(',')[0]}</div>
+    </li>
+  `).join('') : '<li class="loading" style="font-size:.82rem">No custom orders yet.</li>';
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM ORDERS
+   ═══════════════════════════════════════════ */
+async function loadOrders(){
+  const { data, error } = await db.from('configure_submissions').select('*').order('created_at', {ascending:false});
+  if (error){ toast('Could not load custom orders: ' + error.message, true); return; }
+  allOrders = data || [];
+  renderOrders();
+  const unread = allOrders.filter(o => !o.is_read).length;
+  const badge = document.getElementById('orders-badge');
+  badge.textContent = unread;
+  badge.classList.toggle('show', unread > 0);
+  document.getElementById('orders-count-sub').textContent =
+    allOrders.length + ' total · ' + unread + ' unread';
+}
+
+function filterOrders(){
+  const q      = document.getElementById('orders-search').value.toLowerCase();
+  const status = document.getElementById('orders-status-filter').value;
+  return allOrders.filter(o => {
+    const name = (o.first_name + ' ' + o.last_name).toLowerCase();
+    if (q && !name.includes(q) && !o.email.toLowerCase().includes(q) && !o.ref_code.toLowerCase().includes(q)) return false;
+    if (status === 'unread' && o.is_read) return false;
+    if (status === 'read'   && !o.is_read) return false;
+    return true;
+  });
+}
+
+function renderOrders(){
+  const filtered = filterOrders();
+  const tbody = document.getElementById('orders-tbody');
+  if (!filtered.length){
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">🛋️</div><p>No custom orders found.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(o => {
+    const name  = o.first_name + ' ' + o.last_name;
+    const badge = o.is_read
+      ? `<span class="badge badge-green">Read</span>`
+      : `<span class="badge badge-gold">Unread</span>`;
+    const total = o.estimated_total ? 'R ' + Number(o.estimated_total).toLocaleString('en-ZA') : '—';
+    return `<tr class="${o.is_read ? '' : 'enq-unread'}">
+      <td style="white-space:nowrap;font-size:.75rem;color:var(--text-light)">${o.ref_code}</td>
+      <td style="white-space:nowrap">${fmtDate(o.created_at)}</td>
+      <td class="primary">${name}</td>
+      <td>${o.email}</td>
+      <td>${o.furniture_name || '—'}</td>
+      <td style="white-space:nowrap">${total}</td>
+      <td>${badge}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-sm btn-ghost" onclick="openOrder('${o.id}')">View</button>
+          ${!o.is_read ? `<button class="btn-sm btn-success" onclick="markOrderRead('${o.id}')">Mark Read</button>` : ''}
+          <button class="btn-sm btn-danger" onclick="deleteOrder('${o.id}')">Delete</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openOrder(id){
+  const o = allOrders.find(x => x.id === id);
+  if (!o) return;
+  const total = o.estimated_total ? 'R ' + Number(o.estimated_total).toLocaleString('en-ZA') : '—';
+  const dims  = o.dimensions ? Object.entries(o.dimensions).map(([k,v]) => `${k.toUpperCase()}: ${v}mm`).join(' · ') : '—';
+  const feats = (o.features && o.features.length) ? o.features.join(', ') : 'None';
+  document.getElementById('enq-modal-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Ref</div>
+           <div style="font-size:.92rem;color:var(--text);font-family:monospace">${o.ref_code}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Date</div>
+           <div style="font-size:.92rem;color:var(--text)">${fmtDate(o.created_at)}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Name</div>
+           <div style="font-size:.92rem;color:var(--text)">${o.first_name} ${o.last_name}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Phone</div>
+           <div style="font-size:.92rem;color:var(--text)">${o.phone || '—'}</div></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Email</div>
+           <a href="mailto:${o.email}" style="color:var(--gold)">${o.email}</a></div>
+      <div><div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.3rem">Province</div>
+           <div style="font-size:.92rem;color:var(--text)">${o.province || '—'}</div></div>
+    </div>
+    <div style="background:var(--off-white);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
+      <div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.8rem">Furniture Spec</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.85rem">
+        <div><span style="color:var(--text-light)">Piece: </span>${o.furniture_name || '—'}</div>
+        <div><span style="color:var(--text-light)">Timeline: </span>${o.timeline || '—'}</div>
+        <div><span style="color:var(--text-light)">Timber: </span>${o.timber || '—'}</div>
+        <div><span style="color:var(--text-light)">Finish: </span>${o.finish_type || '—'}</div>
+        <div><span style="color:var(--text-light)">Upholstery: </span>${o.upholstery || '—'}</div>
+        <div><span style="color:var(--text-light)">Fabric: </span>${o.fabric_colour || '—'}</div>
+        <div><span style="color:var(--text-light)">Hardware: </span>${o.hardware || '—'}</div>
+        <div><span style="color:var(--text-light)">Est. Total: </span><strong>${total}</strong></div>
+        <div style="grid-column:1/-1"><span style="color:var(--text-light)">Dimensions: </span>${dims}</div>
+        <div style="grid-column:1/-1"><span style="color:var(--text-light)">Features: </span>${feats}</div>
+      </div>
+    </div>
+    ${o.notes ? `<div style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin-bottom:.6rem">Notes</div>
+    <div style="background:var(--off-white);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:.88rem;color:var(--text-mid);line-height:1.75;white-space:pre-wrap;margin-bottom:1rem">${o.notes}</div>` : ''}
+    ${o.reference_images ? `<div style="margin-bottom:1rem"><span style="font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light)">Reference Images: </span><a href="${o.reference_images}" target="_blank" rel="noopener" style="color:var(--gold);font-size:.85rem">View Link ↗</a></div>` : ''}
+    <div style="display:flex;gap:.8rem">
+      <a href="mailto:${o.email}?subject=Re: Your Custom Order ${o.ref_code} — Opulent Interior D-Zines" class="btn-sm btn-navy" style="text-decoration:none;display:inline-flex;align-items:center;gap:.4rem">✉️ Reply by Email</a>
+      ${o.phone ? `<a href="tel:${o.phone}" class="btn-sm btn-ghost" style="text-decoration:none">📞 Call</a>` : ''}
+    </div>
+  `;
+  document.getElementById('enq-mark-read-btn').onclick = () => { markOrderRead(o.id); closeModalById('enquiry-modal'); };
+  document.getElementById('enq-delete-btn').onclick    = () => { deleteOrder(o.id); closeModalById('enquiry-modal'); };
+  openModalById('enquiry-modal');
+  if (!o.is_read) markOrderRead(o.id);
+}
+
+async function markOrderRead(id){
+  await db.from('configure_submissions').update({ is_read: true }).eq('id', id);
+  const o = allOrders.find(x => x.id === id);
+  if (o) o.is_read = true;
+  renderOrders();
+  const unread = allOrders.filter(o => !o.is_read).length;
+  const badge = document.getElementById('orders-badge');
+  badge.textContent = unread;
+  badge.classList.toggle('show', unread > 0);
+  document.getElementById('orders-count-sub').textContent = allOrders.length + ' total · ' + unread + ' unread';
+  updateDashboard();
+}
+
+async function markAllOrdersRead(){
+  await db.from('configure_submissions').update({ is_read: true }).eq('is_read', false);
+  allOrders.forEach(o => o.is_read = true);
+  renderOrders();
+  document.getElementById('orders-badge').classList.remove('show');
+  document.getElementById('orders-count-sub').textContent = allOrders.length + ' total · 0 unread';
+  updateDashboard();
+  toast('All custom orders marked as read');
+}
+
+async function deleteOrder(id){
+  if (!confirm('Delete this custom order? This cannot be undone.')) return;
+  const { error } = await db.from('configure_submissions').delete().eq('id', id);
+  if (error){ toast('Delete failed', true); return; }
+  allOrders = allOrders.filter(x => x.id !== id);
+  renderOrders();
+  updateDashboard();
+  toast('Custom order deleted');
 }
 </script>
 </body>
