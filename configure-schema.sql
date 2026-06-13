@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS configure_submissions (
   hardware         TEXT,
   features         TEXT[],
   estimated_total  NUMERIC,
+  preview_svg      TEXT,
   is_read          BOOLEAN     NOT NULL DEFAULT FALSE,
   created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

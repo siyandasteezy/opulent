@@ -1887,6 +1887,7 @@
       hardware:         state.hardware?.label   || null,
       features:         state.features.size ? [...state.features].map(id => FEATURE_DATA[id]?.name || id) : null,
       estimated_total:  state._total            || null,
+      preview_svg:      document.getElementById('furnitureSvgContainer').innerHTML.trim() || null,
     };
 
     const { error } = await db.from('configure_submissions').insert(payload);
