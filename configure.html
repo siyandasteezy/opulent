@@ -807,29 +807,17 @@
                 <div class="option-section" style="margin-top:1rem;margin-bottom:0;">
                   <div class="option-label">Upholstery Colour</div>
                   <div class="swatch-row" id="fabricColourSwatches">
-                    <label class="swatch selected" data-group="fabric-colour" data-val="ivory" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#f5f0e8;border:1px solid #ddd;"></span> Ivory
+                    <label class="swatch selected" data-group="fabric-colour" data-val="beige" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#c8b49a;"></span> Beige
                     </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="sand" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#c8b090;"></span> Sand
+                    <label class="swatch" data-group="fabric-colour" data-val="cream" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#f0ebe0;border:1px solid #ddd;"></span> Cream
                     </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="slate" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#708090;"></span> Slate
+                    <label class="swatch" data-group="fabric-colour" data-val="grey" onclick="selectSwatch(this)">
+                      <span class="swatch-dot" style="background:#9e9e9e;"></span> Grey
                     </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="sage" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#8fad8a;"></span> Sage
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="navy" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#0d1626;"></span> Navy
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="terracotta" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#c0624a;"></span> Terracotta
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="charcoal-fab" onclick="selectSwatch(this)">
+                    <label class="swatch" data-group="fabric-colour" data-val="charcoal" onclick="selectSwatch(this)">
                       <span class="swatch-dot" style="background:#3d3d3d;"></span> Charcoal
-                    </label>
-                    <label class="swatch" data-group="fabric-colour" data-val="blush" onclick="selectSwatch(this)">
-                      <span class="swatch-dot" style="background:#e8b4a0;"></span> Blush
                     </label>
                   </div>
                 </div>
@@ -1244,7 +1232,7 @@
     timber: { val: 'oak', mult: 1.0, label: 'Solid Oak' },
     finish: { val: 'natural', mult: 1.0, label: 'Natural' },
     upholstery: { add: 0, label: 'Linen Blend' },
-    fabricColour: 'Ivory',
+    fabricColour: 'beige',
     hardware: { val: 'satin-brass', add: 0, label: 'Satin Brass' },
     features: new Set(),
   };
@@ -1608,7 +1596,7 @@
 
   function drawSofa() {
     const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fabric = { beige:'#c8b49a', cream:'#f0ebe0', grey:'#9e9e9e', charcoal:'#3d3d3d' };
     const fc = fabric[state.fabricColour] || '#e8d5c0';
     return svgWrap(`
       <!-- Back rest -->
@@ -1637,7 +1625,7 @@
 
   function drawArmchair() {
     const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fabric = { beige:'#c8b49a', cream:'#f0ebe0', grey:'#9e9e9e', charcoal:'#3d3d3d' };
     const fc = fabric[state.fabricColour] || '#e8d5c0';
     return svgWrap(`
       <rect x="55" y="55" width="170" height="70" rx="10" fill="${fc}" filter="url(#shadow)"/>
@@ -1658,7 +1646,7 @@
 
   function drawBed() {
     const w = getTimberFill(), g = getGoldTone();
-    const fabric = { ivory:'#f5f0e8', sand:'#c8b090', slate:'#708090', sage:'#8fad8a', navy:'#0d1626', terracotta:'#c0624a', 'charcoal-fab':'#3d3d3d', blush:'#e8b4a0' };
+    const fabric = { beige:'#c8b49a', cream:'#f0ebe0', grey:'#9e9e9e', charcoal:'#3d3d3d' };
     const fc = fabric[state.fabricColour] || '#e8d5c0';
     return svgWrap(`
       <!-- Headboard -->

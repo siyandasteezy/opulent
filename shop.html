@@ -144,6 +144,13 @@
     .btn-wa{background:#25D366;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.28)}
     .btn-wa:hover{background:#1fbd5b;transform:translateY(-2px)}
     .modal-footnote{font-size:.7rem;color:var(--text-light);text-align:center;line-height:1.55}
+    .colour-dots{display:flex;align-items:center;gap:.35rem;margin:.3rem 0 .8rem}
+    .colour-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.13);flex-shrink:0;cursor:default}
+    .colour-label{font-size:.62rem;color:var(--text-light);margin-left:.2rem;letter-spacing:.04em}
+    .modal-colours{padding:.7rem 0;border-top:1px solid var(--border)}
+    .modal-colour-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.4rem}
+    .modal-colour-chip{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--text-mid)}
+    .modal-colour-chip .colour-dot{width:16px;height:16px}
 
     /* ── cart ── */
     .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:1099;opacity:0;pointer-events:none;transition:opacity .4s}
@@ -330,6 +337,15 @@
         <div style="font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:.5rem">Select Size</div>
         <div class="size-toggle" id="modalSizeToggle"></div>
       </div>
+      <div class="modal-colours">
+        <div class="modal-price-label">Available Colours</div>
+        <div class="modal-colour-row">
+          <div class="modal-colour-chip"><span class="colour-dot" style="background:#c8b49a"></span> Beige</div>
+          <div class="modal-colour-chip"><span class="colour-dot" style="background:#f0ebe0;border-color:#ccc"></span> Cream</div>
+          <div class="modal-colour-chip"><span class="colour-dot" style="background:#9e9e9e"></span> Grey</div>
+          <div class="modal-colour-chip"><span class="colour-dot" style="background:#3d3d3d"></span> Charcoal</div>
+        </div>
+      </div>
       <div class="modal-price-block">
         <div class="modal-price-label">Price (incl. VAT)</div>
         <div class="modal-price" id="modalPrice"></div>
@@ -479,6 +495,13 @@ function buildCards(){
       <div class="card-body">
         <div class="card-name">${p.name}</div>
         <div class="card-size">📐 ${dimStr}</div>
+        <div class="colour-dots">
+          <span class="colour-dot" style="background:#c8b49a" title="Beige"></span>
+          <span class="colour-dot" style="background:#f0ebe0" title="Cream"></span>
+          <span class="colour-dot" style="background:#9e9e9e" title="Grey"></span>
+          <span class="colour-dot" style="background:#3d3d3d" title="Charcoal"></span>
+          <span class="colour-label">Available colours</span>
+        </div>
         <div class="card-footer">
           <div>
             <div class="card-price"><sup>R</sup>${price.toLocaleString('en-ZA')}</div>
