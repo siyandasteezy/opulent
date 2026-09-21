@@ -176,6 +176,17 @@
     .cart-total-lbl{font-size:.78rem;font-weight:600;letter-spacing:.06em;color:var(--text-mid)}
     .cart-total-val{font-family:var(--serif);font-size:1.45rem;color:var(--navy)}
     .cart-ft-note{font-size:.68rem;color:var(--text-light);line-height:1.5}
+    .cart-divider{display:flex;align-items:center;gap:.7rem;color:var(--text-light);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase}
+    .cart-divider::before,.cart-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .btn-yoco{background:linear-gradient(135deg,#b8864e 0%,#d4a96a 100%);color:#fff;box-shadow:0 4px 14px rgba(184,134,78,.32);font-size:.72rem}
+    .btn-yoco:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,134,78,.42)}
+    .btn-yoco:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .yoco-badge{font-size:.6rem;color:var(--text-light);text-align:center;letter-spacing:.04em}
+    .payment-banner{position:fixed;top:0;left:0;right:0;z-index:2000;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-size:.78rem;font-weight:500;animation:slideDown .4s ease}
+    .payment-banner.success{background:#166534;color:#dcfce7}
+    .payment-banner.cancelled{background:#7c2d12;color:#fee2e2}
+    .payment-banner-close{background:none;border:none;cursor:pointer;opacity:.7;font-size:1.1rem;color:inherit;flex-shrink:0}
+    @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 
     /* ── custom banner ── */
     .custom-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:5rem 0;margin-top:2rem}
@@ -379,8 +390,11 @@
       <span class="cart-total-val" id="cartTotal">R 0</span>
     </div>
     <p class="cart-ft-note">Based on standard fabric. A consultant will confirm your final quote including delivery.</p>
+    <button class="btn btn-yoco btn-full" id="cartPay">Pay with Card</button>
+    <div class="cart-divider"><span>or enquire</span></div>
     <button class="btn btn-wa btn-full" id="cartWA">💬 Send via WhatsApp</button>
     <button class="btn btn-primary btn-full" id="cartEmail">✉️ Send via Email</button>
+    <p class="yoco-badge">🔒 Secure checkout powered by Yoco</p>
   </div>
 </aside>
 
@@ -649,6 +663,52 @@ function renderList(){
   const emailText = encodeURIComponent(`Hi Opulent Interior D-Zines,\n\nPlease find my furniture enquiry below:\n\n${lines.replace(/•/g,'-')}\n\nEstimated Total: ${R(total)}\n\nKindly confirm pricing, availability, lead time, and delivery. Thank you.`);
   document.getElementById('cartEmail').onclick = ()=>{ window.location.href=`mailto:info@opulentinteriordzines.co.za?subject=Furniture Enquiry – ${totalItems} Item${totalItems!==1?'s':''}&body=${emailText}`; };
 }
+
+/* ── Yoco checkout ── */
+document.getElementById('cartPay').addEventListener('click', async () => {
+  const btn = document.getElementById('cartPay');
+  const total = list.reduce((s, i) => s + i.price * i.qty, 0);
+  if (!total || !list.length) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Preparing checkout…';
+
+  const items = list.map(i => `${i.name}${i.sz ? ' (' + i.sz + ')' : ''} x${i.qty}`).join(', ');
+  const base = window.location.origin + window.location.pathname;
+  const successUrl = base + '?payment=success';
+  const cancelUrl  = base + '?payment=cancelled';
+
+  try {
+    const res = await fetch('/.netlify/functions/create-yoco-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amountCents: Math.round(total * 100), items, successUrl, cancelUrl }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.redirectUrl) throw new Error(data.error || 'Checkout failed');
+    window.location.href = data.redirectUrl;
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Pay with Card';
+    showToast('Payment unavailable — please use WhatsApp or email to order.');
+    console.error('Yoco checkout error:', err.message);
+  }
+});
+
+/* payment return banner */
+(function checkPaymentReturn() {
+  const p = new URLSearchParams(window.location.search).get('payment');
+  if (!p) return;
+  const success = p === 'success';
+  const banner = document.createElement('div');
+  banner.className = 'payment-banner ' + (success ? 'success' : 'cancelled');
+  banner.innerHTML = success
+    ? '<span>✓ Payment received — thank you! We\'ll be in touch to confirm your order details.</span><button class="payment-banner-close" aria-label="Dismiss">✕</button>'
+    : '<span>Payment was not completed. Your cart items are still saved — try again or enquire via WhatsApp.</span><button class="payment-banner-close" aria-label="Dismiss">✕</button>';
+  document.body.prepend(banner);
+  banner.querySelector('.payment-banner-close').addEventListener('click', () => banner.remove());
+  history.replaceState(null, '', window.location.pathname);
+})();
 
 /* cart open/close */
 const openCart = ()=>{ document.getElementById('cartSidebar').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
